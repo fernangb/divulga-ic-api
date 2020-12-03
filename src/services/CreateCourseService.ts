@@ -1,5 +1,6 @@
 import Course from '../models/Course';
 import CoursesRepository from '../repositories/CoursesRepository';
+import {getCustomRepository} from 'typeorm';
 
 interface CourseDTO {
   name: string;
@@ -10,18 +11,20 @@ interface CourseDTO {
 }
 
 class CreateCourseService {
-  private coursesRepository: CoursesRepository;
+  public async execute({name, building, address, type, schedule}: CourseDTO): Promise<Course>{
+    const coursesRepository = getCustomRepository(CoursesRepository);
 
-  constructor(coursesRepository: CoursesRepository){
-    this.coursesRepository = coursesRepository;
-  }
+    const findCourse = await coursesRepository.findExistingCourse(name, type, schedule);
 
-  public execute({name, building, address, type, schedule}: CourseDTO): Course{
+    if(findCourse){
+      throw Error('Curso já cadastrado no sistema.');
+    }
 
-    const course = this.coursesRepository.create({name, building, address, type, schedule});
+    const course = coursesRepository.create({name, building, address, type, schedule});
+
+    await coursesRepository.save(course);
 
     return course;
-
   }
 }
 

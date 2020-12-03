@@ -5,6 +5,9 @@
   "username": "postgres",
   "password": "divulgaic",
   "database": "divulga-ic",
+  "entities": [
+    "./src/models/*.ts"
+  ],
   "migrations": [
     "./src/database/migrations/*.ts"
   ],

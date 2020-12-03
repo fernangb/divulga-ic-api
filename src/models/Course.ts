@@ -1,51 +1,31 @@
-import { uuid } from "uuidv4";
-import {parseISO} from 'date-fns';
-import {zonedTimeToUtc} from 'date-fns-tz';
+import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn} from 'typeorm';
 
-
-interface CreateCourseDTO {
-  name: string;
-
-  building: string;
-
-  address: string;
-
-  schedule: 'Integral' | 'Noturno';
-
-  type: 'Bacharel' | 'Licenciatura';
-}
-
+@Entity('courses')
 class Course {
 
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column()
   name: string;
 
+  @Column()
   building: string;
 
+  @Column()
   address: string;
 
+  @Column()
   schedule: 'Integral' | 'Noturno';
 
+  @Column()
   type: 'Bacharel' | 'Licenciatura';
 
+  @CreateDateColumn()
   created_at: Date;
 
+  @UpdateDateColumn()
   updated_at: Date;
-
-  constructor({name, building, address, type, schedule}: CreateCourseDTO){
-    const znDate = zonedTimeToUtc(new Date(), 'America/Sao_Paulo');
-    const dt = new Date().toLocaleString;
-
-    this.id = uuid();
-    this.name = name;
-    this.building = building;
-    this.address = address;
-    this.schedule = schedule;
-    this.type = type;
-    this.created_at = new Date();
-    this.updated_at = this.created_at;
-  }
 }
 
 export default Course;

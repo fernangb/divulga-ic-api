@@ -1,34 +1,19 @@
 import Course from '../models/Course';
-import {parseISO} from 'date-fns';
+import {EntityRepository, Repository} from 'typeorm';
 
-interface CreateCourseDTO {
-  name: string;
-  building: string;
-  address:  string;
-  type: 'Bacharel' | 'Licenciatura';
-  schedule: 'Integral' | 'Noturno';
-}
+@EntityRepository(Course)
+class CoursesRepository extends Repository<Course>{
+  public async findExistingCourse(name: string, type: string, schedule: string): Promise<Course | undefined>{
+    const findCourse = await this.findOne({
+      where: {
+        name,
+        // type,
+        // schedule
+      },
+    });
 
-class CoursesRepository {
-  private courses: Course[];
-
-  constructor(){
-    this.courses = [];
+    return findCourse;
   }
-
-  public create({name, building, address, type, schedule}: CreateCourseDTO): Course{
-    const course = new Course({name, building, address, type, schedule});
-
-    this.courses.push(course);
-    parseISO(Date.now().toString());
-
-    return course;
-  }
-
-  public all(): Course[]{
-    return this.courses;
-  }
-
 
 }
 

@@ -1,17 +1,17 @@
 import {Router} from 'express';
 import CoursesRepository from '../repositories/CoursesRepository';
 import CreateCourseService from '../services/CreateCourseService';
+import {getCustomRepository} from 'typeorm';
 
 const coursesRouter = Router();
-const coursesRepository = new CoursesRepository();
 
-coursesRouter.post('/', (request, response) => {
+coursesRouter.post('/', async (request, response) => {
   try{
     const {name, building, address, type, schedule} = request.body;
 
-    const createCourse = new CreateCourseService(coursesRepository);
+    const createCourse = new CreateCourseService();
 
-    const course = createCourse.execute({
+    const course = await createCourse.execute({
       name,
       building,
       address,
@@ -26,7 +26,9 @@ coursesRouter.post('/', (request, response) => {
 });
 
 coursesRouter.get('/', (request, response) => {
-  const courses = coursesRepository.all();
+  const coursesRepository = getCustomRepository(CoursesRepository);
+
+  const courses = coursesRepository.find();
 
   return response.json(courses);
 });
