@@ -1,30 +1,30 @@
 import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn} from 'typeorm';
 
-@Entity('courses')
+//@Entity('courses')
 class Course {
 
-  @PrimaryGeneratedColumn('uuid')
+  //@PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  //@Column()
   name: string;
 
-  @Column()
+  //@Column()
   building: string;
 
-  @Column()
+  //@Column()
   address: string;
 
-  @Column()
+  //@Column()
   schedule: 'Integral' | 'Noturno';
 
-  @Column()
+  //@Column()
   type: 'Bacharel' | 'Licenciatura';
 
-  @CreateDateColumn()
+  //@CreateDateColumn()
   created_at: Date;
 
-  @UpdateDateColumn()
+  //@UpdateDateColumn()
   updated_at: Date;
 }
 
