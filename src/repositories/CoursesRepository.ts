@@ -7,8 +7,8 @@ class CoursesRepository extends Repository<Course>{
     const findCourse = await this.findOne({
       where: {
         name,
-        // type,
-        // schedule
+        type,
+        schedule
       },
     });
 

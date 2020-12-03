@@ -41,14 +41,14 @@ export class CreateCourses1606947572438 implements MigrationInterface {
             },
             {
               name: 'created_at',
-              type: 'timestamp with time zone',
-              isNullable: false
+              type: 'timestamp',
+              default: 'now()',
             },
             {
               name: 'updated_at',
-              type: 'timestamp with time zone',
-              isNullable: false
-            }
+              type: 'timestamp',
+              default: 'now()',
+            },
           ]
         })
       );

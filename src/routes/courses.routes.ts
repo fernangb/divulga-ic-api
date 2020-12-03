@@ -25,10 +25,10 @@ coursesRouter.post('/', async (request, response) => {
   }
 });
 
-coursesRouter.get('/', (request, response) => {
+coursesRouter.get('/', async(request, response) => {
   const coursesRepository = getCustomRepository(CoursesRepository);
 
-  const courses = coursesRepository.find();
+  const courses = await coursesRepository.find();
 
   return response.json(courses);
 });
