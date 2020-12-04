@@ -10,10 +10,10 @@ class CreateAreaService {
   public async execute({name}: AreaDTO): Promise<Area>{
     const areasRepository = getCustomRepository(AreasRepository);
 
-    const findArea = await areasRepository.findByName(name);
+    const checkAreaExists = await areasRepository.findByName(name);
 
-    if(findArea){
-      throw Error('Área já cadastrada no sistema.');
+    if(checkAreaExists){
+      throw new Error('Área já cadastrada no sistema.');
     }
 
     const area = areasRepository.create({name});

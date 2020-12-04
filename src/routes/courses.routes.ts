@@ -7,13 +7,13 @@ const coursesRouter = Router();
 
 coursesRouter.post('/', async (request, response) => {
   try{
-    const {name, building, address, type, schedule} = request.body;
+    const {name, building_id, address, type, schedule} = request.body;
 
     const createCourse = new CreateCourseService();
 
     const course = await createCourse.execute({
       name,
-      building,
+      building_id,
       address,
       type,
       schedule

@@ -1,30 +1,26 @@
 import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn} from 'typeorm';
-import Building from './Building';
+import Campus from '../models/Campus';
 
-@Entity('course')
-class Course {
-
+@Entity('building')
+class Building {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  building_id: string;
+  campus_id: string;
 
-  @ManyToOne(() => Building)
-  @JoinColumn({name: 'building_id'})
-  building: Building;
+  @ManyToOne(() => Campus)
+  @JoinColumn({name: 'campus_id'})
+  campus: Campus;
 
   @Column()
   name: string;
 
   @Column()
+  commonName: string;
+
+  @Column()
   address: string;
-
-  @Column()
-  schedule: 'Integral' | 'Noturno';
-
-  @Column()
-  type: 'Bacharel' | 'Licenciatura';
 
   @CreateDateColumn()
   created_at: Date;
@@ -33,4 +29,4 @@ class Course {
   updated_at: Date;
 }
 
-export default Course;
+export default Building;

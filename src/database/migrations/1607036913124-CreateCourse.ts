@@ -1,10 +1,13 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class CreateCampus1607005858785 implements MigrationInterface {
+export class CreateCourse1607036913124 implements MigrationInterface {
+
+
+
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'campus',
+        name: 'course',
         columns: [
           {
             name: 'id',
@@ -14,19 +17,29 @@ export class CreateCampus1607005858785 implements MigrationInterface {
             default: 'uuid_generate_v4()'
           },
           {
-            name: 'name',
-            type: 'varchar',
-            isNullable: false
+            name: 'building_id',
+            type: 'uuid',
+            isNullable: true
           },
           {
-            name: 'commonName',
+            name: 'name',
             type: 'varchar',
             isNullable: false
           },
           {
             name: 'address',
             type: 'varchar',
-            isNullable: true
+            isNullable: false
+          },
+          {
+            name: 'type',
+            type: 'varchar',
+            isNullable: false
+          },
+          {
+            name: 'schedule',
+            type: 'varchar',
+            isNullable: false
           },
           {
             name: 'created_at',
@@ -41,10 +54,21 @@ export class CreateCampus1607005858785 implements MigrationInterface {
         ]
       })
     );
+
+    await queryRunner.createForeignKey('course', new TableForeignKey({
+      name: 'CourseBuilding',
+      columnNames: ['building_id'],
+      referencedColumnNames: ['id'],
+      referencedTableName: 'building',
+      onDelete: 'SET NULL',
+      onUpdate: 'CASCADE'
+    }))
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('campus');
+    await queryRunner.dropForeignKey('course', 'CourseBuilding');
+
+    await queryRunner.dropTable('course');
   }
 
 }

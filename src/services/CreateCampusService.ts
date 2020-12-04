@@ -12,10 +12,10 @@ class CreateCampusService {
   public async execute({name,address, commonName}: CampusDTO): Promise<Campus>{
     const campusRepository = getCustomRepository(CampusRepository);
 
-    const findCampus = await campusRepository.findByName(name);
+    const checkCampusExists = await campusRepository.findByName(name);
 
-    if(findCampus){
-      throw Error('Campus já cadastrado no sistema.');
+    if(checkCampusExists){
+      throw new Error('Campus já cadastrado no sistema.');
     }
 
     const campus = campusRepository.create({name,address, commonName});
