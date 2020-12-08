@@ -7,14 +7,14 @@ const campusRouter = Router();
 
 campusRouter.post('/', async (request, response) => {
   try{
-    const {name, commonName, address} = request.body;
+    const {nome, nome_comum, endereco} = request.body;
 
     const createCampus = new CreateCampusService();
 
     const campus = await createCampus.execute({
-      name,
-      address,
-      commonName
+      nome,
+      endereco,
+      nome_comum
     });
 
     return response.json(campus);

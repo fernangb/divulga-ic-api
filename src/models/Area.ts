@@ -7,13 +7,13 @@ class Area {
   id: string;
 
   @Column()
-  name: string;
+  nome: string;
 
   @CreateDateColumn()
-  created_at: Date;
+  dt_criacao: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  dt_atualizacao: Date;
 }
 
 export default Area;

@@ -7,19 +7,19 @@ class Campus {
   id: string;
 
   @Column()
-  name: string;
+  nome: string;
 
   @Column()
-  commonName: string;
+  nome_comum: string;
 
   @Column()
-  address: string;
+  endereco: string;
 
   @CreateDateColumn()
-  created_at: Date;
+  dt_criacao: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  dt_atualizacao: Date;
 }
 
 export default Campus;

@@ -1,32 +1,32 @@
 import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn} from 'typeorm';
-import Campus from '../models/Campus';
+import Campus from './Campus';
 
-@Entity('building')
+@Entity('predio')
 class Building {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  campus_id: string;
+  id_campus: string;
 
   @ManyToOne(() => Campus)
-  @JoinColumn({name: 'campus_id'})
+  @JoinColumn({name: 'id_campus'})
   campus: Campus;
 
   @Column()
-  name: string;
+  nome: string;
 
   @Column()
-  commonName: string;
+  nome_comum: string;
 
   @Column()
-  address: string;
+  endereco: string;
 
   @CreateDateColumn()
-  created_at: Date;
+  dt_criacao: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  dt_atualizacao: Date;
 }
 
 export default Building;

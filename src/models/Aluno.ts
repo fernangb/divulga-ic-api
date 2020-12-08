@@ -1,48 +1,48 @@
 import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn} from 'typeorm';
-import Course from '../models/Course';
+import Curso from './Curso';
 
-@Entity('student')
-class Student {
+@Entity('aluno')
+class Aluno {
 
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  course_id: string;
+  id_curso: string;
 
-  @ManyToOne(() => Course)
-  @JoinColumn({name: 'course_id'})
-  course: Course;
+  @ManyToOne(() => Curso)
+  @JoinColumn({name: 'id_curso'})
+  curso: Curso;
 
   @Column()
-  fullName: string;
+  nome: string;
 
   @Column()
   dre: string;
 
   @Column()
-  entrySemester: string;
+  periodo_entrada: string;
 
   @Column()
-  actualSemester: number;
+  periodo_atual: number;
 
   @Column()
   cr: number;
 
   @Column()
-  description: string;
+  descricao: string;
 
   @Column()
   email: string;
 
   @Column()
-  password: string;
+  senha: string;
 
   @CreateDateColumn()
-  created_at: Date;
+  dt_criacao: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  dt_atualizacao: Date;
 }
 
-export default Student;
+export default Aluno;

@@ -3,20 +3,20 @@ import AreasRepository from '../repositories/AreasRepository';
 import {getCustomRepository} from 'typeorm';
 
 interface AreaDTO {
-  name: string;
+  nome: string;
 }
 
 class CreateAreaService {
-  public async execute({name}: AreaDTO): Promise<Area>{
+  public async execute({nome}: AreaDTO): Promise<Area>{
     const areasRepository = getCustomRepository(AreasRepository);
 
-    const checkAreaExists = await areasRepository.findByName(name);
+    const areaEncontrada = await areasRepository.procurarPeloNome(nome);
 
-    if(checkAreaExists){
+    if(areaEncontrada){
       throw new Error('Área já cadastrada no sistema.');
     }
 
-    const area = areasRepository.create({name});
+    const area = areasRepository.create({nome});
 
     await areasRepository.save(area);
 

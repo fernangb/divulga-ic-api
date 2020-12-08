@@ -9,5 +9,5 @@ app.use(express.json());
 app.use(routes);
 
 app.listen(3333, () => {
-    console.log("----- Divulga IC started at port 3333 !! -----");
+    console.log("----- Divulga IC iniciou na porta 3333 !! -----");
 });

@@ -7,12 +7,12 @@ const areaRouter = Router();
 
 areaRouter.post('/', async (request, response) => {
   try{
-    const {name} = request.body;
+    const {nome} = request.body;
 
     const createArea = new CreateAreaService();
 
     const area = await createArea.execute({
-      name
+      nome
     });
 
     return response.json(area);

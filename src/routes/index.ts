@@ -1,16 +1,16 @@
 import { Router } from 'express';
+import alunosRouter from './alunos.routes';
 import areasRouter from './areas.routes';
-import buildingsRouter from './buildings.routes';
 import campusRouter from './campus.routes';
-import coursesRouter from './courses.routes';
-import studentsRouter from './students.routes';
+import cursosRouter from './cursos.routes';
+import prediosRouter from './predios.routes';
 
 const routes = Router();
 
+routes.use('/alunos', alunosRouter);
 routes.use('/areas', areasRouter);
-routes.use('/buildings', buildingsRouter);
 routes.use('/campus', campusRouter);
-routes.use('/courses', coursesRouter);
-routes.use('/students', studentsRouter);
+routes.use('/cursos', cursosRouter);
+routes.use('/predios', prediosRouter);
 
 export default routes;

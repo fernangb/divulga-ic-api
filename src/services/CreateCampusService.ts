@@ -3,22 +3,22 @@ import CampusRepository from '../repositories/CampusRepository';
 import {getCustomRepository} from 'typeorm';
 
 interface CampusDTO {
-  name: string;
-  address:  string;
-  commonName: string;
+  nome: string;
+  endereco:  string;
+  nome_comum: string;
 }
 
 class CreateCampusService {
-  public async execute({name,address, commonName}: CampusDTO): Promise<Campus>{
+  public async execute({nome,endereco, nome_comum}: CampusDTO): Promise<Campus>{
     const campusRepository = getCustomRepository(CampusRepository);
 
-    const checkCampusExists = await campusRepository.findByName(name);
+    const campusEncontrado = await campusRepository.procurarPeloNome(nome);
 
-    if(checkCampusExists){
+    if(campusEncontrado){
       throw new Error('Campus já cadastrado no sistema.');
     }
 
-    const campus = campusRepository.create({name,address, commonName});
+    const campus = campusRepository.create({nome,endereco, nome_comum});
 
     await campusRepository.save(campus);
 

@@ -3,14 +3,14 @@ import {EntityRepository, Repository} from 'typeorm';
 
 @EntityRepository(Campus)
 class CampusRepository extends Repository<Campus>{
-  public async findByName(name: string): Promise<Campus | undefined>{
-    const findCampus = await this.findOne({
+  public async procurarPeloNome(nome: string): Promise<Campus | undefined>{
+    const campusEncontrado = await this.findOne({
       where: {
-        name
+        nome
       },
     });
 
-    return findCampus;
+    return campusEncontrado;
   }
 
 }

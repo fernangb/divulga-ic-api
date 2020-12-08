@@ -1,11 +1,11 @@
-import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
+import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreateBuildings1607031923087 implements MigrationInterface {
+export class CriarTabelaCampus1607384037443 implements MigrationInterface {
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'building',
+        name: 'campus',
         columns: [
           {
             name: 'id',
@@ -15,53 +15,37 @@ export class CreateBuildings1607031923087 implements MigrationInterface {
             default: 'uuid_generate_v4()'
           },
           {
-            name: 'name',
+            name: 'nome',
             type: 'varchar',
             isNullable: false
           },
           {
-            name: 'commonName',
+            name: 'nome_comum',
             type: 'varchar',
             isNullable: false
           },
           {
-            name: 'address',
+            name: 'endereco',
             type: 'varchar',
-            isNullable: false
-          },
-          {
-            name: 'campus_id',
-            type: 'uuid',
             isNullable: true
           },
           {
-            name: 'created_at',
+            name: 'dt_criacao',
             type: 'timestamp',
             default: 'now()',
           },
           {
-            name: 'updated_at',
+            name: 'dt_atualizacao',
             type: 'timestamp',
             default: 'now()',
           },
         ]
       })
     );
-
-    await queryRunner.createForeignKey('building', new TableForeignKey({
-      name: 'BuildingCampus',
-      columnNames: ['campus_id'],
-      referencedColumnNames: ['id'],
-      referencedTableName: 'campus',
-      onDelete: 'SET NULL',
-      onUpdate: 'CASCADE'
-    }))
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('building', 'BuildingCampus');
-
-    await queryRunner.dropTable('building');
+    await queryRunner.dropTable('campus');
   }
 
 }

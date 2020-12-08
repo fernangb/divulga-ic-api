@@ -1,13 +1,11 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class CreateCourse1607036913124 implements MigrationInterface {
-
-
+export class CriarTabelaCurso1607384380748 implements MigrationInterface {
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'course',
+        name: 'curso',
         columns: [
           {
             name: 'id',
@@ -17,37 +15,37 @@ export class CreateCourse1607036913124 implements MigrationInterface {
             default: 'uuid_generate_v4()'
           },
           {
-            name: 'building_id',
+            name: 'id_predio',
             type: 'uuid',
             isNullable: true
           },
           {
-            name: 'name',
+            name: 'nome',
             type: 'varchar',
             isNullable: false
           },
           {
-            name: 'address',
+            name: 'endereco',
             type: 'varchar',
             isNullable: false
           },
           {
-            name: 'type',
+            name: 'tipo',
             type: 'varchar',
             isNullable: false
           },
           {
-            name: 'schedule',
+            name: 'turno',
             type: 'varchar',
             isNullable: false
           },
           {
-            name: 'created_at',
+            name: 'dt_criacao',
             type: 'timestamp',
             default: 'now()',
           },
           {
-            name: 'updated_at',
+            name: 'dt_atualizacao',
             type: 'timestamp',
             default: 'now()',
           },
@@ -55,20 +53,20 @@ export class CreateCourse1607036913124 implements MigrationInterface {
       })
     );
 
-    await queryRunner.createForeignKey('course', new TableForeignKey({
-      name: 'CourseBuilding',
-      columnNames: ['building_id'],
+    await queryRunner.createForeignKey('curso', new TableForeignKey({
+      name: 'PredioCurso',
+      columnNames: ['id_predio'],
       referencedColumnNames: ['id'],
-      referencedTableName: 'building',
+      referencedTableName: 'predio',
       onDelete: 'SET NULL',
       onUpdate: 'CASCADE'
     }))
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('course', 'CourseBuilding');
+    await queryRunner.dropForeignKey('predio', 'PredioCurso');
 
-    await queryRunner.dropTable('course');
+    await queryRunner.dropTable('predio');
   }
 
 }

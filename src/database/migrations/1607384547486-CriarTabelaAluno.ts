@@ -1,11 +1,11 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class CreateStudent1607040079764 implements MigrationInterface {
+export class CriarTabelaAluno1607384547486 implements MigrationInterface {
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'student',
+        name: 'aluno',
         columns: [
           {
             name: 'id',
@@ -15,12 +15,12 @@ export class CreateStudent1607040079764 implements MigrationInterface {
             default: 'uuid_generate_v4()'
           },
           {
-            name: 'fullName',
+            name: 'nome',
             type: 'varchar',
             isNullable: false
           },
           {
-            name: 'course_id',
+            name: 'id_curso',
             type: 'uuid',
             isNullable: true
           },
@@ -31,12 +31,12 @@ export class CreateStudent1607040079764 implements MigrationInterface {
             isUnique: true
           },
           {
-            name: 'entrySemester',
+            name: 'periodo_entrada',
             type: 'varchar',
             isNullable: true
           },
           {
-            name: 'actualSemester',
+            name: 'periodo_atual',
             type: 'integer',
             isNullable: true
           },
@@ -46,7 +46,7 @@ export class CreateStudent1607040079764 implements MigrationInterface {
             isNullable: true
           },
           {
-            name: 'description',
+            name: 'descricao',
             type: 'varchar',
             isNullable: true
           },
@@ -57,37 +57,38 @@ export class CreateStudent1607040079764 implements MigrationInterface {
             isUnique: true
           },
           {
-            name: 'password',
+            name: 'senha',
             type: 'varchar',
             isNullable: false
           },
           {
-            name: 'created_at',
+            name: 'dt_criacao',
             type: 'timestamp',
             default: 'now()',
           },
           {
-            name: 'updated_at',
+            name: 'dt_atualizacao',
             type: 'timestamp',
             default: 'now()',
           },
         ]
       })
     );
-    await queryRunner.createForeignKey('student', new TableForeignKey({
-      name: 'StudentCourse',
-      columnNames: ['course_id'],
+    await queryRunner.createForeignKey('aluno', new TableForeignKey({
+      name: 'CursoAluno',
+      columnNames: ['id_curso'],
       referencedColumnNames: ['id'],
-      referencedTableName: 'course',
+      referencedTableName: 'curso',
       onDelete: 'SET NULL',
       onUpdate: 'CASCADE'
     }))
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('student', 'StudentCourse');
+    await queryRunner.dropForeignKey('aluno', 'CursoAluno');
 
-    await queryRunner.dropTable('student');
+    await queryRunner.dropTable('aluno');
   }
 
 }
+
