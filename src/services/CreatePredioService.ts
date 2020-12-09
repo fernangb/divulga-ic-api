@@ -1,6 +1,6 @@
+import { getCustomRepository } from 'typeorm';
 import Predio from '../models/Predio';
 import PrediosRepository from '../repositories/PrediosRepository';
-import {getCustomRepository} from 'typeorm';
 
 interface PredioDTO {
   nome: string;
@@ -10,16 +10,26 @@ interface PredioDTO {
 }
 
 class CreatePredioService {
-  public async execute({nome, nome_comum, endereco, id_campus}: PredioDTO): Promise<Predio>{
+  public async execute({
+    nome,
+    nome_comum,
+    endereco,
+    id_campus,
+  }: PredioDTO): Promise<Predio> {
     const prediosRepository = getCustomRepository(PrediosRepository);
 
     const predioEncontrado = await prediosRepository.procurarPeloNome(nome);
 
-    if(predioEncontrado){
+    if (predioEncontrado) {
       throw new Error('Prédio já cadastrado no sistema.');
     }
 
-    const predio = prediosRepository.create({nome, nome_comum, endereco, id_campus});
+    const predio = prediosRepository.create({
+      nome,
+      nome_comum,
+      endereco,
+      id_campus,
+    });
 
     await prediosRepository.save(predio);
 

@@ -1,9 +1,16 @@
-import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn} from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 import Curso from './Curso';
 
 @Entity('aluno')
 class Aluno {
-
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -11,7 +18,7 @@ class Aluno {
   id_curso: string;
 
   @ManyToOne(() => Curso)
-  @JoinColumn({name: 'id_curso'})
+  @JoinColumn({ name: 'id_curso' })
   curso: Curso;
 
   @Column()

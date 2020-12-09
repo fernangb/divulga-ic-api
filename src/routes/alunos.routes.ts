@@ -1,12 +1,12 @@
-import {Router} from 'express';
+import { Router } from 'express';
+import { getCustomRepository } from 'typeorm';
 import CreateAlunoService from '../services/CreateAlunoService';
-import {getCustomRepository} from 'typeorm';
 
 const alunoRouter = Router();
 
 alunoRouter.post('/', async (request, response) => {
-  try{
-    const {nome, id_curso, email, senha, dre} = request.body;
+  try {
+    const { nome, id_curso, email, senha, dre } = request.body;
 
     const createAluno = new CreateAlunoService();
 
@@ -15,19 +15,19 @@ alunoRouter.post('/', async (request, response) => {
       id_curso,
       email,
       senha,
-      dre
+      dre,
     });
 
     const alunoResponse = {
       nome,
       id_curso,
       email,
-      dre
-    }
+      dre,
+    };
 
     return response.json(alunoResponse);
-  }catch(err){
-    return response.status(400).json({error: err.message});
+  } catch (err) {
+    return response.status(400).json({ error: err.message });
   }
 });
 

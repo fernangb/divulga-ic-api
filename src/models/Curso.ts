@@ -1,9 +1,16 @@
-import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn} from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 import Predio from './Predio';
 
 @Entity('curso')
 class Curso {
-
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -11,7 +18,7 @@ class Curso {
   id_predio: string;
 
   @ManyToOne(() => Predio)
-  @JoinColumn({name: 'id_predio'})
+  @JoinColumn({ name: 'id_predio' })
   predio: Predio;
 
   @Column()

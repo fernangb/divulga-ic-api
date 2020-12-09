@@ -1,13 +1,13 @@
-import {Router} from 'express';
+import { Router } from 'express';
+import { getCustomRepository } from 'typeorm';
 import CursosRepository from '../repositories/CursosRepository';
 import CreateCursoService from '../services/CreateCursoService';
-import {getCustomRepository} from 'typeorm';
 
 const cursosRouter = Router();
 
 cursosRouter.post('/', async (request, response) => {
-  try{
-    const {nome, id_predio, endereco, tipo, turno} = request.body;
+  try {
+    const { nome, id_predio, endereco, tipo, turno } = request.body;
 
     const createCurso = new CreateCursoService();
 
@@ -16,16 +16,16 @@ cursosRouter.post('/', async (request, response) => {
       id_predio,
       endereco,
       tipo,
-      turno
+      turno,
     });
 
     return response.json(curso);
-  }catch(err){
-    return response.status(400).json({error: err.message});
+  } catch (err) {
+    return response.status(400).json({ error: err.message });
   }
 });
 
-cursosRouter.get('/', async(request, response) => {
+cursosRouter.get('/', async (request, response) => {
   const cursosRepository = getCustomRepository(CursosRepository);
 
   const cursos = await cursosRepository.find();

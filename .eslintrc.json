@@ -30,6 +30,7 @@
           "ts": "never"
         }
       ],
+      "camelcase": "off",
       "prettier/prettier": "error"
     },
     "settings": {

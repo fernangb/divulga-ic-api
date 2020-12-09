@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import authRouter from './auth.routes';
 import alunosRouter from './alunos.routes';
 import areasRouter from './areas.routes';
 import campusRouter from './campus.routes';
@@ -7,6 +8,7 @@ import prediosRouter from './predios.routes';
 
 const routes = Router();
 
+routes.use('/auth', authRouter);
 routes.use('/alunos', alunosRouter);
 routes.use('/areas', areasRouter);
 routes.use('/campus', campusRouter);

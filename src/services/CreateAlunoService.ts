@@ -1,5 +1,5 @@
+import { getCustomRepository, getRepository } from 'typeorm';
 import Aluno from '../models/Aluno';
-import {getCustomRepository, getRepository} from 'typeorm';
 
 interface AlunoDTO {
   nome: string;
@@ -10,18 +10,30 @@ interface AlunoDTO {
 }
 
 class CreateAlunoService {
-  public async execute({nome, email, senha, id_curso, dre}: AlunoDTO): Promise<Aluno>{
+  public async execute({
+    nome,
+    email,
+    senha,
+    id_curso,
+    dre,
+  }: AlunoDTO): Promise<Aluno> {
     const alunosRepository = getRepository(Aluno);
 
     const alunoEncontrado = await alunosRepository.findOne({
-      where: {email}
+      where: { email },
     });
 
-    if(alunoEncontrado){
+    if (alunoEncontrado) {
       throw new Error('Email já cadastrado no sistema.');
     }
 
-    const aluno = alunosRepository.create({nome, id_curso, email, senha, dre});
+    const aluno = alunosRepository.create({
+      nome,
+      id_curso,
+      email,
+      senha,
+      dre,
+    });
 
     await alunosRepository.save(aluno);
 
