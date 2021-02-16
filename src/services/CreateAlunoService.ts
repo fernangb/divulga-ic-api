@@ -1,4 +1,6 @@
+/* eslint-disable class-methods-use-this */
 import { getCustomRepository, getRepository } from 'typeorm';
+import { hash } from 'bcryptjs';
 import Aluno from '../models/Aluno';
 
 interface AlunoDTO {
@@ -27,11 +29,13 @@ class CreateAlunoService {
       throw new Error('Email já cadastrado no sistema.');
     }
 
+    const senhaCriptografada = await hash(senha, 8);
+
     const aluno = alunosRepository.create({
       nome,
       id_curso,
       email,
-      senha,
+      senha: senhaCriptografada,
       dre,
     });
 
