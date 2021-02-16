@@ -1,6 +1,7 @@
 import { getCustomRepository } from 'typeorm';
 import Nivel from '../models/Nivel';
 import NiveisRepository from '../repositories/NiveisRepository';
+import AppError from '../errors/AppError';
 
 interface NivelDTO {
   nome: string;
@@ -13,7 +14,7 @@ class CreateNivelService {
     const nivelEncontrado = await niveisRepository.procurarPeloNome(nome);
 
     if (nivelEncontrado) {
-      throw new Error('Nível já cadastrado no sistema.');
+      throw new AppError('Nível já cadastrado no sistema.');
     }
 
     const nivel = niveisRepository.create({ nome });

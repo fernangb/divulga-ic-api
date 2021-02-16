@@ -6,19 +6,15 @@ import CreateNivelService from '../services/CreateNivelService';
 const nivelRouter = Router();
 
 nivelRouter.post('/', async (request, response) => {
-  try {
-    const { nome } = request.body;
+  const { nome } = request.body;
 
-    const createNivel = new CreateNivelService();
+  const createNivel = new CreateNivelService();
 
-    const nivel = await createNivel.execute({
-      nome,
-    });
+  const nivel = await createNivel.execute({
+    nome,
+  });
 
-    return response.json(nivel);
-  } catch (err) {
-    return response.status(400).json({ error: err.message });
-  }
+  return response.json(nivel);
 });
 
 nivelRouter.get('/', async (request, response) => {

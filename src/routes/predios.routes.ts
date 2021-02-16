@@ -6,22 +6,18 @@ import CreatePredioService from '../services/CreatePredioService';
 const predioRouter = Router();
 
 predioRouter.post('/', async (request, response) => {
-  try {
-    const { nome, nome_comum, endereco, id_campus } = request.body;
+  const { nome, nome_comum, endereco, id_campus } = request.body;
 
-    const createPredio = new CreatePredioService();
+  const createPredio = new CreatePredioService();
 
-    const predio = await createPredio.execute({
-      nome,
-      nome_comum,
-      endereco,
-      id_campus,
-    });
+  const predio = await createPredio.execute({
+    nome,
+    nome_comum,
+    endereco,
+    id_campus,
+  });
 
-    return response.json(predio);
-  } catch (err) {
-    return response.status(400).json({ error: err.message });
-  }
+  return response.json(predio);
 });
 
 predioRouter.get('/', async (request, response) => {

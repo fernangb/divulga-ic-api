@@ -1,7 +1,8 @@
 /* eslint-disable class-methods-use-this */
-import { getCustomRepository, getRepository } from 'typeorm';
+import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
 import Aluno from '../models/Aluno';
+import AppError from '../errors/AppError';
 
 interface AlunoDTO {
   nome: string;
@@ -26,7 +27,7 @@ class CreateAlunoService {
     });
 
     if (alunoEncontrado) {
-      throw new Error('Email já cadastrado no sistema.');
+      throw new AppError('Email já cadastrado no sistema.');
     }
 
     const senhaCriptografada = await hash(senha, 8);

@@ -9,26 +9,22 @@ const usuarioRouter = Router();
 const upload = multer(uploadConfig);
 
 usuarioRouter.post('/', async (request, response) => {
-  try {
-    const { email, senha, id_nivel } = request.body;
+  const { email, senha, id_nivel } = request.body;
 
-    const createUsuario = new CreateUsuarioService();
+  const createUsuario = new CreateUsuarioService();
 
-    const usuario = await createUsuario.execute({
-      email,
-      senha,
-      id_nivel,
-    });
+  const usuario = await createUsuario.execute({
+    email,
+    senha,
+    id_nivel,
+  });
 
-    const usuarioResponse = {
-      id_nivel,
-      email,
-    };
+  const usuarioResponse = {
+    id_nivel,
+    email,
+  };
 
-    return response.json(usuarioResponse);
-  } catch (err) {
-    return response.status(400).json({ error: err.message });
-  }
+  return response.json(usuarioResponse);
 });
 
 usuarioRouter.patch(

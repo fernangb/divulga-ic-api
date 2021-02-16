@@ -3,6 +3,7 @@ import { getRepository } from 'typeorm';
 import { sign } from 'jsonwebtoken';
 import Usuario from '../models/Usuario';
 import authConfig from '../config/auth';
+import AppError from '../errors/AppError';
 
 interface Request {
   email: string;
@@ -23,13 +24,13 @@ class AuthenticateUsuarioService {
     });
 
     if (!usuario) {
-      throw new Error('Combinação email/senha incorreta.');
+      throw new AppError('Combinação email/senha incorreta.', 401);
     }
 
     const senhaCorreta = await compare(senha, usuario.senha);
 
     if (!senhaCorreta) {
-      throw new Error('Combinação email/senha incorreta.');
+      throw new AppError('Combinação email/senha incorreta.', 401);
     }
 
     const { secret, expiresIn } = authConfig.jwt;

@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import Usuario from '../models/Usuario';
 import uploadConfig from '../config/upload';
+import AppError from '../errors/AppError';
 
 interface Request {
   id_usuario: string;
@@ -18,7 +19,10 @@ class UpdateAvatarUsuarioService {
 
     const usuario = await usuariosRepository.findOne(id_usuario);
     if (!usuario) {
-      throw new Error('Apenas usuarios autenticados pode alterar a foto.');
+      throw new AppError(
+        'Apenas usuarios autenticados pode alterar a foto.',
+        401,
+      );
     }
 
     if (usuario.avatar) {

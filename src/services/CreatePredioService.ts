@@ -1,6 +1,7 @@
 import { getCustomRepository } from 'typeorm';
 import Predio from '../models/Predio';
 import PrediosRepository from '../repositories/PrediosRepository';
+import AppError from '../errors/AppError';
 
 interface PredioDTO {
   nome: string;
@@ -21,7 +22,7 @@ class CreatePredioService {
     const predioEncontrado = await prediosRepository.procurarPeloNome(nome);
 
     if (predioEncontrado) {
-      throw new Error('Prédio já cadastrado no sistema.');
+      throw new AppError('Prédio já cadastrado no sistema.');
     }
 
     const predio = prediosRepository.create({

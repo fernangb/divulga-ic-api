@@ -9,23 +9,19 @@ const cursosRouter = Router();
 cursosRouter.use(ensureAuthenticated);
 
 cursosRouter.post('/', async (request, response) => {
-  try {
-    const { nome, id_predio, endereco, tipo, turno } = request.body;
+  const { nome, id_predio, endereco, tipo, turno } = request.body;
 
-    const createCurso = new CreateCursoService();
+  const createCurso = new CreateCursoService();
 
-    const curso = await createCurso.execute({
-      nome,
-      id_predio,
-      endereco,
-      tipo,
-      turno,
-    });
+  const curso = await createCurso.execute({
+    nome,
+    id_predio,
+    endereco,
+    tipo,
+    turno,
+  });
 
-    return response.json(curso);
-  } catch (err) {
-    return response.status(400).json({ error: err.message });
-  }
+  return response.json(curso);
 });
 
 cursosRouter.get('/', async (request, response) => {

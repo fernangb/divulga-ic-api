@@ -1,6 +1,7 @@
 import { getCustomRepository } from 'typeorm';
 import Campus from '../models/Campus';
 import CampusRepository from '../repositories/CampusRepository';
+import AppError from '../errors/AppError';
 
 interface CampusDTO {
   nome: string;
@@ -19,7 +20,7 @@ class CreateCampusService {
     const campusEncontrado = await campusRepository.procurarPeloNome(nome);
 
     if (campusEncontrado) {
-      throw new Error('Campus já cadastrado no sistema.');
+      throw new AppError('Campus já cadastrado no sistema.');
     }
 
     const campus = campusRepository.create({ nome, endereco, nome_comum });

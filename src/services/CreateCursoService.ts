@@ -1,6 +1,7 @@
 import { getCustomRepository } from 'typeorm';
 import Curso from '../models/Curso';
 import CursosRepository from '../repositories/CursosRepository';
+import AppError from '../errors/AppError';
 
 interface CursoDTO {
   nome: string;
@@ -27,7 +28,7 @@ class CreateCursoService {
     );
 
     if (cursoEncontrado) {
-      throw Error('Curso já cadastrado no sistema.');
+      throw new AppError('Curso já cadastrado no sistema.');
     }
 
     const curso = cursosRepository.create({
