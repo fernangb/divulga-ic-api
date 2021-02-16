@@ -1,7 +1,6 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class CriarTabelaCampus1607384037443 implements MigrationInterface {
-
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -12,22 +11,22 @@ export class CriarTabelaCampus1607384037443 implements MigrationInterface {
             type: 'uuid',
             isPrimary: true,
             generationStrategy: 'uuid',
-            default: 'uuid_generate_v4()'
+            default: 'uuid_generate_v4()',
           },
           {
             name: 'nome',
             type: 'varchar',
-            isNullable: false
+            isNullable: false,
           },
           {
             name: 'nome_comum',
             type: 'varchar',
-            isNullable: false
+            isNullable: false,
           },
           {
             name: 'endereco',
             type: 'varchar',
-            isNullable: true
+            isNullable: true,
           },
           {
             name: 'dt_criacao',
@@ -39,13 +38,12 @@ export class CriarTabelaCampus1607384037443 implements MigrationInterface {
             type: 'timestamp',
             default: 'now()',
           },
-        ]
-      })
+        ],
+      }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable('campus');
   }
-
 }

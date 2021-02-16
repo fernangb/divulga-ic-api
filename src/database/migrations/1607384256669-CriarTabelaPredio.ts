@@ -1,7 +1,11 @@
-import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
 export class CriarTabelaPredio1607384256669 implements MigrationInterface {
-
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -12,27 +16,27 @@ export class CriarTabelaPredio1607384256669 implements MigrationInterface {
             type: 'uuid',
             isPrimary: true,
             generationStrategy: 'uuid',
-            default: 'uuid_generate_v4()'
+            default: 'uuid_generate_v4()',
           },
           {
             name: 'nome',
             type: 'varchar',
-            isNullable: false
+            isNullable: false,
           },
           {
             name: 'nome_comum',
             type: 'varchar',
-            isNullable: false
+            isNullable: false,
           },
           {
             name: 'endereco',
             type: 'varchar',
-            isNullable: false
+            isNullable: false,
           },
           {
             name: 'id_campus',
             type: 'uuid',
-            isNullable: true
+            isNullable: true,
           },
           {
             name: 'dt_criacao',
@@ -44,18 +48,21 @@ export class CriarTabelaPredio1607384256669 implements MigrationInterface {
             type: 'timestamp',
             default: 'now()',
           },
-        ]
-      })
+        ],
+      }),
     );
 
-    await queryRunner.createForeignKey('predio', new TableForeignKey({
-      name: 'CampusPredio',
-      columnNames: ['id_campus'],
-      referencedColumnNames: ['id'],
-      referencedTableName: 'campus',
-      onDelete: 'SET NULL',
-      onUpdate: 'CASCADE'
-    }))
+    await queryRunner.createForeignKey(
+      'predio',
+      new TableForeignKey({
+        name: 'CampusPredio',
+        columnNames: ['id_campus'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'campus',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+      }),
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
@@ -63,5 +70,4 @@ export class CriarTabelaPredio1607384256669 implements MigrationInterface {
 
     await queryRunner.dropTable('predio');
   }
-
 }

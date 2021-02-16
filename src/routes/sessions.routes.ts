@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import AuthenticateAlunoService from '../services/AuthenticateAlunoService';
+import AuthenticateUsuarioService from '../services/AuthenticateUsuarioService';
 
 const sessionsRouter = Router();
 
@@ -7,11 +7,13 @@ sessionsRouter.post('/', async (request, response) => {
   try {
     const { email, senha } = request.body;
 
-    const usuarioAutenticado = new AuthenticateAlunoService();
+    const usuarioAutenticado = new AuthenticateUsuarioService();
 
-    await usuarioAutenticado.execute({ email, senha });
+    const { usuario } = await usuarioAutenticado.execute({ email, senha });
 
-    return response.json({ ok: true });
+    delete usuario.senha;
+
+    return response.json({ usuario });
   } catch (err) {
     return response.status(400).json({ error: err.message });
   }

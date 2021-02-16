@@ -5,11 +5,11 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export class CriarTabelaCurso1607384380748 implements MigrationInterface {
+export class CriarTabelaUsuario1613501791647 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'curso',
+        name: 'usuario',
         columns: [
           {
             name: 'id',
@@ -19,29 +19,20 @@ export class CriarTabelaCurso1607384380748 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'id_predio',
+            name: 'email',
+            type: 'varchar',
+            isNullable: false,
+            isUnique: true,
+          },
+          {
+            name: 'senha',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
+            name: 'id_nivel',
             type: 'uuid',
             isNullable: true,
-          },
-          {
-            name: 'nome',
-            type: 'varchar',
-            isNullable: false,
-          },
-          {
-            name: 'endereco',
-            type: 'varchar',
-            isNullable: false,
-          },
-          {
-            name: 'tipo',
-            type: 'varchar',
-            isNullable: false,
-          },
-          {
-            name: 'turno',
-            type: 'varchar',
-            isNullable: false,
           },
           {
             name: 'dt_criacao',
@@ -58,12 +49,12 @@ export class CriarTabelaCurso1607384380748 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      'curso',
+      'usuario',
       new TableForeignKey({
-        name: 'PredioCurso',
-        columnNames: ['id_predio'],
+        name: 'NivelUsuario',
+        columnNames: ['id_nivel'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'predio',
+        referencedTableName: 'nivel',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       }),
@@ -71,8 +62,8 @@ export class CriarTabelaCurso1607384380748 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('predio', 'PredioCurso');
+    await queryRunner.dropForeignKey('usuario', 'NivelUsuario');
 
-    await queryRunner.dropTable('predio');
+    await queryRunner.dropTable('usuario');
   }
 }

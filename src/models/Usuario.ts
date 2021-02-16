@@ -7,28 +7,25 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import Campus from './Campus';
+import Nivel from './Nivel';
 
-@Entity('predio')
-class Predio {
+@Entity('usuario')
+class Usuario {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  id_campus: string;
+  id_nivel: string;
 
-  @ManyToOne(() => Campus)
-  @JoinColumn({ name: 'id_campus' })
-  campus: Campus;
-
-  @Column()
-  nome: string;
+  @ManyToOne(() => Nivel)
+  @JoinColumn({ name: 'id_nivel' })
+  nivel: Nivel;
 
   @Column()
-  nome_comum: string;
+  email: string;
 
   @Column()
-  endereco: string;
+  senha: string;
 
   @CreateDateColumn()
   dt_criacao: Date;
@@ -37,4 +34,4 @@ class Predio {
   dt_atualizacao: Date;
 }
 
-export default Predio;
+export default Usuario;
