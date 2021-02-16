@@ -1,6 +1,7 @@
 import { getCustomRepository } from 'typeorm';
 import Area from '../models/Area';
 import AreasRepository from '../repositories/AreasRepository';
+import AppError from '../errors/AppError';
 
 interface AreaDTO {
   nome: string;
@@ -13,7 +14,7 @@ class CreateAreaService {
     const areaEncontrada = await areasRepository.procurarPeloNome(nome);
 
     if (areaEncontrada) {
-      throw new Error('Área já cadastrada no sistema.');
+      throw new AppError('Área já cadastrada no sistema.');
     }
 
     const area = areasRepository.create({ nome });
