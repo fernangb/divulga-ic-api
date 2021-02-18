@@ -1,14 +1,14 @@
 import { Router } from 'express';
-import { getCustomRepository } from 'typeorm';
 import CampusRepository from '@modules/campus/infra/typeorm/repositories/CampusRepository';
 import CreateCampusService from '@modules/campus/services/CreateCampusService';
 
 const campusRouter = Router();
+const campusRepository = new CampusRepository();
 
 campusRouter.post('/', async (request, response) => {
   const { nome, nome_comum, endereco } = request.body;
 
-  const createCampus = new CreateCampusService();
+  const createCampus = new CreateCampusService(campusRepository);
 
   const campus = await createCampus.execute({
     nome,
@@ -19,12 +19,12 @@ campusRouter.post('/', async (request, response) => {
   return response.json(campus);
 });
 
-campusRouter.get('/', async (request, response) => {
-  const campusRepository = getCustomRepository(CampusRepository);
+// campusRouter.get('/', async (request, response) => {
+//   const campusRepository = getCustomRepository(CampusRepository);
 
-  const campus = await campusRepository.find();
+//   const campus = await campusRepository.find();
 
-  return response.json(campus);
-});
+//   return response.json(campus);
+// });
 
 export default campusRouter;

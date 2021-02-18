@@ -1,9 +1,8 @@
-import { getCustomRepository } from 'typeorm';
 import Predio from '@modules/predios/infra/typeorm/entities/Predio';
-import PrediosRepository from '@modules/predios/infra/typeorm/repositories/PrediosRepository';
 import AppError from '@shared/errors/AppError';
+import IPrediosRepository from '../repositories/IPrediosRepository';
 
-interface PredioDTO {
+interface IRequest {
   nome: string;
   nome_comum: string;
   endereco: string;
@@ -11,21 +10,23 @@ interface PredioDTO {
 }
 
 class CreatePredioService {
+  constructor(private prediosRepository: IPrediosRepository) {}
+
   public async execute({
     nome,
     nome_comum,
     endereco,
     id_campus,
-  }: PredioDTO): Promise<Predio> {
-    const prediosRepository = getCustomRepository(PrediosRepository);
-
-    const predioEncontrado = await prediosRepository.procurarPeloNome(nome);
+  }: IRequest): Promise<Predio> {
+    const predioEncontrado = await this.prediosRepository.procurarPeloNome(
+      nome,
+    );
 
     if (predioEncontrado) {
       throw new AppError('Prédio já cadastrado no sistema.');
     }
 
-    const predio = await prediosRepository.create({
+    const predio = await this.prediosRepository.create({
       nome,
       nome_comum,
       endereco,

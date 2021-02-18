@@ -1,14 +1,14 @@
 import { Router } from 'express';
-import { getCustomRepository } from 'typeorm';
 import NiveisRepository from '@modules/usuarios/infra/typeorm/repositories/NiveisRepository';
 import CreateNivelService from '@modules/usuarios/services/CreateNivelService';
 
 const nivelRouter = Router();
+const niveisRepository = new NiveisRepository();
 
 nivelRouter.post('/', async (request, response) => {
   const { nome } = request.body;
 
-  const createNivel = new CreateNivelService();
+  const createNivel = new CreateNivelService(niveisRepository);
 
   const nivel = await createNivel.execute({
     nome,
@@ -17,12 +17,11 @@ nivelRouter.post('/', async (request, response) => {
   return response.json(nivel);
 });
 
-nivelRouter.get('/', async (request, response) => {
-  const nivelRepository = getCustomRepository(NiveisRepository);
+// nivelRouter.get('/', async (request, response) => {
 
-  const nivel = await nivelRepository.find();
+//   const nivel = await nivelRepository.find();
 
-  return response.json(nivel);
-});
+//   return response.json(nivel);
+// });
 
 export default nivelRouter;

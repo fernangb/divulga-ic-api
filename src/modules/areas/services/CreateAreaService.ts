@@ -1,23 +1,22 @@
-import { getCustomRepository } from 'typeorm';
-import AreasRepository from '@modules/areas/infra/typeorm/repositories/AreasRepository';
 import Area from '@modules/areas/infra/typeorm/entities/Area';
 import AppError from '@shared/errors/AppError';
+import IAreasRepository from '../repositories/IAreasRepository';
 
-interface AreaDTO {
+interface IRequest {
   nome: string;
 }
 
 class CreateAreaService {
-  public async execute({ nome }: AreaDTO): Promise<Area> {
-    const areasRepository = getCustomRepository(AreasRepository);
+  constructor(private areasRepository: IAreasRepository) {}
 
-    const areaEncontrada = await areasRepository.procurarPeloNome(nome);
+  public async execute({ nome }: IRequest): Promise<Area> {
+    const areaEncontrada = await this.areasRepository.procurarPeloNome(nome);
 
     if (areaEncontrada) {
       throw new AppError('Área já cadastrada no sistema.');
     }
 
-    const area = await areasRepository.create({ nome });
+    const area = await this.areasRepository.create({ nome });
 
     return area;
   }

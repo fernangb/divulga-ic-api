@@ -1,7 +1,6 @@
-import { getCustomRepository } from 'typeorm';
 import Curso from '@modules/cursos/infra/typeorm/entities/Curso';
-import CursosRepository from '@modules/cursos/infra/typeorm/repositories/CursosRepository';
 import AppError from '@shared/errors/AppError';
+import ICursosRepository from '../repositories/ICursosRepository';
 
 interface CursoDTO {
   nome: string;
@@ -12,6 +11,8 @@ interface CursoDTO {
 }
 
 class CreateCursoService {
+  constructor(private cursosRepository: ICursosRepository) {}
+
   public async execute({
     nome,
     id_predio,
@@ -19,9 +20,7 @@ class CreateCursoService {
     tipo,
     turno,
   }: CursoDTO): Promise<Curso> {
-    const cursosRepository = getCustomRepository(CursosRepository);
-
-    const cursoEncontrado = await cursosRepository.procurarCursoExistente(
+    const cursoEncontrado = await this.cursosRepository.procurarCursoExistente(
       nome,
       tipo,
       turno,
@@ -31,7 +30,7 @@ class CreateCursoService {
       throw new AppError('Curso já cadastrado no sistema.');
     }
 
-    const curso = await cursosRepository.create({
+    const curso = await this.cursosRepository.create({
       nome,
       id_predio,
       endereco,

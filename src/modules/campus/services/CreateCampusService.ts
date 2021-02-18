@@ -1,29 +1,28 @@
-import { getCustomRepository } from 'typeorm';
 import Campus from '@modules/campus/infra/typeorm/entities/Campus';
-import CampusRepository from '@modules/campus/infra/typeorm/repositories/CampusRepository';
 import AppError from '@shared/errors/AppError';
+import ICampusRepository from '../repositories/ICampusRepository';
 
-interface CampusDTO {
+interface IRequest {
   nome: string;
   endereco: string;
   nome_comum: string;
 }
 
 class CreateCampusService {
+  constructor(private campusRepository: ICampusRepository) {}
+
   public async execute({
     nome,
     endereco,
     nome_comum,
-  }: CampusDTO): Promise<Campus> {
-    const campusRepository = getCustomRepository(CampusRepository);
-
-    const campusEncontrado = await campusRepository.procurarPeloNome(nome);
+  }: IRequest): Promise<Campus> {
+    const campusEncontrado = await this.campusRepository.procurarPeloNome(nome);
 
     if (campusEncontrado) {
       throw new AppError('Campus já cadastrado no sistema.');
     }
 
-    const campus = await campusRepository.create({
+    const campus = await this.campusRepository.create({
       nome,
       endereco,
       nome_comum,

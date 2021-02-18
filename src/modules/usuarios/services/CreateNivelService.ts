@@ -1,23 +1,22 @@
-import { getCustomRepository } from 'typeorm';
 import Nivel from '@modules/usuarios/infra/typeorm/entities/Nivel';
-import NiveisRepository from '@modules/usuarios/infra/typeorm/repositories/NiveisRepository';
 import AppError from '@shared/errors/AppError';
+import INiveisRepository from '../repositories/INiveisRepository';
 
-interface NivelDTO {
+interface IRequest {
   nome: string;
 }
 
 class CreateNivelService {
-  public async execute({ nome }: NivelDTO): Promise<Nivel> {
-    const niveisRepository = getCustomRepository(NiveisRepository);
+  constructor(private niveisRepository: INiveisRepository) {}
 
-    const nivelEncontrado = await niveisRepository.procurarPeloNome(nome);
+  public async execute({ nome }: IRequest): Promise<Nivel> {
+    const nivelEncontrado = await this.niveisRepository.procurarPeloNome(nome);
 
     if (nivelEncontrado) {
       throw new AppError('Nível já cadastrado no sistema.');
     }
 
-    const nivel = await niveisRepository.create({ nome });
+    const nivel = await this.niveisRepository.create({ nome });
 
     return nivel;
   }

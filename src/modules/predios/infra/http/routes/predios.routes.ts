@@ -1,14 +1,14 @@
 import { Router } from 'express';
-import { getCustomRepository } from 'typeorm';
 import PrediosRepository from '@modules/predios/infra/typeorm/repositories/PrediosRepository';
 import CreatePredioService from '@modules/predios/services/CreatePredioService';
 
 const predioRouter = Router();
+const prediosRepository = new PrediosRepository();
 
 predioRouter.post('/', async (request, response) => {
   const { nome, nome_comum, endereco, id_campus } = request.body;
 
-  const createPredio = new CreatePredioService();
+  const createPredio = new CreatePredioService(prediosRepository);
 
   const predio = await createPredio.execute({
     nome,
@@ -20,12 +20,11 @@ predioRouter.post('/', async (request, response) => {
   return response.json(predio);
 });
 
-predioRouter.get('/', async (request, response) => {
-  const predioRepository = getCustomRepository(PrediosRepository);
+// predioRouter.get('/', async (request, response) => {
 
-  const predio = await predioRepository.find();
+//   const predio = await predioRepository.find();
 
-  return response.json(predio);
-});
+//   return response.json(predio);
+// });
 
 export default predioRouter;

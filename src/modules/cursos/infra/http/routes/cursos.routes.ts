@@ -1,17 +1,17 @@
 import { Router } from 'express';
-import { getCustomRepository } from 'typeorm';
 import CursosRepository from '@modules/cursos/infra/typeorm/repositories/CursosRepository';
 import CreateCursoService from '@modules/cursos/services/CreateCursoService';
 // import ensureAuthenticated from '@modules/usuarios/infra/http/middlewares/EnsureAuthenticated';
 
 const cursosRouter = Router();
+const cursosRepository = new CursosRepository();
 
 // cursosRouter.use(ensureAuthenticated);
 
 cursosRouter.post('/', async (request, response) => {
   const { nome, id_predio, endereco, tipo, turno } = request.body;
 
-  const createCurso = new CreateCursoService();
+  const createCurso = new CreateCursoService(cursosRepository);
 
   const curso = await createCurso.execute({
     nome,
@@ -24,12 +24,11 @@ cursosRouter.post('/', async (request, response) => {
   return response.json(curso);
 });
 
-cursosRouter.get('/', async (request, response) => {
-  const cursosRepository = getCustomRepository(CursosRepository);
+// cursosRouter.get('/', async (request, response) => {
 
-  const cursos = await cursosRepository.find();
+//   const cursos = await cursosRepository.find();
 
-  return response.json(cursos);
-});
+//   return response.json(cursos);
+// });
 
 export default cursosRouter;
