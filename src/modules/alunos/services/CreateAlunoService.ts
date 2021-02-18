@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
-import Aluno from '../entities/Aluno';
+import Aluno from '../infra/typeorm/entities/Aluno';
 import AppError from '../../../shared/errors/AppError';
 
 interface AlunoDTO {

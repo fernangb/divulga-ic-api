@@ -1,5 +1,5 @@
 import { getCustomRepository } from 'typeorm';
-import Campus from '../entities/Campus';
+import Campus from '../infra/typeorm/entities/Campus';
 import CampusRepository from '../repositories/CampusRepository';
 import AppError from '../../../shared/errors/AppError';
 

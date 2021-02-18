@@ -1,5 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
-import Predio from '../entities/Predio';
+import Predio from '../infra/typeorm/entities/Predio';
 
 @EntityRepository(Predio)
 class PrediosRepository extends Repository<Predio> {

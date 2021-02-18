@@ -1,5 +1,5 @@
 import { getCustomRepository } from 'typeorm';
-import Nivel from '../entities/Nivel';
+import Nivel from '../infra/typeorm/entities/Nivel';
 import NiveisRepository from '../repositories/NiveisRepository';
 import AppError from '../../../shared/errors/AppError';
 

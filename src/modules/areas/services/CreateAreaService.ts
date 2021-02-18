@@ -1,5 +1,5 @@
 import { getCustomRepository } from 'typeorm';
-import Area from '../entities/Area';
+import Area from '../infra/typeorm/entities/Area';
 import AreasRepository from '../repositories/AreasRepository';
 import AppError from '../../../shared/errors/AppError';
 

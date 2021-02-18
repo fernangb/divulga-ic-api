@@ -1,5 +1,5 @@
 import { getCustomRepository } from 'typeorm';
-import Predio from '../entities/Predio';
+import Predio from '../infra/typeorm/entities/Predio';
 import PrediosRepository from '../repositories/PrediosRepository';
 import AppError from '../../../shared/errors/AppError';
 
