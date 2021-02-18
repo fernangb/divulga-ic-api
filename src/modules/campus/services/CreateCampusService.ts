@@ -23,9 +23,11 @@ class CreateCampusService {
       throw new AppError('Campus já cadastrado no sistema.');
     }
 
-    const campus = campusRepository.create({ nome, endereco, nome_comum });
-
-    await campusRepository.save(campus);
+    const campus = await campusRepository.create({
+      nome,
+      endereco,
+      nome_comum,
+    });
 
     return campus;
   }

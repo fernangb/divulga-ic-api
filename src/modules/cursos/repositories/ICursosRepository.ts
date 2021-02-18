@@ -1,6 +1,8 @@
 import Curso from '@modules/cursos/infra/typeorm/entities/Curso';
+import ICreateCursoDTO from '../dtos/ICreateCursoDTO';
 
 interface ICursosRepository {
+  create(data: ICreateCursoDTO): Promise<Curso>;
   procurarCursoExistente(
     nome: string,
     tipo: string,

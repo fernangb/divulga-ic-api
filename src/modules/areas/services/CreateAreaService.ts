@@ -17,9 +17,7 @@ class CreateAreaService {
       throw new AppError('Área já cadastrada no sistema.');
     }
 
-    const area = areasRepository.create({ nome });
-
-    await areasRepository.save(area);
+    const area = await areasRepository.create({ nome });
 
     return area;
   }

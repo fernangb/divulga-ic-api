@@ -17,9 +17,7 @@ class CreateNivelService {
       throw new AppError('Nível já cadastrado no sistema.');
     }
 
-    const nivel = niveisRepository.create({ nome });
-
-    await niveisRepository.save(nivel);
+    const nivel = await niveisRepository.create({ nome });
 
     return nivel;
   }

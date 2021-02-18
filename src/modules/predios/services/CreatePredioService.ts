@@ -25,14 +25,12 @@ class CreatePredioService {
       throw new AppError('Prédio já cadastrado no sistema.');
     }
 
-    const predio = prediosRepository.create({
+    const predio = await prediosRepository.create({
       nome,
       nome_comum,
       endereco,
       id_campus,
     });
-
-    await prediosRepository.save(predio);
 
     return predio;
   }

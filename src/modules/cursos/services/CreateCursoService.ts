@@ -31,15 +31,13 @@ class CreateCursoService {
       throw new AppError('Curso já cadastrado no sistema.');
     }
 
-    const curso = cursosRepository.create({
+    const curso = await cursosRepository.create({
       nome,
       id_predio,
       endereco,
       tipo,
       turno,
     });
-
-    await cursosRepository.save(curso);
 
     return curso;
   }
