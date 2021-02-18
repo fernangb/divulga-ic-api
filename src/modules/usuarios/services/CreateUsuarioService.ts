@@ -1,35 +1,33 @@
-import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
 import Usuario from '@modules/usuarios/infra/typeorm/entities/Usuario';
 import AppError from '@shared/errors/AppError';
+import IUsuariosRepository from '../repositories/IUsuariosRepository';
 
-interface Request {
+interface IRequest {
   email: string;
   senha: string;
   id_nivel: string;
 }
 
 class CreateUsuarioService {
-  public async execute({ email, senha, id_nivel }: Request): Promise<Usuario> {
-    const usersRepository = getRepository(Usuario);
+  constructor(private usuariosRepository: IUsuariosRepository) {}
 
-    const checkUsuarioExists = await usersRepository.findOne({
-      where: { email },
-    });
+  public async execute({ email, senha, id_nivel }: IRequest): Promise<Usuario> {
+    const usuarioEncontrado = await this.usuariosRepository.procurarPeloEmail(
+      email,
+    );
 
-    if (checkUsuarioExists) {
+    if (usuarioEncontrado) {
       throw new AppError('Email já cadastrado.');
     }
 
     const hashedPassword = await hash(senha, 8);
 
-    const user = usersRepository.create({
+    const user = await this.usuariosRepository.create({
       email,
       senha: hashedPassword,
       id_nivel,
     });
-
-    await usersRepository.save(user);
 
     return user;
   }

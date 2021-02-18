@@ -3,10 +3,11 @@ import AreasRepository from '@modules/areas/infra/typeorm/repositories/AreasRepo
 import CreateAreaService from '@modules/areas/services/CreateAreaService';
 
 const areaRouter = Router();
-const areasRepository = new AreasRepository();
 
 areaRouter.post('/', async (request, response) => {
   const { nome } = request.body;
+
+  const areasRepository = new AreasRepository();
 
   const createArea = new CreateAreaService(areasRepository);
 

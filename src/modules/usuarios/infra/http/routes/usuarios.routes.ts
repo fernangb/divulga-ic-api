@@ -4,6 +4,7 @@ import uploadConfig from '@config/upload';
 import CreateUsuarioService from '@modules/usuarios/services/CreateUsuarioService';
 import UpdateAvatarUsuarioService from '@modules/usuarios/services/UpdateAvatarUsuarioService';
 import ensureAuthenticated from '@modules/usuarios/infra/http/middlewares/EnsureAuthenticated';
+import UsuariosRepository from '../../typeorm/repositories/UsuariosRepository';
 
 const usuarioRouter = Router();
 const upload = multer(uploadConfig);
@@ -11,7 +12,9 @@ const upload = multer(uploadConfig);
 usuarioRouter.post('/', async (request, response) => {
   const { email, senha, id_nivel } = request.body;
 
-  const createUsuario = new CreateUsuarioService();
+  const usuariosRepository = new UsuariosRepository();
+
+  const createUsuario = new CreateUsuarioService(usuariosRepository);
 
   const user = await createUsuario.execute({
     email,
@@ -19,12 +22,9 @@ usuarioRouter.post('/', async (request, response) => {
     id_nivel,
   });
 
-  const usuarioResponse = {
-    id_nivel,
-    email,
-  };
+  delete user.senha;
 
-  return response.json(usuarioResponse);
+  return response.json(user);
 });
 
 usuarioRouter.patch(
@@ -33,7 +33,11 @@ usuarioRouter.patch(
   upload.single('avatar'),
   async (request, response) => {
     try {
-      const updateAvatarUsuario = new UpdateAvatarUsuarioService();
+      const usuariosRepository = new UsuariosRepository();
+
+      const updateAvatarUsuario = new UpdateAvatarUsuarioService(
+        usuariosRepository,
+      );
 
       const user = await updateAvatarUsuario.execute({
         id_usuario: request.usuario.id,

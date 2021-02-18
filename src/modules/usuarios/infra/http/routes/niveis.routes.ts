@@ -3,10 +3,11 @@ import NiveisRepository from '@modules/usuarios/infra/typeorm/repositories/Nivei
 import CreateNivelService from '@modules/usuarios/services/CreateNivelService';
 
 const nivelRouter = Router();
-const niveisRepository = new NiveisRepository();
 
 nivelRouter.post('/', async (request, response) => {
   const { nome } = request.body;
+
+  const niveisRepository = new NiveisRepository();
 
   const createNivel = new CreateNivelService(niveisRepository);
 

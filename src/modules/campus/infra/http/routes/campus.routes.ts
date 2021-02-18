@@ -3,10 +3,11 @@ import CampusRepository from '@modules/campus/infra/typeorm/repositories/CampusR
 import CreateCampusService from '@modules/campus/services/CreateCampusService';
 
 const campusRouter = Router();
-const campusRepository = new CampusRepository();
 
 campusRouter.post('/', async (request, response) => {
   const { nome, nome_comum, endereco } = request.body;
+
+  const campusRepository = new CampusRepository();
 
   const createCampus = new CreateCampusService(campusRepository);
 

@@ -1,27 +1,25 @@
 import { compare } from 'bcryptjs';
-import { getRepository } from 'typeorm';
 import { sign } from 'jsonwebtoken';
 import Usuario from '@modules/usuarios/infra/typeorm/entities/Usuario';
 import authConfig from '@config/auth';
 import AppError from '@shared/errors/AppError';
+import IUsuariosRepository from '../repositories/IUsuariosRepository';
 
-interface Request {
+interface IRequest {
   email: string;
   senha: string;
 }
 
-interface Response {
+interface IResponse {
   user: Usuario;
   token: string;
 }
 
 class AuthenticateUsuarioService {
-  public async execute({ email, senha }: Request): Promise<Response> {
-    const usuariosRepository = getRepository(Usuario);
+  constructor(private usuariosRepository: IUsuariosRepository) {}
 
-    const user = await usuariosRepository.findOne({
-      where: { email },
-    });
+  public async execute({ email, senha }: IRequest): Promise<IResponse> {
+    const user = await this.usuariosRepository.procurarPeloEmail(email);
 
     if (!user) {
       throw new AppError('Combinação email/senha incorreta.', 401);

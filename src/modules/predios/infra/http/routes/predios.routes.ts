@@ -3,10 +3,11 @@ import PrediosRepository from '@modules/predios/infra/typeorm/repositories/Predi
 import CreatePredioService from '@modules/predios/services/CreatePredioService';
 
 const predioRouter = Router();
-const prediosRepository = new PrediosRepository();
 
 predioRouter.post('/', async (request, response) => {
   const { nome, nome_comum, endereco, id_campus } = request.body;
+
+  const prediosRepository = new PrediosRepository();
 
   const createPredio = new CreatePredioService(prediosRepository);
 

@@ -4,12 +4,13 @@ import CreateCursoService from '@modules/cursos/services/CreateCursoService';
 // import ensureAuthenticated from '@modules/usuarios/infra/http/middlewares/EnsureAuthenticated';
 
 const cursosRouter = Router();
-const cursosRepository = new CursosRepository();
 
 // cursosRouter.use(ensureAuthenticated);
 
 cursosRouter.post('/', async (request, response) => {
   const { nome, id_predio, endereco, tipo, turno } = request.body;
+
+  const cursosRepository = new CursosRepository();
 
   const createCurso = new CreateCursoService(cursosRepository);
 

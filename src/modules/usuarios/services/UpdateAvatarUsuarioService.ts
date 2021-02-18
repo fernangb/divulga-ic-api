@@ -1,23 +1,23 @@
-import { getRepository } from 'typeorm';
 import path from 'path';
 import fs from 'fs';
 import Usuario from '@modules/usuarios/infra/typeorm/entities/Usuario';
 import uploadConfig from '@config/upload';
 import AppError from '@shared/errors/AppError';
+import IUsuariosRepository from '../repositories/IUsuariosRepository';
 
-interface Request {
+interface IRequest {
   id_usuario: string;
   avatarFilename: string;
 }
 
 class UpdateAvatarUsuarioService {
+  constructor(private usuariosRepository: IUsuariosRepository) {}
+
   public async execute({
     id_usuario,
     avatarFilename,
-  }: Request): Promise<Usuario> {
-    const usuariosRepository = getRepository(Usuario);
-
-    const usuario = await usuariosRepository.findOne(id_usuario);
+  }: IRequest): Promise<Usuario> {
+    const usuario = await this.usuariosRepository.procurarPeloId(id_usuario);
     if (!usuario) {
       throw new AppError(
         'Apenas usuarios autenticados pode alterar a foto.',
@@ -40,7 +40,7 @@ class UpdateAvatarUsuarioService {
 
     usuario.avatar = avatarFilename;
 
-    await usuariosRepository.save(usuario);
+    await this.usuariosRepository.save(usuario);
 
     return usuario;
   }
