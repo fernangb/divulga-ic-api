@@ -1,6 +1,6 @@
 import { getCustomRepository } from 'typeorm';
 import Predio from '@modules/predios/infra/typeorm/entities/Predio';
-import PrediosRepository from '@modules/predios/repositories/PrediosRepository';
+import PrediosRepository from '@modules/predios/infra/typeorm/repositories/PrediosRepository';
 import AppError from '@shared/errors/AppError';
 
 interface PredioDTO {

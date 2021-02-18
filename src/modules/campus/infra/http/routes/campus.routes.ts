@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
-import CampusRepository from '@modules/campus/repositories/CampusRepository';
+import CampusRepository from '@modules/campus/infra/typeorm/repositories/CampusRepository';
 import CreateCampusService from '@modules/campus/services/CreateCampusService';
 
 const campusRouter = Router();

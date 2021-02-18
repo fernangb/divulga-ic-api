@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
-import NiveisRepository from '@modules/usuarios/repositories/NiveisRepository';
+import NiveisRepository from '@modules/usuarios/infra/typeorm/repositories/NiveisRepository';
 import CreateNivelService from '@modules/usuarios/services/CreateNivelService';
 
 const nivelRouter = Router();

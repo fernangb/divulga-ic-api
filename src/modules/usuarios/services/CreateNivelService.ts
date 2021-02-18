@@ -1,6 +1,6 @@
 import { getCustomRepository } from 'typeorm';
 import Nivel from '@modules/usuarios/infra/typeorm/entities/Nivel';
-import NiveisRepository from '@modules/usuarios/repositories/NiveisRepository';
+import NiveisRepository from '@modules/usuarios/infra/typeorm/repositories/NiveisRepository';
 import AppError from '@shared/errors/AppError';
 
 interface NivelDTO {

@@ -1,6 +1,6 @@
 import { getCustomRepository } from 'typeorm';
 import Campus from '@modules/campus/infra/typeorm/entities/Campus';
-import CampusRepository from '@modules/campus/repositories/CampusRepository';
+import CampusRepository from '@modules/campus/infra/typeorm/repositories/CampusRepository';
 import AppError from '@shared/errors/AppError';
 
 interface CampusDTO {

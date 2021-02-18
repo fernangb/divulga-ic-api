@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
-import CursosRepository from '@modules/cursos/repositories/CursosRepository';
+import CursosRepository from '@modules/cursos/infra/typeorm/repositories/CursosRepository';
 import CreateCursoService from '@modules/cursos/services/CreateCursoService';
 // import ensureAuthenticated from '@modules/usuarios/infra/http/middlewares/EnsureAuthenticated';
 

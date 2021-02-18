@@ -1,6 +1,6 @@
 import { getCustomRepository } from 'typeorm';
 import Curso from '@modules/cursos/infra/typeorm/entities/Curso';
-import CursosRepository from '@modules/cursos/repositories/CursosRepository';
+import CursosRepository from '@modules/cursos/infra/typeorm/repositories/CursosRepository';
 import AppError from '@shared/errors/AppError';
 
 interface CursoDTO {
