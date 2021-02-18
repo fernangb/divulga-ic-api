@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import CursosRepository from '@modules/cursos/infra/typeorm/repositories/CursosRepository';
 import CreateCursoService from '@modules/cursos/services/CreateCursoService';
 // import ensureAuthenticated from '@modules/usuarios/infra/http/middlewares/EnsureAuthenticated';
+import { container } from 'tsyringe';
 
 const cursosRouter = Router();
 
@@ -10,9 +10,7 @@ const cursosRouter = Router();
 cursosRouter.post('/', async (request, response) => {
   const { nome, id_predio, endereco, tipo, turno } = request.body;
 
-  const cursosRepository = new CursosRepository();
-
-  const createCurso = new CreateCursoService(cursosRepository);
+  const createCurso = container.resolve(CreateCursoService);
 
   const curso = await createCurso.execute({
     nome,

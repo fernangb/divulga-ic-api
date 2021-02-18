@@ -4,7 +4,7 @@ import uploadConfig from '@config/upload';
 import CreateUsuarioService from '@modules/usuarios/services/CreateUsuarioService';
 import UpdateAvatarUsuarioService from '@modules/usuarios/services/UpdateAvatarUsuarioService';
 import ensureAuthenticated from '@modules/usuarios/infra/http/middlewares/EnsureAuthenticated';
-import UsuariosRepository from '../../typeorm/repositories/UsuariosRepository';
+import { container } from 'tsyringe';
 
 const usuarioRouter = Router();
 const upload = multer(uploadConfig);
@@ -12,9 +12,7 @@ const upload = multer(uploadConfig);
 usuarioRouter.post('/', async (request, response) => {
   const { email, senha, id_nivel } = request.body;
 
-  const usuariosRepository = new UsuariosRepository();
-
-  const createUsuario = new CreateUsuarioService(usuariosRepository);
+  const createUsuario = container.resolve(CreateUsuarioService);
 
   const user = await createUsuario.execute({
     email,
@@ -33,11 +31,7 @@ usuarioRouter.patch(
   upload.single('avatar'),
   async (request, response) => {
     try {
-      const usuariosRepository = new UsuariosRepository();
-
-      const updateAvatarUsuario = new UpdateAvatarUsuarioService(
-        usuariosRepository,
-      );
+      const updateAvatarUsuario = container.resolve(UpdateAvatarUsuarioService);
 
       const user = await updateAvatarUsuario.execute({
         id_usuario: request.usuario.id,

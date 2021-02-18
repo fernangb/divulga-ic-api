@@ -1,15 +1,13 @@
 import { Router } from 'express';
-import CampusRepository from '@modules/campus/infra/typeorm/repositories/CampusRepository';
 import CreateCampusService from '@modules/campus/services/CreateCampusService';
+import { container } from 'tsyringe';
 
 const campusRouter = Router();
 
 campusRouter.post('/', async (request, response) => {
   const { nome, nome_comum, endereco } = request.body;
 
-  const campusRepository = new CampusRepository();
-
-  const createCampus = new CreateCampusService(campusRepository);
+  const createCampus = container.resolve(CreateCampusService);
 
   const campus = await createCampus.execute({
     nome,

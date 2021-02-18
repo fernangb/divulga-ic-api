@@ -1,5 +1,6 @@
 import Curso from '@modules/cursos/infra/typeorm/entities/Curso';
 import AppError from '@shared/errors/AppError';
+import { inject, injectable } from 'tsyringe';
 import ICursosRepository from '../repositories/ICursosRepository';
 
 interface CursoDTO {
@@ -10,8 +11,12 @@ interface CursoDTO {
   turno: 'Integral' | 'Noturno';
 }
 
+@injectable()
 class CreateCursoService {
-  constructor(private cursosRepository: ICursosRepository) {}
+  constructor(
+    @inject('CursosRepository')
+    private cursosRepository: ICursosRepository,
+  ) {}
 
   public async execute({
     nome,

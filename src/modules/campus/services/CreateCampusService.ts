@@ -1,5 +1,6 @@
 import Campus from '@modules/campus/infra/typeorm/entities/Campus';
 import AppError from '@shared/errors/AppError';
+import { inject, injectable } from 'tsyringe';
 import ICampusRepository from '../repositories/ICampusRepository';
 
 interface IRequest {
@@ -8,8 +9,12 @@ interface IRequest {
   nome_comum: string;
 }
 
+@injectable()
 class CreateCampusService {
-  constructor(private campusRepository: ICampusRepository) {}
+  constructor(
+    @inject('CampusRepository')
+    private campusRepository: ICampusRepository,
+  ) {}
 
   public async execute({
     nome,

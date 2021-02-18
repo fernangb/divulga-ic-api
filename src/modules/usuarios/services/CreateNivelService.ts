@@ -1,13 +1,18 @@
 import Nivel from '@modules/usuarios/infra/typeorm/entities/Nivel';
 import AppError from '@shared/errors/AppError';
+import { inject, injectable } from 'tsyringe';
 import INiveisRepository from '../repositories/INiveisRepository';
 
 interface IRequest {
   nome: string;
 }
 
+@injectable()
 class CreateNivelService {
-  constructor(private niveisRepository: INiveisRepository) {}
+  constructor(
+    @inject('NiveisRepository')
+    private niveisRepository: INiveisRepository,
+  ) {}
 
   public async execute({ nome }: IRequest): Promise<Nivel> {
     const nivelEncontrado = await this.niveisRepository.procurarPeloNome(nome);

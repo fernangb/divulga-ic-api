@@ -1,5 +1,6 @@
 import Predio from '@modules/predios/infra/typeorm/entities/Predio';
 import AppError from '@shared/errors/AppError';
+import { inject, injectable } from 'tsyringe';
 import IPrediosRepository from '../repositories/IPrediosRepository';
 
 interface IRequest {
@@ -9,8 +10,12 @@ interface IRequest {
   id_campus: string;
 }
 
+@injectable()
 class CreatePredioService {
-  constructor(private prediosRepository: IPrediosRepository) {}
+  constructor(
+    @inject('PrediosRepository')
+    private prediosRepository: IPrediosRepository,
+  ) {}
 
   public async execute({
     nome,
