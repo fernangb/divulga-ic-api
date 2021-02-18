@@ -1,7 +1,7 @@
 import { getCustomRepository } from 'typeorm';
-import Area from '../infra/typeorm/entities/Area';
-import AreasRepository from '../repositories/AreasRepository';
-import AppError from '../../../shared/errors/AppError';
+import AreasRepository from '@modules/areas/repositories/AreasRepository';
+import Area from '@modules/areas/infra/typeorm/entities/Area';
+import AppError from '@shared/errors/AppError';
 
 interface AreaDTO {
   nome: string;

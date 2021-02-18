@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
-import CreateAlunoService from '../../../../modules/alunos/services/CreateAlunoService';
+import CreateAlunoService from '@modules/alunos/services/CreateAlunoService';
 
 const alunoRouter = Router();
 

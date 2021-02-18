@@ -7,7 +7,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import Campus from '../../../../campus/infra/typeorm/entities/Campus';
+import Campus from '@modules/campus/infra/typeorm/entities/Campus';
 
 @Entity('predio')
 class Predio {

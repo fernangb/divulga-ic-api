@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
-import AreasRepository from '../../../../modules/areas/repositories/AreasRepository';
-import CreateAreaService from '../../../../modules/areas/services/CreateAreaService';
+import AreasRepository from '@modules/areas/repositories/AreasRepository';
+import CreateAreaService from '@modules/areas/services/CreateAreaService';
 
 const areaRouter = Router();
 

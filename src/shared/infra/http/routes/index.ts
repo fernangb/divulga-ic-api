@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import alunosRouter from './alunos.routes';
-import areasRouter from './areas.routes';
-import campusRouter from './campus.routes';
-import cursosRouter from './cursos.routes';
-import niveisRouter from './niveis.routes';
-import prediosRouter from './predios.routes';
-import sessionsRouter from './sessions.routes';
-import usuariosRouter from './usuarios.routes';
+import alunosRouter from '@modules/alunos/infra/http/routes/alunos.routes';
+import areasRouter from '@modules/areas/infra/http/routes/areas.routes';
+import campusRouter from '@modules/campus/infra/http/routes/campus.routes';
+import cursosRouter from '@modules/cursos/infra/http/routes/cursos.routes';
+import niveisRouter from '@modules/usuarios/infra/http/routes/niveis.routes';
+import prediosRouter from '@modules/predios/infra/http/routes/predios.routes';
+import sessionsRouter from '@modules/usuarios/infra/http/routes/sessions.routes';
+import usuariosRouter from '@modules/usuarios/infra/http/routes/usuarios.routes';
 
 const routes = Router();
 

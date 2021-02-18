@@ -7,7 +7,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import Curso from '../../../../cursos/infra/typeorm/entities/Curso';
+import Curso from '@modules/cursos/infra/typeorm/entities/Curso';
 
 @Entity('aluno')
 class Aluno {

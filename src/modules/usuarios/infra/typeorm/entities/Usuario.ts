@@ -7,7 +7,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import Nivel from './Nivel';
+import Nivel from '@modules/usuarios/infra/typeorm/entities/Nivel';
 
 @Entity('usuario')
 class Usuario {

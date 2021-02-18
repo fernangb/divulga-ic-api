@@ -1,5 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
-import Nivel from '../infra/typeorm/entities/Nivel';
+import Nivel from '@modules/usuarios/infra/typeorm/entities/Nivel';
 
 @EntityRepository(Nivel)
 class NiveisRepository extends Repository<Nivel> {

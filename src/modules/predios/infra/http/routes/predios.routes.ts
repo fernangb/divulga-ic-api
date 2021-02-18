@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
-import PrediosRepository from '../../../../modules/predios/repositories/PrediosRepository';
-import CreatePredioService from '../../../../modules/predios/services/CreatePredioService';
+import PrediosRepository from '@modules/predios/repositories/PrediosRepository';
+import CreatePredioService from '@modules/predios/services/CreatePredioService';
 
 const predioRouter = Router();
 

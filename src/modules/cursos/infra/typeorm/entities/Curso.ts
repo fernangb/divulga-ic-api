@@ -7,7 +7,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import Predio from '../../../../predios/infra/typeorm/entities/Predio';
+import Predio from '@modules/predios/infra/typeorm/entities/Predio';
 
 @Entity('curso')
 class Curso {

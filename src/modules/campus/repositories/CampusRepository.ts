@@ -1,5 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
-import Campus from '../infra/typeorm/entities/Campus';
+import Campus from '@modules/campus/infra/typeorm/entities/Campus';
 
 @EntityRepository(Campus)
 class CampusRepository extends Repository<Campus> {

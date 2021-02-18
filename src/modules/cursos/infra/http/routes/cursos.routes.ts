@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
-import CursosRepository from '../../../../modules/cursos/repositories/CursosRepository';
-import CreateCursoService from '../../../../modules/cursos/services/CreateCursoService';
-import ensureAuthenticated from '../middlewares/EnsureAuthenticated';
+import CursosRepository from '@modules/cursos/repositories/CursosRepository';
+import CreateCursoService from '@modules/cursos/services/CreateCursoService';
+// import ensureAuthenticated from '@modules/usuarios/infra/http/middlewares/EnsureAuthenticated';
 
 const cursosRouter = Router();
 
-cursosRouter.use(ensureAuthenticated);
+// cursosRouter.use(ensureAuthenticated);
 
 cursosRouter.post('/', async (request, response) => {
   const { nome, id_predio, endereco, tipo, turno } = request.body;
