@@ -13,7 +13,7 @@ usuarioRouter.post('/', async (request, response) => {
 
   const createUsuario = new CreateUsuarioService();
 
-  const usuario = await createUsuario.execute({
+  const user = await createUsuario.execute({
     email,
     senha,
     id_nivel,
@@ -35,14 +35,14 @@ usuarioRouter.patch(
     try {
       const updateAvatarUsuario = new UpdateAvatarUsuarioService();
 
-      const usuario = await updateAvatarUsuario.execute({
+      const user = await updateAvatarUsuario.execute({
         id_usuario: request.usuario.id,
         avatarFilename: request.file.filename,
       });
 
-      delete usuario.senha;
+      delete user.senha;
 
-      return response.json(usuario);
+      return response.json(user);
     } catch (err) {
       return response.status(400).json({ error: err.message });
     }

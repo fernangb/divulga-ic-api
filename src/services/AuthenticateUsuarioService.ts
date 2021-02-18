@@ -11,7 +11,7 @@ interface Request {
 }
 
 interface Response {
-  usuario: Usuario;
+  user: Usuario;
   token: string;
 }
 
@@ -19,15 +19,15 @@ class AuthenticateUsuarioService {
   public async execute({ email, senha }: Request): Promise<Response> {
     const usuariosRepository = getRepository(Usuario);
 
-    const usuario = await usuariosRepository.findOne({
+    const user = await usuariosRepository.findOne({
       where: { email },
     });
 
-    if (!usuario) {
+    if (!user) {
       throw new AppError('Combinação email/senha incorreta.', 401);
     }
 
-    const senhaCorreta = await compare(senha, usuario.senha);
+    const senhaCorreta = await compare(senha, user.senha);
 
     if (!senhaCorreta) {
       throw new AppError('Combinação email/senha incorreta.', 401);
@@ -36,11 +36,11 @@ class AuthenticateUsuarioService {
     const { secret, expiresIn } = authConfig.jwt;
 
     const token = sign({}, secret, {
-      subject: usuario.id,
+      subject: user.id,
       expiresIn,
     });
 
-    return { usuario, token };
+    return { user, token };
   }
 }
 

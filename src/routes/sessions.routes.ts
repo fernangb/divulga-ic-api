@@ -4,18 +4,18 @@ import AuthenticateUsuarioService from '../services/AuthenticateUsuarioService';
 const sessionsRouter = Router();
 
 sessionsRouter.post('/', async (request, response) => {
-  const { email, senha } = request.body;
+  const { email, password } = request.body;
 
   const usuarioAutenticado = new AuthenticateUsuarioService();
 
-  const { usuario, token } = await usuarioAutenticado.execute({
+  const { user, token } = await usuarioAutenticado.execute({
     email,
-    senha,
+    senha: password,
   });
 
-  delete usuario.senha;
+  delete user.senha;
 
-  return response.json({ usuario, token });
+  return response.json({ user, token });
 });
 
 export default sessionsRouter;
