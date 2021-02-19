@@ -1,20 +1,11 @@
 import { Router } from 'express';
-import CreateNivelService from '@modules/usuarios/services/CreateNivelService';
-import { container } from 'tsyringe';
+import NiveisController from '../controllers/NiveisController';
 
 const nivelRouter = Router();
 
-nivelRouter.post('/', async (request, response) => {
-  const { nome } = request.body;
+const niveisController = new NiveisController();
 
-  const createNivel = container.resolve(CreateNivelService);
-
-  const nivel = await createNivel.execute({
-    nome,
-  });
-
-  return response.json(nivel);
-});
+nivelRouter.post('/', niveisController.create);
 
 // nivelRouter.get('/', async (request, response) => {
 

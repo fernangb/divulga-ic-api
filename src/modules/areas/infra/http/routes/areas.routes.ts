@@ -1,20 +1,11 @@
 import { Router } from 'express';
-import CreateAreaService from '@modules/areas/services/CreateAreaService';
-import { container } from 'tsyringe';
+
+import AreasController from '../controllers/AreasController';
 
 const areaRouter = Router();
+const areasController = new AreasController();
 
-areaRouter.post('/', async (request, response) => {
-  const { nome } = request.body;
-
-  const createArea = container.resolve(CreateAreaService);
-
-  const area = await createArea.execute({
-    nome,
-  });
-
-  return response.json(area);
-});
+areaRouter.post('/', areasController.create);
 
 // areaRouter.get('/', async (request, response) => {
 //   const area = await areasRepository.find();

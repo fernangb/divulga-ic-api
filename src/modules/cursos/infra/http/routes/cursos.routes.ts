@@ -1,27 +1,14 @@
 import { Router } from 'express';
-import CreateCursoService from '@modules/cursos/services/CreateCursoService';
 // import ensureAuthenticated from '@modules/usuarios/infra/http/middlewares/EnsureAuthenticated';
-import { container } from 'tsyringe';
+import CursosController from '../controllers/CursosController';
 
 const cursosRouter = Router();
 
 // cursosRouter.use(ensureAuthenticated);
 
-cursosRouter.post('/', async (request, response) => {
-  const { nome, id_predio, endereco, tipo, turno } = request.body;
+const cursosController = new CursosController();
 
-  const createCurso = container.resolve(CreateCursoService);
-
-  const curso = await createCurso.execute({
-    nome,
-    id_predio,
-    endereco,
-    tipo,
-    turno,
-  });
-
-  return response.json(curso);
-});
+cursosRouter.post('/', cursosController.create);
 
 // cursosRouter.get('/', async (request, response) => {
 

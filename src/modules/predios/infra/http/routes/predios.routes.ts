@@ -1,23 +1,11 @@
 import { Router } from 'express';
-import CreatePredioService from '@modules/predios/services/CreatePredioService';
-import { container } from 'tsyringe';
+import PrediosController from '../controllers/PrediosController';
 
 const predioRouter = Router();
 
-predioRouter.post('/', async (request, response) => {
-  const { nome, nome_comum, endereco, id_campus } = request.body;
+const prediosController = new PrediosController();
 
-  const createPredio = container.resolve(CreatePredioService);
-
-  const predio = await createPredio.execute({
-    nome,
-    nome_comum,
-    endereco,
-    id_campus,
-  });
-
-  return response.json(predio);
-});
+predioRouter.post('/', prediosController.create);
 
 // predioRouter.get('/', async (request, response) => {
 

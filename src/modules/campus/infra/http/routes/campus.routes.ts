@@ -1,22 +1,10 @@
 import { Router } from 'express';
-import CreateCampusService from '@modules/campus/services/CreateCampusService';
-import { container } from 'tsyringe';
+import CampusController from '../controllers/CampusController';
 
 const campusRouter = Router();
+const campusController = new CampusController();
 
-campusRouter.post('/', async (request, response) => {
-  const { nome, nome_comum, endereco } = request.body;
-
-  const createCampus = container.resolve(CreateCampusService);
-
-  const campus = await createCampus.execute({
-    nome,
-    endereco,
-    nome_comum,
-  });
-
-  return response.json(campus);
-});
+campusRouter.post('/', campusController.create);
 
 // campusRouter.get('/', async (request, response) => {
 //   const campusRepository = getCustomRepository(CampusRepository);
