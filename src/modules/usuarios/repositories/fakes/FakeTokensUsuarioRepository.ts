@@ -1,4 +1,3 @@
-import Usuario from '@modules/usuarios/infra/typeorm/entities/Usuario';
 import { v4 as uuid_v4 } from 'uuid';
 import TokenUsuario from '@modules/usuarios/infra/typeorm/entities/TokenUsuario';
 import ITokensUsuarioRepository from '../ITokensUsuarioRepository';
@@ -13,6 +12,8 @@ class FakeTokensUsuarioRepository implements ITokensUsuarioRepository {
       id: uuid_v4(),
       token: uuid_v4(),
       id_usuario,
+      dt_criacao: new Date(),
+      dt_atualizacao: new Date(),
     });
 
     this.tokensUsuario.push(tokenUsuario);

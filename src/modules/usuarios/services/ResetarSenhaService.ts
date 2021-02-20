@@ -1,7 +1,10 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
+import { isAfter, addHours } from 'date-fns';
 import IUsuariosRepository from '../repositories/IUsuariosRepository';
 import ITokensUsuarioRepository from '../repositories/ITokensUsuarioRepository';
+import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 
 interface IRequest {
   senha: string;
@@ -16,6 +19,9 @@ class ResetarSenhaService {
 
     @inject('TokensUsuarioRepository')
     private tokensUsuarioRepository: ITokensUsuarioRepository,
+
+    @inject('HashProvider')
+    private hashProvider: IHashProvider,
   ) {}
 
   public async execute({ token, senha }: IRequest): Promise<void> {
@@ -34,7 +40,14 @@ class ResetarSenhaService {
       throw new AppError('Usuário não existe.');
     }
 
-    usuario.senha = senha;
+    const dtCriacaoToken = tokenUsuario.dt_criacao;
+    const dataLimite = addHours(dtCriacaoToken, 2);
+
+    if (isAfter(Date.now(), dataLimite)) {
+      throw new AppError('Token expirado');
+    }
+
+    usuario.senha = await this.hashProvider.gerarHash(senha);
 
     this.usuariosRepository.save(usuario);
   }
