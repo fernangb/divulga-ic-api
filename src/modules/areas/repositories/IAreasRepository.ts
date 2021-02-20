@@ -3,7 +3,7 @@ import ICreateAreaDTO from '../dtos/ICreateAreaDTO';
 
 interface IAreasRepository {
   create(data: ICreateAreaDTO): Promise<Area>;
-  procurarPeloNome(nome: string): Promise<Area | undefined>;
+  encontrarPeloNome(nome: string): Promise<Area | undefined>;
 }
 
 export default IAreasRepository;

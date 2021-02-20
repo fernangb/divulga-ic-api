@@ -10,15 +10,15 @@ import FakeTokensUsuarioRepository from '../repositories/fakes/FakeTokensUsuario
 import EnviarEmailRecuperarSenhaService from './EnviarEmailRecuperarSenhaService';
 
 let fakeUsuariosRepository: FakeUsuariosRepository;
-let fakeTokensUsuarioRepository: FakeTokensUsuarioRepository;
 let fakeMailProvider: FakeMailProvider;
+let fakeTokensUsuarioRepository: FakeTokensUsuarioRepository;
 let enviarEmailRecuperarSenha: EnviarEmailRecuperarSenhaService;
 
 describe('EnviarEmailRecuperarSenha', () => {
   beforeEach(() => {
     fakeUsuariosRepository = new FakeUsuariosRepository();
-    fakeTokensUsuarioRepository = new FakeTokensUsuarioRepository();
     fakeMailProvider = new FakeMailProvider();
+    fakeTokensUsuarioRepository = new FakeTokensUsuarioRepository();
     enviarEmailRecuperarSenha = new EnviarEmailRecuperarSenhaService(
       fakeUsuariosRepository,
       fakeMailProvider,

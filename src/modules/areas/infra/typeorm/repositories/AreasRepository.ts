@@ -10,7 +10,7 @@ class AreasRepository implements IAreasRepository {
     this.ormRepository = getRepository(Area);
   }
 
-  public async procurarPeloNome(nome: string): Promise<Area | undefined> {
+  public async encontrarPeloNome(nome: string): Promise<Area | undefined> {
     const areaEncontrada = await this.ormRepository.findOne({
       where: {
         nome,

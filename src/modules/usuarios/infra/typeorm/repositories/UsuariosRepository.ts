@@ -10,13 +10,13 @@ class UsuariosRepository implements IUsuariosRepository {
     this.ormRepository = getRepository(Usuario);
   }
 
-  public async procurarPeloId(id: string): Promise<Usuario | undefined> {
+  public async encontrarPeloId(id: string): Promise<Usuario | undefined> {
     const usuarioEncontrado = await this.ormRepository.findOne(id);
 
     return usuarioEncontrado;
   }
 
-  public async procurarPeloEmail(email: string): Promise<Usuario | undefined> {
+  public async encontrarPeloEmail(email: string): Promise<Usuario | undefined> {
     const usuarioEncontrado = await this.ormRepository.findOne({
       where: {
         email,

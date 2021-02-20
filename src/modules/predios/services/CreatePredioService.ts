@@ -23,7 +23,7 @@ class CreatePredioService {
     endereco,
     id_campus,
   }: IRequest): Promise<Predio> {
-    const predioEncontrado = await this.prediosRepository.procurarPeloNome(
+    const predioEncontrado = await this.prediosRepository.encontrarPeloNome(
       nome,
     );
 

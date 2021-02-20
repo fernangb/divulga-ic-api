@@ -1,40 +1,43 @@
-import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import IUsuariosRepository from '../repositories/IUsuariosRepository';
 import ITokensUsuarioRepository from '../repositories/ITokensUsuarioRepository';
 
 interface IRequest {
-  email: string;
+  senha: string;
+  token: string;
 }
 
 @injectable()
-class EnviarEmailRecuperarSenhaService {
+class ResetarSenhaService {
   constructor(
     @inject('UsuariosRepository')
     private usuariosRepository: IUsuariosRepository,
-
-    @inject('MailProvider')
-    private mailProvider: IMailProvider,
 
     @inject('TokensUsuarioRepository')
     private tokensUsuarioRepository: ITokensUsuarioRepository,
   ) {}
 
-  public async execute({ email }: IRequest): Promise<void> {
-    const usuario = await this.usuariosRepository.encontrarPeloEmail(email);
+  public async execute({ token, senha }: IRequest): Promise<void> {
+    const tokenUsuario = await this.tokensUsuarioRepository.encontrarPeloToken(
+      token,
+    );
+
+    if (!tokenUsuario) {
+      throw new AppError('Token do usuário não existe.');
+    }
+    const usuario = await this.usuariosRepository.encontrarPeloId(
+      tokenUsuario.id_usuario,
+    );
 
     if (!usuario) {
       throw new AppError('Usuário não existe.');
     }
 
-    await this.tokensUsuarioRepository.gerarToken(usuario.id);
+    usuario.senha = senha;
 
-    this.mailProvider.enviarEmail(
-      email,
-      'Pedido de recuperação de senha recebido',
-    );
+    this.usuariosRepository.save(usuario);
   }
 }
 
-export default EnviarEmailRecuperarSenhaService;
+export default ResetarSenhaService;

@@ -10,7 +10,7 @@ class CursosRepository implements ICursosRepository {
     this.ormRepository = getRepository(Curso);
   }
 
-  public async procurarCursoExistente(
+  public async encontrarCursoExistente(
     nome: string,
     tipo: string,
     turno: string,

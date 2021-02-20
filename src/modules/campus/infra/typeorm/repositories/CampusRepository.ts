@@ -10,7 +10,7 @@ class CampusRepository implements ICampusRepository {
     this.ormRepository = getRepository(Campus);
   }
 
-  public async procurarPeloNome(nome: string): Promise<Campus | undefined> {
+  public async encontrarPeloNome(nome: string): Promise<Campus | undefined> {
     const campusEncontrado = await this.ormRepository.findOne({
       where: {
         nome,

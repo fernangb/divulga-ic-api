@@ -21,7 +21,7 @@ class CreateCampusService {
     endereco,
     nome_comum,
   }: IRequest): Promise<Campus> {
-    const campusEncontrado = await this.campusRepository.procurarPeloNome(nome);
+    const campusEncontrado = await this.campusRepository.encontrarPeloNome(nome);
 
     if (campusEncontrado) {
       throw new AppError('Campus já cadastrado no sistema.');

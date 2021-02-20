@@ -6,7 +6,7 @@ import { v4 as uuid_v4 } from 'uuid';
 class CampusRepository implements ICampusRepository {
   private campus: Campus[] = [];
 
-  public async procurarPeloNome(nome: string): Promise<Campus | undefined> {
+  public async encontrarPeloNome(nome: string): Promise<Campus | undefined> {
     const areaEncontrada = this.campus.find(c => c.nome === nome);
 
     return areaEncontrada;

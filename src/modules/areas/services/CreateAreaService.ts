@@ -15,7 +15,7 @@ class CreateAreaService {
   ) {}
 
   public async execute({ nome }: IRequest): Promise<Area> {
-    const areaEncontrada = await this.areasRepository.procurarPeloNome(nome);
+    const areaEncontrada = await this.areasRepository.encontrarPeloNome(nome);
 
     if (areaEncontrada) {
       throw new AppError('Área já cadastrada no sistema.');

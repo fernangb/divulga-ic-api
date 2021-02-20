@@ -23,7 +23,7 @@ class UpdateAvatarUsuarioService {
     id_usuario,
     avatarFilename,
   }: IRequest): Promise<Usuario> {
-    const usuario = await this.usuariosRepository.procurarPeloId(id_usuario);
+    const usuario = await this.usuariosRepository.encontrarPeloId(id_usuario);
     if (!usuario) {
       throw new AppError(
         'Apenas usuarios autenticados pode alterar a foto.',

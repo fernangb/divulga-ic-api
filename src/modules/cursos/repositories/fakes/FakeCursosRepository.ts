@@ -6,7 +6,7 @@ import { v4 as uuid_v4 } from 'uuid';
 class FakeCursosRepository implements ICursosRepository {
   private cursos: Curso[] = [];
 
-  public async procurarCursoExistente(
+  public async encontrarCursoExistente(
     nome: string,
     tipo: string,
     turno: string,

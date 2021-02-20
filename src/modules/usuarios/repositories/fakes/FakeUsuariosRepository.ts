@@ -6,13 +6,13 @@ import { v4 as uuid_v4 } from 'uuid';
 class FakeUsuariosRepository implements IUsuariosRepository {
   private usuarios: Usuario[] = [];
 
-  public async procurarPeloId(id: string): Promise<Usuario | undefined> {
+  public async encontrarPeloId(id: string): Promise<Usuario | undefined> {
     const usuarioEncontrado = this.usuarios.find(usuario => usuario.id === id);
 
     return usuarioEncontrado;
   }
 
-  public async procurarPeloEmail(email: string): Promise<Usuario | undefined> {
+  public async encontrarPeloEmail(email: string): Promise<Usuario | undefined> {
     const usuarioEncontrado = this.usuarios.find(
       usuario => usuario.email === email,
     );

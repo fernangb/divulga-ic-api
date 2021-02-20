@@ -6,7 +6,7 @@ import { v4 as uuid_v4 } from 'uuid';
 class PrediosRepository implements IPrediosRepository {
   private predios: Predio[] = [];
 
-  public async procurarPeloNome(nome: string): Promise<Predio | undefined> {
+  public async encontrarPeloNome(nome: string): Promise<Predio | undefined> {
     const predioEncontrado = this.predios.find(predio => predio.nome === nome);
 
     return predioEncontrado;

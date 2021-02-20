@@ -15,7 +15,7 @@ class CreateNivelService {
   ) {}
 
   public async execute({ nome }: IRequest): Promise<Nivel> {
-    const nivelEncontrado = await this.niveisRepository.procurarPeloNome(nome);
+    const nivelEncontrado = await this.niveisRepository.encontrarPeloNome(nome);
 
     if (nivelEncontrado) {
       throw new AppError('Nível já cadastrado no sistema.');

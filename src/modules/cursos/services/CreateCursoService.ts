@@ -25,7 +25,7 @@ class CreateCursoService {
     tipo,
     turno,
   }: CursoDTO): Promise<Curso> {
-    const cursoEncontrado = await this.cursosRepository.procurarCursoExistente(
+    const cursoEncontrado = await this.cursosRepository.encontrarCursoExistente(
       nome,
       tipo,
       turno,

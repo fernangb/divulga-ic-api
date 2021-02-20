@@ -10,7 +10,7 @@ class PrediosRepository implements IPrediosRepository {
     this.ormRepository = getRepository(Predio);
   }
 
-  public async procurarPeloNome(nome: string): Promise<Predio | undefined> {
+  public async encontrarPeloNome(nome: string): Promise<Predio | undefined> {
     const predioEncontrado = await this.ormRepository.findOne({
       where: {
         nome,

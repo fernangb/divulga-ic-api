@@ -27,7 +27,7 @@ class AuthenticateUsuarioService {
   ) {}
 
   public async execute({ email, senha }: IRequest): Promise<IResponse> {
-    const user = await this.usuariosRepository.procurarPeloEmail(email);
+    const user = await this.usuariosRepository.encontrarPeloEmail(email);
 
     if (!user) {
       throw new AppError('Combinação email/senha incorreta.', 401);

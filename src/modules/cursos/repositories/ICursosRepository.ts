@@ -3,7 +3,7 @@ import ICreateCursoDTO from '../dtos/ICreateCursoDTO';
 
 interface ICursosRepository {
   create(data: ICreateCursoDTO): Promise<Curso>;
-  procurarCursoExistente(
+  encontrarCursoExistente(
     nome: string,
     tipo: string,
     turno: string,

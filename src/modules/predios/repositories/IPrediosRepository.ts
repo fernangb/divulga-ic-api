@@ -4,7 +4,7 @@ import ICreatePredioDTO from '../dtos/ICreatePredioDTO';
 interface IPrediosRepository {
   create(data: ICreatePredioDTO): Promise<Predio>;
 
-  procurarPeloNome(nome: string): Promise<Predio | undefined>;
+  encontrarPeloNome(nome: string): Promise<Predio | undefined>;
 }
 
 export default IPrediosRepository;

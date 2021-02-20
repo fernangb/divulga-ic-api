@@ -6,7 +6,7 @@ import { v4 as uuid_v4 } from 'uuid';
 class NiveisRepository implements INiveisRepository {
   private niveis: Nivel[] = [];
 
-  public async procurarPeloNome(nome: string): Promise<Nivel | undefined> {
+  public async encontrarPeloNome(nome: string): Promise<Nivel | undefined> {
     const nivelEncontrado = this.niveis.find(nivel => nivel.nome === nome);
 
     return nivelEncontrado;

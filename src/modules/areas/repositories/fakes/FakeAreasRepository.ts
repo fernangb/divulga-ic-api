@@ -6,7 +6,7 @@ import { v4 as uuid_v4 } from 'uuid';
 class FakeAreasRepository implements IAreasRepository {
   private areas: Area[] = [];
 
-  public async procurarPeloNome(nome: string): Promise<Area | undefined> {
+  public async encontrarPeloNome(nome: string): Promise<Area | undefined> {
     const areaEncontrada = this.areas.find(area => area.nome === nome);
 
     return areaEncontrada;

@@ -21,7 +21,7 @@ class CreateUsuarioService {
   ) {}
 
   public async execute({ email, senha, id_nivel }: IRequest): Promise<Usuario> {
-    const usuarioEncontrado = await this.usuariosRepository.procurarPeloEmail(
+    const usuarioEncontrado = await this.usuariosRepository.encontrarPeloEmail(
       email,
     );
 
