@@ -28,11 +28,11 @@ class EnviarEmailRecuperarSenhaService {
       throw new AppError('Usuário não existe.');
     }
 
-    await this.tokensUsuarioRepository.gerarToken(usuario.id);
+    const { token } = await this.tokensUsuarioRepository.gerarToken(usuario.id);
 
-    this.mailProvider.enviarEmail(
+    await this.mailProvider.enviarEmail(
       email,
-      'Pedido de recuperação de senha recebido',
+      `Pedido de recuperação de senha recebido: ${token}`,
     );
   }
 }
