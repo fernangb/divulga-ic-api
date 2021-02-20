@@ -1,5 +1,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
+import AppError from '@shared/errors/AppError';
 import 'reflect-metadata';
 
 import FakeAreasRepository from '../repositories/fakes/FakeAreasRepository';
@@ -15,7 +16,14 @@ describe('CreateArea', () => {
     expect(area).toHaveProperty('id');
   });
 
-  // it('não deve ser permitido criar duas áreas com o mesmo nome', () => {
-  //   expect(1 + 2).toBe(3);
-  // });
+  it('não deve ser permitido criar duas áreas com o mesmo nome', async () => {
+    const fakeAreasRepository = new FakeAreasRepository();
+    const createArea = new CreateAreaService(fakeAreasRepository);
+
+    await createArea.execute({ nome: 'Teste' });
+
+    expect(createArea.execute({ nome: 'Teste' })).rejects.toBeInstanceOf(
+      AppError,
+    );
+  });
 });

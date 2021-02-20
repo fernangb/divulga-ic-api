@@ -1,7 +1,7 @@
 import Area from '@modules/areas/infra/typeorm/entities/Area';
 import IAreasRepository from '@modules/areas/repositories/IAreasRepository';
 import ICreateAreaDTO from '@modules/areas/dtos/ICreateAreaDTO';
-import { uuid } from 'uuidv4';
+import { v4 as uuid_v4 } from 'uuid';
 
 class FakeAreasRepository implements IAreasRepository {
   private areas: Area[] = [];
@@ -15,7 +15,7 @@ class FakeAreasRepository implements IAreasRepository {
   public async create({ nome }: ICreateAreaDTO): Promise<Area> {
     const area = new Area();
 
-    Object.assign(area, { id: uuid(), nome });
+    Object.assign(area, { id: uuid_v4(), nome });
 
     this.areas.push(area);
 
