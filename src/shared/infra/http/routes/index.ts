@@ -7,6 +7,7 @@ import niveisRouter from '@modules/usuarios/infra/http/routes/niveis.routes';
 import prediosRouter from '@modules/predios/infra/http/routes/predios.routes';
 import sessionsRouter from '@modules/usuarios/infra/http/routes/sessions.routes';
 import usuariosRouter from '@modules/usuarios/infra/http/routes/usuarios.routes';
+import senhaRouter from '@modules/usuarios/infra/http/routes/senha.routes';
 
 const routes = Router();
 
@@ -16,6 +17,7 @@ routes.use('/campus', campusRouter);
 routes.use('/cursos', cursosRouter);
 routes.use('/niveis', niveisRouter);
 routes.use('/predios', prediosRouter);
+routes.use('/senha', senhaRouter);
 routes.use('/sessions', sessionsRouter);
 routes.use('/usuarios', usuariosRouter);
 

@@ -14,6 +14,8 @@ import INiveisRepository from '@modules/usuarios/repositories/INiveisRepository'
 import NiveisRepository from '@modules/usuarios/infra/typeorm/repositories/NiveisRepository';
 import IUsuariosRepository from '@modules/usuarios/repositories/IUsuariosRepository';
 import UsuariosRepository from '@modules/usuarios/infra/typeorm/repositories/UsuariosRepository';
+import ITokensUsuarioRepository from '@modules/usuarios/repositories/ITokensUsuarioRepository';
+import TokensUsuarioRepository from '@modules/usuarios/infra/typeorm/repositories/TokensUsuarioRepository';
 
 container.registerSingleton<IAreasRepository>(
   'AreasRepository',
@@ -43,4 +45,9 @@ container.registerSingleton<INiveisRepository>(
 container.registerSingleton<IUsuariosRepository>(
   'UsuariosRepository',
   UsuariosRepository,
+);
+
+container.registerSingleton<ITokensUsuarioRepository>(
+  'TokensUsuarioRepository',
+  TokensUsuarioRepository,
 );
