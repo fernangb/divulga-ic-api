@@ -4,12 +4,18 @@ import AppError from '@shared/errors/AppError';
 import 'reflect-metadata';
 
 import FakeUsuariosRepository from '../repositories/fakes/FakeUsuariosRepository';
+import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
+
 import CreateUsuarioService from './CreateUsuarioService';
 
 describe('CreateUsuario', () => {
   it('deve ser possível criar um novo usuário', async () => {
     const fakeUsuariosRepository = new FakeUsuariosRepository();
-    const createUsuario = new CreateUsuarioService(fakeUsuariosRepository);
+    const fakeHashProvider = new FakeHashProvider();
+    const createUsuario = new CreateUsuarioService(
+      fakeUsuariosRepository,
+      fakeHashProvider,
+    );
 
     const usuario = await createUsuario.execute({
       email: 'teste@gmail.com',
@@ -22,7 +28,11 @@ describe('CreateUsuario', () => {
 
   it('não deve ser possível criar um novo usuário com o mesmo email', async () => {
     const fakeUsuariosRepository = new FakeUsuariosRepository();
-    const createUsuario = new CreateUsuarioService(fakeUsuariosRepository);
+    const fakeHashProvider = new FakeHashProvider();
+    const createUsuario = new CreateUsuarioService(
+      fakeUsuariosRepository,
+      fakeHashProvider,
+    );
 
     await createUsuario.execute({
       email: 'teste@gmail.com',

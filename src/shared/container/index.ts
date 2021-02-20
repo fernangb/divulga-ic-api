@@ -1,4 +1,5 @@
 import { container } from 'tsyringe';
+import '@modules/usuarios/providers';
 
 import IAreasRepository from '@modules/areas/repositories/IAreasRepository';
 import AreasRepository from '@modules/areas/infra/typeorm/repositories/AreasRepository';
