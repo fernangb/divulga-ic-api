@@ -40,7 +40,7 @@ describe('CreateUsuario', () => {
       id_nivel: '1',
     });
 
-    expect(
+    await expect(
       createUsuario.execute({
         email: 'teste@gmail.com',
         senha: '123456',

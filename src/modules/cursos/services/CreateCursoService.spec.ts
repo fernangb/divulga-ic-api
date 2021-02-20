@@ -34,7 +34,7 @@ describe('CreateCurso', () => {
       turno: 'Integral',
     });
 
-    expect(
+    await expect(
       createCurso.execute({
         nome: 'Teste',
         id_predio: '1',

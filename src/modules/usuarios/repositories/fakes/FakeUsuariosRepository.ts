@@ -3,7 +3,7 @@ import IUsuariosRepository from '@modules/usuarios/repositories/IUsuariosReposit
 import ICreateUsuarioDTO from '@modules/usuarios/dtos/ICreateUsuarioDTO';
 import { v4 as uuid_v4 } from 'uuid';
 
-class UsuariosRepository implements IUsuariosRepository {
+class FakeUsuariosRepository implements IUsuariosRepository {
   private usuarios: Usuario[] = [];
 
   public async procurarPeloId(id: string): Promise<Usuario | undefined> {
@@ -43,4 +43,4 @@ class UsuariosRepository implements IUsuariosRepository {
   }
 }
 
-export default UsuariosRepository;
+export default FakeUsuariosRepository;

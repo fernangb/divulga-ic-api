@@ -32,7 +32,7 @@ describe('CreatePredio', () => {
       id_campus: '1',
     });
 
-    expect(
+    await expect(
       createPredio.execute({
         nome: 'Teste',
         nome_comum: 'Teste',

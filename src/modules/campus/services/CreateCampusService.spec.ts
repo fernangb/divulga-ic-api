@@ -30,7 +30,7 @@ describe('CreateCampus', () => {
       endereco: 'Teste',
     });
 
-    expect(
+    await expect(
       createCampus.execute({
         nome: 'Teste',
         nome_comum: 'Teste',

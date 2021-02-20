@@ -44,7 +44,7 @@ describe('AuthenticateUsuario', () => {
       fakeHashProvider,
     );
 
-    expect(
+    await expect(
       authenticateUsuario.execute({
         email: 'teste@gmail.com',
         senha: '123456',
@@ -70,7 +70,7 @@ describe('AuthenticateUsuario', () => {
       id_nivel: '1',
     });
 
-    expect(
+    await expect(
       authenticateUsuario.execute({
         email: 'teste@gmail.com',
         senha: '000000',
