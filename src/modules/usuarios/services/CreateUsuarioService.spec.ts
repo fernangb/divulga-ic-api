@@ -21,6 +21,7 @@ describe('CreateUsuario', () => {
       email: 'teste@gmail.com',
       senha: '123456',
       id_nivel: '1',
+      nome: 'Teste',
     });
 
     expect(usuario).toHaveProperty('id');
@@ -38,6 +39,7 @@ describe('CreateUsuario', () => {
       email: 'teste@gmail.com',
       senha: '123456',
       id_nivel: '1',
+      nome: 'Teste',
     });
 
     await expect(
@@ -45,6 +47,7 @@ describe('CreateUsuario', () => {
         email: 'teste@gmail.com',
         senha: '123456',
         id_nivel: '1',
+        nome: 'Teste',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

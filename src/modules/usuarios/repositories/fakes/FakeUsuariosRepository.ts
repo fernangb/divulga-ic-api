@@ -24,10 +24,11 @@ class FakeUsuariosRepository implements IUsuariosRepository {
     email,
     senha,
     id_nivel,
+    nome,
   }: ICreateUsuarioDTO): Promise<Usuario> {
     const usuario = new Usuario();
 
-    Object.assign(usuario, { id: uuid_v4(), email, senha, id_nivel });
+    Object.assign(usuario, { id: uuid_v4(), email, senha, id_nivel, nome });
 
     this.usuarios.push(usuario);
 

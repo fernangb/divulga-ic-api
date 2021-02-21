@@ -31,6 +31,7 @@ describe('ResetarSenhaService', () => {
       email: 'fulano@detal.com',
       senha: '123456',
       id_nivel: '1',
+      nome: 'Teste',
     });
 
     const { token } = await fakeTokensUsuarioRepository.gerarToken(usuario.id);
@@ -71,6 +72,7 @@ describe('ResetarSenhaService', () => {
       email: 'fulano@detal.com',
       senha: '123456',
       id_nivel: '1',
+      nome: 'Teste',
     });
 
     const { token } = await fakeTokensUsuarioRepository.gerarToken(usuario.id);

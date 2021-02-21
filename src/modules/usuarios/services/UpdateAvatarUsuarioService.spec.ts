@@ -17,6 +17,7 @@ describe('UpdateAvatarUsuario', () => {
       email: 'fulano@detal.com',
       senha: '123456',
       id_nivel: '1',
+      nome: 'Teste',
     });
 
     await updateUsuarioAvatar.execute({
@@ -58,6 +59,7 @@ describe('UpdateAvatarUsuario', () => {
       email: 'fulano@detal.com',
       senha: '123456',
       id_nivel: '1',
+      nome: 'Teste',
     });
 
     await updateUsuarioAvatar.execute({

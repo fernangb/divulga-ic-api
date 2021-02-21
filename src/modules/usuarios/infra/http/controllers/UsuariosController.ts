@@ -4,7 +4,7 @@ import CreateUsuarioService from '@modules/usuarios/services/CreateUsuarioServic
 
 export default class UsuariosController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { email, senha, id_nivel } = request.body;
+    const { email, senha, id_nivel, nome } = request.body;
 
     const createUsuario = container.resolve(CreateUsuarioService);
 
@@ -12,6 +12,7 @@ export default class UsuariosController {
       email,
       senha,
       id_nivel,
+      nome,
     });
 
     delete user.senha;

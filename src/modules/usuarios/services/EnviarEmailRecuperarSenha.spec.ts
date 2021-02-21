@@ -33,6 +33,7 @@ describe('EnviarEmailRecuperarSenha', () => {
       email: 'teste@teste.com',
       senha: '123456',
       id_nivel: '1',
+      nome: 'Teste',
     });
 
     await enviarEmailRecuperarSenha.execute({
@@ -57,6 +58,7 @@ describe('EnviarEmailRecuperarSenha', () => {
       email: 'teste@teste.com',
       senha: '123456',
       id_nivel: '1',
+      nome: 'Teste',
     });
 
     await enviarEmailRecuperarSenha.execute({

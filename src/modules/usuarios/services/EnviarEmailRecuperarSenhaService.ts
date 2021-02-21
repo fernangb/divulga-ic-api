@@ -30,10 +30,20 @@ class EnviarEmailRecuperarSenhaService {
 
     const { token } = await this.tokensUsuarioRepository.gerarToken(usuario.id);
 
-    await this.mailProvider.enviarEmail(
-      email,
-      `Pedido de recuperação de senha recebido: ${token}`,
-    );
+    await this.mailProvider.enviarEmail({
+      to: {
+        name: usuario.nome,
+        email: usuario.email,
+      },
+      subject: '[DICA] Recuperação de Senha',
+      templateData: {
+        template: 'Olá, {{name}}: {{token}}',
+        variables: {
+          name: usuario.nome,
+          token,
+        },
+      },
+    });
   }
 }
 

@@ -31,6 +31,11 @@ export default class CriarTabelaUsuario1613501791647
             isNullable: false,
           },
           {
+            name: 'nome',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
             name: 'id_nivel',
             type: 'uuid',
             isNullable: true,

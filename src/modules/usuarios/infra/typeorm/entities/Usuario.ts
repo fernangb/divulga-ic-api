@@ -22,6 +22,9 @@ class Usuario {
   nivel: Nivel;
 
   @Column()
+  nome: string;
+
+  @Column()
   email: string;
 
   @Column()

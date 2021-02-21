@@ -25,6 +25,7 @@ describe('AuthenticateUsuario', () => {
       email: 'teste@gmail.com',
       senha: '123456',
       id_nivel: '1',
+      nome: 'Teste',
     });
 
     const response = await authenticateUsuario.execute({
@@ -68,6 +69,7 @@ describe('AuthenticateUsuario', () => {
       email: 'teste@gmail.com',
       senha: '123456',
       id_nivel: '1',
+      nome: 'Teste',
     });
 
     await expect(
