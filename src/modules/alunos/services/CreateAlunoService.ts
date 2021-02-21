@@ -1,46 +1,61 @@
-/* eslint-disable class-methods-use-this */
-import { getRepository } from 'typeorm';
-import { hash } from 'bcryptjs';
 import Aluno from '@modules/alunos/infra/typeorm/entities/Aluno';
+import IUsuariosRepository from '@modules/usuarios/repositories/IUsuariosRepository';
 import AppError from '@shared/errors/AppError';
+import { inject, injectable } from 'tsyringe';
+import IAlunosRepository from '../repositories/IAlunosRepository';
 
-interface AlunoDTO {
+interface IRequest {
   nome: string;
   email: string;
   senha: string;
-  id_curso: string;
+  id_nivel: string;
   dre: string;
+  periodo: number;
+  id_curso: string;
 }
 
+@injectable()
 class CreateAlunoService {
+  constructor(
+    @inject('UsuariosRepository')
+    private usuariosRepository: IUsuariosRepository,
+
+    @inject('AlunosRepository')
+    private alunosRepository: IAlunosRepository,
+  ) {}
+
   public async execute({
-    nome,
     email,
     senha,
-    id_curso,
+    id_nivel,
+    nome,
     dre,
-  }: AlunoDTO): Promise<Aluno> {
-    const alunosRepository = getRepository(Aluno);
-
-    const alunoEncontrado = await alunosRepository.findOne({
-      where: { email },
-    });
+    periodo,
+    id_curso,
+  }: IRequest): Promise<Aluno> {
+    const alunoEncontrado = await this.alunosRepository.encontrarPeloDRE(dre);
 
     if (alunoEncontrado) {
-      throw new AppError('Email já cadastrado no sistema.');
+      throw new AppError('Aluno já cadastrado.');
     }
 
-    const senhaCriptografada = await hash(senha, 8);
+    try {
+      const usuario = await this.usuariosRepository.create({
+        nome,
+        email,
+        senha,
+        id_nivel,
+      });
+    } catch (err) {
+      throw new AppError(err);
+    }
 
-    const aluno = alunosRepository.create({
-      nome,
-      id_curso,
-      email,
-      senha: senhaCriptografada,
+    const aluno = await this.alunosRepository.create({
+      periodo,
       dre,
+      id_curso,
+      id_usuario: usuario.id,
     });
-
-    await alunosRepository.save(aluno);
 
     return aluno;
   }

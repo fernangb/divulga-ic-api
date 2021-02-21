@@ -1,30 +1,10 @@
 import { Router } from 'express';
-import { getCustomRepository } from 'typeorm';
-import CreateAlunoService from '@modules/alunos/services/CreateAlunoService';
+import AlunosController from '../controllers/AlunosController';
 
 const alunoRouter = Router();
 
-alunoRouter.post('/', async (request, response) => {
-  const { nome, id_curso, email, senha, dre } = request.body;
+const alunosController = new AlunosController();
 
-  const createAluno = new CreateAlunoService();
-
-  const aluno = await createAluno.execute({
-    nome,
-    id_curso,
-    email,
-    senha,
-    dre,
-  });
-
-  const alunoResponse = {
-    nome,
-    id_curso,
-    email,
-    dre,
-  };
-
-  return response.json(alunoResponse);
-});
+alunoRouter.post('/', alunosController.create);
 
 export default alunoRouter;

@@ -8,6 +8,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import Curso from '@modules/cursos/infra/typeorm/entities/Curso';
+import Usuario from '@modules/usuarios/infra/typeorm/entities/Usuario';
 
 @Entity('aluno')
 class Aluno {
@@ -22,28 +23,20 @@ class Aluno {
   curso: Curso;
 
   @Column()
-  nome: string;
+  id_usuario: string;
+
+  @ManyToOne(() => Usuario)
+  @JoinColumn({ name: 'id_usuario' })
+  usuario: Usuario;
 
   @Column()
   dre: string;
 
   @Column()
-  periodo_entrada: string;
+  periodo: number;
 
   @Column()
-  periodo_atual: number;
-
-  @Column()
-  cr: number;
-
-  @Column()
-  descricao: string;
-
-  @Column()
-  email: string;
-
-  @Column()
-  senha: string;
+  cr?: number;
 
   @CreateDateColumn()
   dt_criacao: Date;

@@ -2,6 +2,8 @@ import { container } from 'tsyringe';
 import '@modules/usuarios/providers';
 import './providers';
 
+import IAlunosRepository from '@modules/alunos/repositories/IAlunosRepository';
+import AlunosRepository from '@modules/alunos/infra/typeorm/repositories/AlunosRepository';
 import IAreasRepository from '@modules/areas/repositories/IAreasRepository';
 import AreasRepository from '@modules/areas/infra/typeorm/repositories/AreasRepository';
 import ICampusRepository from '@modules/campus/repositories/ICampusRepository';
@@ -50,4 +52,9 @@ container.registerSingleton<IUsuariosRepository>(
 container.registerSingleton<ITokensUsuarioRepository>(
   'TokensUsuarioRepository',
   TokensUsuarioRepository,
+);
+
+container.registerSingleton<IAlunosRepository>(
+  'AlunosRepository',
+  AlunosRepository,
 );
