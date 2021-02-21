@@ -9,6 +9,7 @@ import prediosRouter from '@modules/predios/infra/http/routes/predios.routes';
 import sessionsRouter from '@modules/usuarios/infra/http/routes/sessions.routes';
 import usuariosRouter from '@modules/usuarios/infra/http/routes/usuarios.routes';
 import senhaRouter from '@modules/usuarios/infra/http/routes/senha.routes';
+import laboratoriosRouter from '@modules/laboratorios/infra/http/routes/laboratorios.routes';
 
 const routes = Router();
 
@@ -22,5 +23,6 @@ routes.use('/predios', prediosRouter);
 routes.use('/senha', senhaRouter);
 routes.use('/sessions', sessionsRouter);
 routes.use('/usuarios', usuariosRouter);
+routes.use('/laboratorios', laboratoriosRouter);
 
 export default routes;

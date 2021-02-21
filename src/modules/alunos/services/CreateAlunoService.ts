@@ -39,22 +39,30 @@ class CreateAlunoService {
       throw new AppError('Aluno já cadastrado.');
     }
 
-    try {
-      const usuario = await this.usuariosRepository.create({
-        nome,
-        email,
-        senha,
-        id_nivel,
-      });
-    } catch (err) {
-      throw new AppError(err);
+    const dreValido = await this.alunosRepository.validarDRE(dre);
+
+    if (!dreValido) {
+      throw new AppError('DRE inválido.');
     }
+
+    const periodoValido = await this.alunosRepository.validarPeriodo(periodo);
+
+    if (!periodoValido) {
+      throw new AppError('Período inválido.');
+    }
+
+    const usuario = await this.usuariosRepository.create({
+      nome,
+      email,
+      senha,
+      id_nivel,
+    });
 
     const aluno = await this.alunosRepository.create({
       periodo,
       dre,
       id_curso,
-      id_usuario: usuario.id,
+      id_usuario: usuario?.id,
     });
 
     return aluno;

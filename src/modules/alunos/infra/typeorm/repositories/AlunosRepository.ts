@@ -26,6 +26,22 @@ class AlunosRepository implements IAlunosRepository {
     return alunoEncontrado;
   }
 
+  public validarDRE(dre: string): boolean {
+    if (dre.length !== 9) {
+      return false;
+    }
+
+    return true;
+  }
+
+  public validarPeriodo(periodo: number): boolean {
+    if (periodo < 1 || periodo > 20) {
+      return false;
+    }
+
+    return true;
+  }
+
   public async create({
     dre,
     periodo,
