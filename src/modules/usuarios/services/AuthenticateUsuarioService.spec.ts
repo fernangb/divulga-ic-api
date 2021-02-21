@@ -8,19 +8,26 @@ import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import AuthenticateUsuarioService from './AuthenticateUsuarioService';
 import CreateUsuarioService from './CreateUsuarioService';
 
-describe('AuthenticateUsuario', () => {
-  it('deve ser possível autenticar um usuário', async () => {
-    const fakeUsuariosRepository = new FakeUsuariosRepository();
-    const fakeHashProvider = new FakeHashProvider();
-    const authenticateUsuario = new AuthenticateUsuarioService(
-      fakeUsuariosRepository,
-      fakeHashProvider,
-    );
-    const createUsuario = new CreateUsuarioService(
-      fakeUsuariosRepository,
-      fakeHashProvider,
-    );
+let fakeUsuariosRepository: FakeUsuariosRepository;
+let fakeHashProvider: FakeHashProvider;
+let authenticateUsuario: AuthenticateUsuarioService;
+let createUsuario: CreateUsuarioService;
 
+describe('AuthenticateUsuario', () => {
+  beforeEach(() => {
+    fakeUsuariosRepository = new FakeUsuariosRepository();
+    fakeHashProvider = new FakeHashProvider();
+    authenticateUsuario = new AuthenticateUsuarioService(
+      fakeUsuariosRepository,
+      fakeHashProvider,
+    );
+    createUsuario = new CreateUsuarioService(
+      fakeUsuariosRepository,
+      fakeHashProvider,
+    );
+  });
+
+  it('deve ser possível autenticar um usuário', async () => {
     const usuario = await createUsuario.execute({
       email: 'teste@gmail.com',
       senha: '123456',
@@ -38,13 +45,6 @@ describe('AuthenticateUsuario', () => {
   });
 
   it('não deve ser possível autenticar um usuário que não existe', async () => {
-    const fakeUsuariosRepository = new FakeUsuariosRepository();
-    const fakeHashProvider = new FakeHashProvider();
-    const authenticateUsuario = new AuthenticateUsuarioService(
-      fakeUsuariosRepository,
-      fakeHashProvider,
-    );
-
     await expect(
       authenticateUsuario.execute({
         email: 'teste@gmail.com',
@@ -54,17 +54,6 @@ describe('AuthenticateUsuario', () => {
   });
 
   it('não deve ser possível autenticar um usuário com a senha errada', async () => {
-    const fakeUsuariosRepository = new FakeUsuariosRepository();
-    const fakeHashProvider = new FakeHashProvider();
-    const authenticateUsuario = new AuthenticateUsuarioService(
-      fakeUsuariosRepository,
-      fakeHashProvider,
-    );
-    const createUsuario = new CreateUsuarioService(
-      fakeUsuariosRepository,
-      fakeHashProvider,
-    );
-
     await createUsuario.execute({
       email: 'teste@gmail.com',
       senha: '123456',

@@ -6,11 +6,16 @@ import 'reflect-metadata';
 import FakeCampusRepository from '../repositories/fakes/FakeCampusRepository';
 import CreateCampusService from './CreateCampusService';
 
-describe('CreateCampus', () => {
-  it('deve ser possível criar um novo campus', async () => {
-    const fakeCampussRepository = new FakeCampusRepository();
-    const createCampus = new CreateCampusService(fakeCampussRepository);
+let fakeCampusRepository: FakeCampusRepository;
+let createCampus: CreateCampusService;
 
+describe('CreateCampus', () => {
+  beforeEach(() => {
+    fakeCampusRepository = new FakeCampusRepository();
+    createCampus = new CreateCampusService(fakeCampusRepository);
+  });
+
+  it('deve ser possível criar um novo campus', async () => {
     const campus = await createCampus.execute({
       nome: 'Teste',
       nome_comum: 'Teste',
@@ -21,9 +26,6 @@ describe('CreateCampus', () => {
   });
 
   it('não deve ser permitido criar dois campus com o mesmo nome', async () => {
-    const fakeCampussRepository = new FakeCampusRepository();
-    const createCampus = new CreateCampusService(fakeCampussRepository);
-
     await createCampus.execute({
       nome: 'Teste',
       nome_comum: 'Teste',

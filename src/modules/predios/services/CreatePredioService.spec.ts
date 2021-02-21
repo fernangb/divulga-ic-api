@@ -6,11 +6,16 @@ import 'reflect-metadata';
 import FakePrediosRepository from '../repositories/fakes/FakePrediosRepository';
 import CreatePredioService from './CreatePredioService';
 
-describe('CreatePredio', () => {
-  it('deve ser possível criar um novo prédio', async () => {
-    const fakePrediosRepository = new FakePrediosRepository();
-    const createPredio = new CreatePredioService(fakePrediosRepository);
+let fakePrediosRepository: FakePrediosRepository;
+let createPredio: CreatePredioService;
 
+describe('CreatePredio', () => {
+  beforeEach(() => {
+    fakePrediosRepository = new FakePrediosRepository();
+    createPredio = new CreatePredioService(fakePrediosRepository);
+  });
+
+  it('deve ser possível criar um novo prédio', async () => {
     const predio = await createPredio.execute({
       nome: 'Teste',
       nome_comum: 'Teste',
@@ -22,9 +27,6 @@ describe('CreatePredio', () => {
   });
 
   it('não deve ser permitido criar dois prédios com o mesmo nome', async () => {
-    const fakePrediosRepository = new FakePrediosRepository();
-    const createPredio = new CreatePredioService(fakePrediosRepository);
-
     await createPredio.execute({
       nome: 'Teste',
       nome_comum: 'Teste',

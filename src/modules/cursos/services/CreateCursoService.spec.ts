@@ -6,11 +6,16 @@ import 'reflect-metadata';
 import FakeCursosRepository from '../repositories/fakes/FakeCursosRepository';
 import CreateCursoService from './CreateCursoService';
 
-describe('CreateCurso', () => {
-  it('deve ser possível criar um novo curso', async () => {
-    const fakeCursosRepository = new FakeCursosRepository();
-    const createCurso = new CreateCursoService(fakeCursosRepository);
+let fakeCursosRepository: FakeCursosRepository;
+let createCurso: CreateCursoService;
 
+describe('CreateCurso', () => {
+  beforeEach(() => {
+    fakeCursosRepository = new FakeCursosRepository();
+    createCurso = new CreateCursoService(fakeCursosRepository);
+  });
+
+  it('deve ser possível criar um novo curso', async () => {
     const curso = await createCurso.execute({
       nome: 'Teste',
       id_predio: '1',
@@ -23,9 +28,6 @@ describe('CreateCurso', () => {
   });
 
   it('não deve ser permitido criar dois cursos iguais', async () => {
-    const fakeCursosRepository = new FakeCursosRepository();
-    const createCurso = new CreateCursoService(fakeCursosRepository);
-
     await createCurso.execute({
       nome: 'Teste',
       id_predio: '1',

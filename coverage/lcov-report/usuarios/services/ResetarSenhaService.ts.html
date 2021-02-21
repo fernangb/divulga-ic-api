@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for usuarios/services/AuthenticateUsuarioService.ts</title>
+    <title>Code coverage report for usuarios/services/ResetarSenhaService.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">usuarios/services</a> AuthenticateUsuarioService.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">usuarios/services</a> ResetarSenhaService.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>24/24</span>
+                <span class='fraction'>29/29</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>19/19</span>
+                <span class='fraction'>22/22</span>
             </div>
         
             
@@ -113,8 +113,7 @@
 <a name='L54'></a><a href='#L54'>54</a>
 <a name='L55'></a><a href='#L55'>55</a>
 <a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L57'></a><a href='#L57'>57</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -128,30 +127,36 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -161,70 +166,65 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { sign } from 'jsonwebtoken';
-import Usuario from '@modules/usuarios/infra/typeorm/entities/Usuario';
-import authConfig from '@config/auth';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable import/no-extraneous-dependencies */
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
+import { isAfter, addHours } from 'date-fns';
 import IUsuariosRepository from '../repositories/IUsuariosRepository';
+import ITokensUsuarioRepository from '../repositories/ITokensUsuarioRepository';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 &nbsp;
 interface IRequest {
-  email: string;
   senha: string;
-}
-&nbsp;
-interface IResponse {
-  user: Usuario;
   token: string;
 }
 &nbsp;
 @injectable()
-class AuthenticateUsuarioService {
+class ResetarSenhaService {
   constructor(
     @inject('UsuariosRepository')
     private usuariosRepository: IUsuariosRepository,
+&nbsp;
+    @inject('TokensUsuarioRepository')
+    private tokensUsuarioRepository: ITokensUsuarioRepository,
 &nbsp;
     @inject('HashProvider')
     private hashProvider: IHashProvider,
   ) {}
 &nbsp;
-  public async execute({ email, senha }: IRequest): Promise&lt;IResponse&gt; {
-    const user = await this.usuariosRepository.encontrarPeloEmail(email);
-&nbsp;
-    if (!user) {
-      throw new AppError('Combinação email/senha incorreta.', 401);
-    }
-&nbsp;
-    const senhaCorreta = await this.hashProvider.compararHash(
-      senha,
-      user.senha,
+  public async execute({ token, senha }: IRequest): Promise&lt;void&gt; {
+    const tokenUsuario = await this.tokensUsuarioRepository.encontrarPeloToken(
+      token,
     );
 &nbsp;
-    if (!senhaCorreta) {
-      throw new AppError('Combinação email/senha incorreta.', 401);
+    if (!tokenUsuario) {
+      throw new AppError('Token do usuário não existe.');
+    }
+    const usuario = await this.usuariosRepository.encontrarPeloId(
+      tokenUsuario.id_usuario,
+    );
+&nbsp;
+    if (!usuario) {
+      throw new AppError('Usuário não existe.');
     }
 &nbsp;
-    const { secret, expiresIn } = authConfig.jwt;
+    const dtCriacaoToken = tokenUsuario.dt_criacao;
+    const dataLimite = addHours(dtCriacaoToken, 2);
 &nbsp;
-    const token = sign({}, secret, {
-      subject: user.id,
-      expiresIn,
-    });
+    if (isAfter(Date.now(), dataLimite)) {
+      throw new AppError('Token expirado');
+    }
 &nbsp;
-    return { user, token };
+    usuario.senha = await this.hashProvider.gerarHash(senha);
+&nbsp;
+    this.usuariosRepository.save(usuario);
   }
 }
 &nbsp;
-export default AuthenticateUsuarioService;
+export default ResetarSenhaService;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
