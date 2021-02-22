@@ -28,6 +28,10 @@ class LaboratoriosRepository implements ILaboratoriosRepository {
     return laboratorioEncontrado;
   }
 
+  public async ordenar(laboratorios: Laboratorio[]): Promise<Laboratorio[]> {
+    return laboratorios.sort((a, b) => (a.nome > b.nome ? 1 : -1));
+  }
+
   public async create({
     nome,
     sigla,
@@ -48,6 +52,10 @@ class LaboratoriosRepository implements ILaboratoriosRepository {
 
   public async save(laboratorio: Laboratorio): Promise<Laboratorio> {
     return this.ormRepository.save(laboratorio);
+  }
+
+  public async list(): Promise<Laboratorio[]> {
+    return this.ormRepository.find();
   }
 }
 

@@ -8,6 +8,8 @@ interface ICursosRepository {
     tipo: string,
     turno: string,
   ): Promise<Curso | undefined>;
+  list(): Promise<Curso[]>;
+  ordenar(curso: Curso[]): Promise<Curso[]>;
 }
 
 export default ICursosRepository;

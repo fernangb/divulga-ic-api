@@ -1,6 +1,7 @@
 import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import CreateLaboratorioService from '@modules/laboratorios/services/CreateLaboratorioService';
+import ListLaboratoriosService from '@modules/laboratorios/services/ListLaboratoriosService';
 
 export default class LaboratoriosController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -16,5 +17,13 @@ export default class LaboratoriosController {
     });
 
     return response.json(laboratorio);
+  }
+
+  public async list(request: Request, response: Response): Promise<Response> {
+    const listLaboratorios = container.resolve(ListLaboratoriosService);
+
+    const laboratorios = await listLaboratorios.execute();
+
+    return response.json(laboratorios);
   }
 }

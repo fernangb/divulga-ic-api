@@ -26,6 +26,10 @@ class CursosRepository implements ICursosRepository {
     return cursoEncontrado;
   }
 
+  public async ordenar(cursos: Curso[]): Promise<Curso[]> {
+    return cursos.sort((a, b) => (a.nome > b.nome ? 1 : -1));
+  }
+
   public async create({
     nome,
     id_predio,
@@ -44,6 +48,10 @@ class CursosRepository implements ICursosRepository {
     await this.ormRepository.save(curso);
 
     return curso;
+  }
+
+  public async list(): Promise<Curso[]> {
+    return this.ormRepository.find();
   }
 }
 

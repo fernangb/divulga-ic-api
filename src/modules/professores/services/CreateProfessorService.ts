@@ -1,4 +1,5 @@
 import Professor from '@modules/professores/infra/typeorm/entities/Professor';
+import IUsuariosRepository from '@modules/usuarios/repositories/IUsuariosRepository';
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import IProfessoresRepository from '../repositories/IProfessoresRepository';
@@ -15,6 +16,9 @@ class CreateProfessorService {
   constructor(
     @inject('ProfessoresRepository')
     private professoresRepository: IProfessoresRepository,
+
+    @inject('UsuariosRepository')
+    private usuariosRepository: IUsuariosRepository,
   ) {}
 
   public async execute({
@@ -23,18 +27,27 @@ class CreateProfessorService {
     id_usuario,
     siape,
   }: IRequest): Promise<Professor> {
+    if (!id_usuario) {
+      await this.usuariosRepository.delete(id_usuario);
+
+      throw new AppError('ID usuário não existe.');
+    }
+
     const professorEncotrado = await this.professoresRepository.encontrarPeloSIAPE(
       siape,
     );
 
     if (professorEncotrado) {
+      await this.usuariosRepository.delete(id_usuario);
+
       throw new AppError('Professor já cadastrado.');
     }
 
-    const siapeValido = await this.professoresRepository.validarSIAPE(siape);
+    const siapeValido = this.professoresRepository.validarSIAPE(siape);
 
-    //  Se der erro para criar professor, deve-se excluir o usuário correspondente.
     if (!siapeValido) {
+      await this.usuariosRepository.delete(id_usuario);
+
       throw new AppError('SIAPE inválido.');
     }
 

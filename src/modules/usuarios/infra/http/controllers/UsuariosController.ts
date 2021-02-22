@@ -1,6 +1,7 @@
 import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import CreateUsuarioService from '@modules/usuarios/services/CreateUsuarioService';
+import DeleteUsuarioService from '@modules/usuarios/services/DeleteUsuarioService';
 
 export default class UsuariosController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -18,5 +19,17 @@ export default class UsuariosController {
     delete user.senha;
 
     return response.json(user);
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const deleteUsuario = container.resolve(DeleteUsuarioService);
+
+    await deleteUsuario.execute(id);
+
+    return response
+      .status(200)
+      .json({ message: 'Usuário removido com sucesso' });
   }
 }

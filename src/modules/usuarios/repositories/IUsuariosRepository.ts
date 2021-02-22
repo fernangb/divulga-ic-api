@@ -6,4 +6,5 @@ export default interface IUsuariosRepository {
   encontrarPeloEmail(email: string): Promise<Usuario | undefined>;
   create(data: ICreateUsuarioDTO): Promise<Usuario>;
   save(usuario: Usuario): Promise<Usuario>;
+  delete(id: string): Promise<void>;
 }
