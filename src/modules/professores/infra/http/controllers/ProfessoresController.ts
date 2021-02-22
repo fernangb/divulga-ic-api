@@ -12,6 +12,7 @@ export default class ProfessoresController {
       senha,
       nome,
       id_nivel,
+      siape,
     } = request.body;
 
     const createProfessor = container.resolve(CreateProfessorService);
@@ -23,10 +24,12 @@ export default class ProfessoresController {
       id_nivel,
       nome,
     });
+
     const professor = await createProfessor.execute({
       id_curso,
       id_laboratorio,
       id_usuario: usuario?.id,
+      siape,
     });
 
     return response.json(professor);

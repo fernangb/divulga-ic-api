@@ -16,15 +16,44 @@ class ProfessoresRepository implements IProfessoresRepository {
     return professorEncontrado;
   }
 
+  public async encontrarPeloSIAPE(
+    siape: string,
+  ): Promise<Professor | undefined> {
+    const professorEncontrado = await this.ormRepository.findOne({
+      where: {
+        siape,
+      },
+    });
+
+    return professorEncontrado;
+  }
+
+  public validarSIAPE(siape: string): boolean {
+    if (siape.length !== 7) {
+      return false;
+    }
+
+    // eslint-disable-next-line radix
+    const siapeInt = parseInt(siape);
+
+    if (!siapeInt) {
+      return false;
+    }
+
+    return true;
+  }
+
   public async create({
     id_curso,
     id_usuario,
     id_laboratorio,
+    siape,
   }: ICreateProfessorDTO): Promise<Professor> {
     const professor = this.ormRepository.create({
       id_curso,
       id_usuario,
       id_laboratorio,
+      siape,
     });
 
     await this.ormRepository.save(professor);

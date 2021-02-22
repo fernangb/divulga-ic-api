@@ -19,6 +19,10 @@ export class CriarTabelaProfessor1613949032862 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
+            name: 'siape',
+            type: 'varchar',
+          },
+          {
             name: 'id_curso',
             type: 'uuid',
             isNullable: true,

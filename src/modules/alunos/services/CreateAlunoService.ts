@@ -31,12 +31,14 @@ class CreateAlunoService {
 
     const dreValido = await this.alunosRepository.validarDRE(dre);
 
+    //  Se der erro para criar aluno, deve-se excluir o usuário correspondente.
     if (!dreValido) {
       throw new AppError('DRE inválido.');
     }
 
     const periodoValido = await this.alunosRepository.validarPeriodo(periodo);
 
+    //  Se der erro para criar aluno, deve-se excluir o usuário correspondente.
     if (!periodoValido) {
       throw new AppError('Período inválido.');
     }

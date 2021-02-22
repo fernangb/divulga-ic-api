@@ -17,6 +17,9 @@ class Professor {
   id: string;
 
   @Column()
+  siape: string;
+
+  @Column()
   id_curso: string;
 
   @ManyToOne(() => Curso)

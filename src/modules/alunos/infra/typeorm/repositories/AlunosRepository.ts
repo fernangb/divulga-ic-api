@@ -31,6 +31,13 @@ class AlunosRepository implements IAlunosRepository {
       return false;
     }
 
+    // eslint-disable-next-line radix
+    const dreInt = parseInt(dre);
+
+    if (!dreInt) {
+      return false;
+    }
+
     return true;
   }
 
