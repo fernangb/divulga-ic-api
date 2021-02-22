@@ -1,37 +1,27 @@
 import Aluno from '@modules/alunos/infra/typeorm/entities/Aluno';
-import IUsuariosRepository from '@modules/usuarios/repositories/IUsuariosRepository';
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import IAlunosRepository from '../repositories/IAlunosRepository';
 
 interface IRequest {
-  nome: string;
-  email: string;
-  senha: string;
-  id_nivel: string;
   dre: string;
   periodo: number;
   id_curso: string;
+  id_usuario: string;
 }
 
 @injectable()
 class CreateAlunoService {
   constructor(
-    @inject('UsuariosRepository')
-    private usuariosRepository: IUsuariosRepository,
-
     @inject('AlunosRepository')
     private alunosRepository: IAlunosRepository,
   ) {}
 
   public async execute({
-    email,
-    senha,
-    id_nivel,
-    nome,
     dre,
     periodo,
     id_curso,
+    id_usuario,
   }: IRequest): Promise<Aluno> {
     const alunoEncontrado = await this.alunosRepository.encontrarPeloDRE(dre);
 
@@ -51,18 +41,11 @@ class CreateAlunoService {
       throw new AppError('Período inválido.');
     }
 
-    const usuario = await this.usuariosRepository.create({
-      nome,
-      email,
-      senha,
-      id_nivel,
-    });
-
     const aluno = await this.alunosRepository.create({
       periodo,
       dre,
       id_curso,
-      id_usuario: usuario?.id,
+      id_usuario,
     });
 
     return aluno;

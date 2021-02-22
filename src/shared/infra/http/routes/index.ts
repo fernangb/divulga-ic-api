@@ -10,6 +10,7 @@ import sessionsRouter from '@modules/usuarios/infra/http/routes/sessions.routes'
 import usuariosRouter from '@modules/usuarios/infra/http/routes/usuarios.routes';
 import senhaRouter from '@modules/usuarios/infra/http/routes/senha.routes';
 import laboratoriosRouter from '@modules/laboratorios/infra/http/routes/laboratorios.routes';
+import professoresRouter from '@modules/professores/infra/http/routes/professores.routes';
 
 const routes = Router();
 
@@ -24,5 +25,6 @@ routes.use('/senha', senhaRouter);
 routes.use('/sessions', sessionsRouter);
 routes.use('/usuarios', usuariosRouter);
 routes.use('/laboratorios', laboratoriosRouter);
+routes.use('/professores', professoresRouter);
 
 export default routes;

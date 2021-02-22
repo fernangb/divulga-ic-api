@@ -20,6 +20,8 @@ import ITokensUsuarioRepository from '@modules/usuarios/repositories/ITokensUsua
 import TokensUsuarioRepository from '@modules/usuarios/infra/typeorm/repositories/TokensUsuarioRepository';
 import ILaboratoriosRepository from '@modules/laboratorios/repositories/ILaboratoriosRepository';
 import LaboratoriosRepository from '@modules/laboratorios/infra/typeorm/repositories/LaboratoriosRepository';
+import ProfessoresRepository from '@modules/professores/infra/typeorm/repositories/ProfessoresRepository';
+import IProfessoresRepository from '@modules/professores/repositories/IProfessoresRepository';
 
 container.registerSingleton<IAreasRepository>(
   'AreasRepository',
@@ -64,4 +66,9 @@ container.registerSingleton<IAlunosRepository>(
 container.registerSingleton<ILaboratoriosRepository>(
   'LaboratoriosRepository',
   LaboratoriosRepository,
+);
+
+container.registerSingleton<IProfessoresRepository>(
+  'ProfessoresRepository',
+  ProfessoresRepository,
 );

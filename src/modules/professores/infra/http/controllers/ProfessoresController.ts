@@ -1,21 +1,20 @@
 import { container } from 'tsyringe';
 import { Request, Response } from 'express';
-import CreateAlunoService from '@modules/alunos/services/CreateAlunoService';
+import CreateProfessorService from '@modules/professores/services/CreateProfessorService';
 import CreateUsuarioService from '@modules/usuarios/services/CreateUsuarioService';
 
-export default class AlunosController {
+export default class ProfessoresController {
   public async create(request: Request, response: Response): Promise<Response> {
     const {
-      dre,
-      periodo,
       id_curso,
+      id_laboratorio,
       email,
       senha,
-      id_nivel,
       nome,
+      id_nivel,
     } = request.body;
 
-    const createAluno = container.resolve(CreateAlunoService);
+    const createProfessor = container.resolve(CreateProfessorService);
     const createUsuario = container.resolve(CreateUsuarioService);
 
     const usuario = await createUsuario.execute({
@@ -24,14 +23,12 @@ export default class AlunosController {
       id_nivel,
       nome,
     });
-
-    const aluno = await createAluno.execute({
-      dre,
-      periodo,
+    const professor = await createProfessor.execute({
       id_curso,
+      id_laboratorio,
       id_usuario: usuario?.id,
     });
 
-    return response.json(aluno);
+    return response.json(professor);
   }
 }
