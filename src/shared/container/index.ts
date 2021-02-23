@@ -22,6 +22,8 @@ import ILaboratoriosRepository from '@modules/laboratorios/repositories/ILaborat
 import LaboratoriosRepository from '@modules/laboratorios/infra/typeorm/repositories/LaboratoriosRepository';
 import ProfessoresRepository from '@modules/professores/infra/typeorm/repositories/ProfessoresRepository';
 import IProfessoresRepository from '@modules/professores/repositories/IProfessoresRepository';
+import IVagasIcRepository from '@modules/vagas_ic/repositories/IVagasIcRepository';
+import VagasIcRepository from '@modules/vagas_ic/infra/typeorm/repositories/VagasIcRepository';
 
 container.registerSingleton<IAreasRepository>(
   'AreasRepository',
@@ -71,4 +73,9 @@ container.registerSingleton<ILaboratoriosRepository>(
 container.registerSingleton<IProfessoresRepository>(
   'ProfessoresRepository',
   ProfessoresRepository,
+);
+
+container.registerSingleton<IVagasIcRepository>(
+  'VagasIcRepository',
+  VagasIcRepository,
 );
