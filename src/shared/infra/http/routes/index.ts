@@ -12,6 +12,7 @@ import senhaRouter from '@modules/usuarios/infra/http/routes/senha.routes';
 import laboratoriosRouter from '@modules/laboratorios/infra/http/routes/laboratorios.routes';
 import professoresRouter from '@modules/professores/infra/http/routes/professores.routes';
 import vagasIcRouter from '@modules/vagas_ic/infra/http/routes/vagas_ic.routes';
+import inscricoesIcRouter from '@modules/vagas_ic/infra/http/routes/inscricoes_ic.routes';
 
 const routes = Router();
 
@@ -28,5 +29,6 @@ routes.use('/usuarios', usuariosRouter);
 routes.use('/laboratorios', laboratoriosRouter);
 routes.use('/professores', professoresRouter);
 routes.use('/vagas_ic', vagasIcRouter);
+routes.use('/inscricoes_ic', inscricoesIcRouter);
 
 export default routes;

@@ -20,12 +20,26 @@ class AreasRepository implements IAreasRepository {
     return areaEncontrada;
   }
 
+  public async encontrarPeloId(id: string): Promise<Area | undefined> {
+    const areaEncontrada = await this.ormRepository.findOne(id);
+
+    return areaEncontrada;
+  }
+
+  public async ordenar(areas: Area[]): Promise<Area[]> {
+    return areas.sort((a, b) => (a.nome > b.nome ? 1 : -1));
+  }
+
   public async create({ nome }: ICreateAreaDTO): Promise<Area> {
     const area = this.ormRepository.create({ nome });
 
     await this.ormRepository.save(area);
 
     return area;
+  }
+
+  public async list(): Promise<Area[]> {
+    return this.ormRepository.find();
   }
 }
 

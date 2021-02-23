@@ -52,19 +52,25 @@ class VagaIC {
   descricao?: string;
 
   @Column()
-  vl_bolsa?: number;
+  vl_bolsa: number;
 
   @Column()
-  hr_semana?: number;
+  hr_semana: number;
 
   @Column()
-  cr_minimo?: number;
+  cr_minimo: number;
 
   @Column()
-  periodo_minimo?: number;
+  periodo_minimo: number;
 
   @Column()
   es_aberta: boolean;
+
+  @Column()
+  nr_inscritos: number;
+
+  @Column()
+  nr_vagas: number;
 
   @CreateDateColumn()
   dt_criacao: Date;

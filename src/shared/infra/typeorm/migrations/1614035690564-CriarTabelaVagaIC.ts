@@ -30,28 +30,37 @@ export class CriarTabelaVagaIC1614035690564 implements MigrationInterface {
           {
             name: 'vl_bolsa',
             type: 'real',
-            isNullable: true,
+            default: 0,
           },
           {
             name: 'hr_semana',
-            type: 'varchar',
-            isNullable: true,
+            type: 'integer',
+            default: 0,
           },
           {
             name: 'cr_minimo',
-            type: 'varchar',
-            isNullable: true,
+            type: 'real',
+            default: 0,
           },
           {
             name: 'periodo_minimo',
-            type: 'varchar',
-            isNullable: true,
+            type: 'integer',
+            default: 1,
           },
           {
             name: 'es_aberta',
             type: 'boolean',
-            isNullable: true,
             default: true,
+          },
+          {
+            name: 'nr_inscritos',
+            type: 'integer',
+            default: 0,
+          },
+          {
+            name: 'nr_vagas',
+            type: 'integer',
+            default: 1,
           },
           {
             name: 'id_laboratorio',

@@ -4,9 +4,10 @@ export default interface ICreateVagaIcDTO {
   vl_bolsa?: number;
   hr_semana?: number;
   cr_minimo?: number;
+  nr_vagas?: number;
   periodo_minimo?: number;
   id_laboratorio: string;
   id_curso: string;
   id_professor: string;
-  id_area: string;
+  id_area?: string;
 }
