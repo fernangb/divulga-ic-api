@@ -38,7 +38,7 @@ export default class VagasIcController {
     return response.json(vagaIC);
   }
 
-  public async list(request: Request, response: Response): Promise<Response> {
+  public async index(request: Request, response: Response): Promise<Response> {
     const listVagasIC = container.resolve(ListVagasIcService);
 
     const vagasIC = await listVagasIC.execute();

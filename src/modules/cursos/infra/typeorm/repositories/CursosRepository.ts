@@ -56,7 +56,7 @@ class CursosRepository implements ICursosRepository {
     return curso;
   }
 
-  public async list(): Promise<Curso[]> {
+  public async index(): Promise<Curso[]> {
     return this.ormRepository.find();
   }
 }

@@ -9,7 +9,7 @@ interface ICursosRepository {
     tipo: string,
     turno: string,
   ): Promise<Curso | undefined>;
-  list(): Promise<Curso[]>;
+  index(): Promise<Curso[]>;
   ordenar(curso: Curso[]): Promise<Curso[]>;
 }
 

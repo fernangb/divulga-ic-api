@@ -20,7 +20,7 @@ export default class CursosController {
     return response.json(curso);
   }
 
-  public async list(request: Request, response: Response): Promise<Response> {
+  public async index(request: Request, response: Response): Promise<Response> {
     const listCursos = container.resolve(ListCursosService);
 
     const cursos = await listCursos.execute();

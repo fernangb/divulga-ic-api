@@ -10,7 +10,7 @@ class ListVagasIcService {
   ) {}
 
   public async execute(): Promise<VagaIc[]> {
-    return this.vagasIcRepository.list();
+    return this.vagasIcRepository.index();
   }
 }
 

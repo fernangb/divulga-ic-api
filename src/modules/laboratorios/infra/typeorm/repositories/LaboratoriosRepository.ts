@@ -54,7 +54,7 @@ class LaboratoriosRepository implements ILaboratoriosRepository {
     return this.ormRepository.save(laboratorio);
   }
 
-  public async list(): Promise<Laboratorio[]> {
+  public async index(): Promise<Laboratorio[]> {
     return this.ormRepository.find();
   }
 }

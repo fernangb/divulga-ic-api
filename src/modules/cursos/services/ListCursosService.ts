@@ -10,7 +10,7 @@ class ListCursosService {
   ) {}
 
   public async execute(): Promise<Curso[]> {
-    const cursos = await this.cursosRepository.list();
+    const cursos = await this.cursosRepository.index();
 
     return this.cursosRepository.ordenar(cursos);
   }

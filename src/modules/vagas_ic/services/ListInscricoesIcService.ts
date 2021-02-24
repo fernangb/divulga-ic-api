@@ -10,7 +10,7 @@ class ListInscricoesIcService {
   ) {}
 
   public async execute(): Promise<InscricaoIC[]> {
-    return this.inscricoesIcRepository.list();
+    return this.inscricoesIcRepository.index();
   }
 }
 

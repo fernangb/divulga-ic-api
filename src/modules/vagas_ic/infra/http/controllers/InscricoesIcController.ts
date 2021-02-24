@@ -17,7 +17,7 @@ export default class InscricoesIcController {
     return response.json(vagaIC);
   }
 
-  public async list(request: Request, response: Response): Promise<Response> {
+  public async index(request: Request, response: Response): Promise<Response> {
     const listInscricoesIC = container.resolve(ListInscricoesIcService);
 
     const inscricoesIC = await listInscricoesIC.execute();

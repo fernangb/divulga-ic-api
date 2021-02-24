@@ -38,7 +38,7 @@ class AreasRepository implements IAreasRepository {
     return area;
   }
 
-  public async list(): Promise<Area[]> {
+  public async index(): Promise<Area[]> {
     return this.ormRepository.find();
   }
 }

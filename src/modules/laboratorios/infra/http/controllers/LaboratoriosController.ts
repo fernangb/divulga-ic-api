@@ -19,7 +19,7 @@ export default class LaboratoriosController {
     return response.json(laboratorio);
   }
 
-  public async list(request: Request, response: Response): Promise<Response> {
+  public async index(request: Request, response: Response): Promise<Response> {
     const listLaboratorios = container.resolve(ListLaboratoriosService);
 
     const laboratorios = await listLaboratorios.execute();

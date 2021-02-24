@@ -7,6 +7,6 @@ const inscricaoIcRouter = Router();
 const inscricoesIcController = new InscricoesIcController();
 
 inscricaoIcRouter.post('/', inscricoesIcController.create);
-inscricaoIcRouter.get('/', inscricoesIcController.list);
+inscricaoIcRouter.get('/', inscricoesIcController.index);
 
 export default inscricaoIcRouter;

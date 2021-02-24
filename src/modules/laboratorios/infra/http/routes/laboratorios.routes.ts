@@ -6,6 +6,6 @@ const laboratoriosRouter = Router();
 const laboratoriosController = new LaboratoriosController();
 
 laboratoriosRouter.post('/', laboratoriosController.create);
-laboratoriosRouter.get('/', laboratoriosController.list);
+laboratoriosRouter.get('/', laboratoriosController.index);
 
 export default laboratoriosRouter;

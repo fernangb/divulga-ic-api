@@ -6,7 +6,7 @@ const areaRouter = Router();
 const areasController = new AreasController();
 
 areaRouter.post('/', areasController.create);
-areaRouter.get('/', areasController.list);
+areaRouter.get('/', areasController.index);
 
 // areaRouter.get('/', async (request, response) => {
 //   const area = await areasRepository.find();

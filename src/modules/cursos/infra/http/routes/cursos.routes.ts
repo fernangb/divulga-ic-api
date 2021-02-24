@@ -10,7 +10,7 @@ const cursosController = new CursosController();
 
 cursosRouter.post('/', cursosController.create);
 
-cursosRouter.get('/', cursosController.list);
+cursosRouter.get('/', cursosController.index);
 
 //   const cursos = await cursosRepository.find();
 

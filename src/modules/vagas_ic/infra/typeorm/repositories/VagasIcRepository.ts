@@ -3,6 +3,7 @@ import VagaIc from '@modules/vagas_ic/infra/typeorm/entities/VagaIC';
 import IVagasIcRepository from '@modules/vagas_ic/repositories/IVagasIcRepository';
 import ICreateVagaIcDTO from '@modules/vagas_ic/dtos/ICreateVagaIcDTO';
 import IVerificarVagasExistentesDTO from '@modules/vagas_ic/dtos/IVerificarVagasExistentesDTO';
+import IListVagasIcPorAlunoDTO from '@modules/vagas_ic/dtos/IListVagasPorAlunoDTO';
 
 class VagasIcRepository implements IVagasIcRepository {
   private ormRepository: Repository<VagaIc>;
@@ -41,8 +42,8 @@ class VagasIcRepository implements IVagasIcRepository {
     return vagaIc;
   }
 
-  public async list(): Promise<VagaIc[]> {
-    return this.ormRepository.find();
+  public async index(): Promise<VagaIc[]> {
+    return this.ormRepository.find({ where: { es_aberta: true } });
   }
 
   public async encontrarVagaExistente({
@@ -62,6 +63,32 @@ class VagasIcRepository implements IVagasIcRepository {
     if (!vagaEncontrada) return false;
 
     return true;
+  }
+
+  public async encontrarPeloNome(nome: string): Promise<VagaIc[]> {
+    return this.ormRepository.find({ where: { nome, es_aberta: true } });
+  }
+
+  public async encontrarPeloCurso(id_curso: string): Promise<VagaIc[]> {
+    return this.ormRepository.find({ where: { id_curso, es_aberta: true } });
+  }
+
+  public async encontrarPeloLaboratorio(
+    id_laboratorio: string,
+  ): Promise<VagaIc[]> {
+    return this.ormRepository.find({
+      where: { id_laboratorio, es_aberta: true },
+    });
+  }
+
+  public async encontrarPelaArea(id_area: string): Promise<VagaIc[]> {
+    return this.ormRepository.find({ where: { id_area, es_aberta: true } });
+  }
+
+  public async encontrarPorAluno({
+    id_curso,
+  }: IListVagasIcPorAlunoDTO): Promise<VagaIc[]> {
+    return this.ormRepository.find({ where: { id_curso, es_aberta: true } });
   }
 }
 

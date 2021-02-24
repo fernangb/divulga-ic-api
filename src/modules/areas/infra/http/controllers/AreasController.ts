@@ -16,7 +16,7 @@ export default class AreasController {
     return response.json(area);
   }
 
-  public async list(request: Request, response: Response): Promise<Response> {
+  public async index(request: Request, response: Response): Promise<Response> {
     const listAreas = container.resolve(ListAreasService);
 
     const areas = await listAreas.execute();

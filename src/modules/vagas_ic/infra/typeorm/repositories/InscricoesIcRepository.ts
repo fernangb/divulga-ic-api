@@ -24,7 +24,7 @@ class InscricoesIcRepository implements IInscricoesIcRepository {
     return inscricaoIc;
   }
 
-  public async list(): Promise<InscricaoIc[]> {
+  public async index(): Promise<InscricaoIc[]> {
     return this.ormRepository.find();
   }
 }

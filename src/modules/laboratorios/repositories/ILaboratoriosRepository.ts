@@ -7,5 +7,5 @@ export default interface ILaboratoriosRepository {
   ordenar(laboratorios: Laboratorio[]): Promise<Laboratorio[]>;
   create(data: ICreateLaboratorioDTO): Promise<Laboratorio>;
   save(usuario: Laboratorio): Promise<Laboratorio>;
-  list(): Promise<Laboratorio[]>;
+  index(): Promise<Laboratorio[]>;
 }

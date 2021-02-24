@@ -10,7 +10,7 @@ class ListAreasService {
   ) {}
 
   public async execute(): Promise<Area[]> {
-    const areas = await this.areasRepository.list();
+    const areas = await this.areasRepository.index();
 
     return this.areasRepository.ordenar(areas);
   }
