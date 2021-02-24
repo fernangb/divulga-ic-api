@@ -26,6 +26,8 @@ import IVagasIcRepository from '@modules/vagas_ic/repositories/IVagasIcRepositor
 import VagasIcRepository from '@modules/vagas_ic/infra/typeorm/repositories/VagasIcRepository';
 import IInscricoesIcRepository from '@modules/vagas_ic/repositories/IInscricoesIcRepository';
 import InscricoesIcRepository from '@modules/vagas_ic/infra/typeorm/repositories/InscricoesIcRepository';
+import NotificacoesRepository from '@modules/notificacoes/infra/typeorm/schemas/repositories/NotificacoesRepository';
+import INotificacoesRepository from '@modules/notificacoes/repositories/INotificaoesRepository';
 
 container.registerSingleton<IAreasRepository>(
   'AreasRepository',
@@ -85,4 +87,9 @@ container.registerSingleton<IVagasIcRepository>(
 container.registerSingleton<IInscricoesIcRepository>(
   'InscricoesIcRepository',
   InscricoesIcRepository,
+);
+
+container.registerSingleton<INotificacoesRepository>(
+  'NotificacoesRepository',
+  NotificacoesRepository,
 );

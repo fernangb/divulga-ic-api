@@ -69,6 +69,10 @@ class VagasIcRepository implements IVagasIcRepository {
     return this.ormRepository.find({ where: { nome, es_aberta: true } });
   }
 
+  public async encontrarPeloId(id_vaga: string): Promise<VagaIc | undefined> {
+    return this.ormRepository.findOne({ where: id_vaga });
+  }
+
   public async encontrarPeloCurso(id_curso: string): Promise<VagaIc[]> {
     return this.ormRepository.find({ where: { id_curso, es_aberta: true } });
   }
