@@ -1,8 +1,9 @@
+import ensureAuthenticated from '@modules/usuarios/infra/http/middlewares/EnsureAuthenticated';
 import { Router } from 'express';
 import InscricoesIcController from '../controllers/InscricoesIcController';
 
 const inscricaoIcRouter = Router();
-// inscricaoIcRouter.use(ensureAuthenticated);
+inscricaoIcRouter.use(ensureAuthenticated);
 
 const inscricoesIcController = new InscricoesIcController();
 

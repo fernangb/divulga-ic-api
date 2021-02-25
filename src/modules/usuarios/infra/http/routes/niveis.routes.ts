@@ -1,3 +1,4 @@
+import { celebrate, Joi, Segments } from 'celebrate';
 import { Router } from 'express';
 import NiveisController from '../controllers/NiveisController';
 
@@ -5,7 +6,15 @@ const nivelRouter = Router();
 
 const niveisController = new NiveisController();
 
-nivelRouter.post('/', niveisController.create);
+nivelRouter.post(
+  '/',
+  celebrate({
+    [Segments.BODY]: {
+      nome: Joi.string().required(),
+    },
+  }),
+  niveisController.create,
+);
 
 // nivelRouter.get('/', async (request, response) => {
 
