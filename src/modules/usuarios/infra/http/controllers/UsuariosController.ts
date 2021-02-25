@@ -2,6 +2,7 @@ import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import CreateUsuarioService from '@modules/usuarios/services/CreateUsuarioService';
 import DeleteUsuarioService from '@modules/usuarios/services/DeleteUsuarioService';
+import { classToClass } from 'class-transformer';
 
 export default class UsuariosController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -16,9 +17,7 @@ export default class UsuariosController {
       nome,
     });
 
-    delete user.senha;
-
-    return response.json(user);
+    return response.json(classToClass(user));
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {

@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 
 import UpdatePerfilService from '@modules/usuarios/services/UpdatePerfilService';
 import ShowPerfilService from '@modules/usuarios/services/ShowPerfilService';
+import { classToClass } from 'class-transformer';
 
 export default class PerfilController {
   public async show(request: Request, response: Response): Promise<Response> {
@@ -14,15 +15,7 @@ export default class PerfilController {
       id_usuario,
     });
 
-    const usuarioSemSenha = {
-      id: usuario.id,
-      nome: usuario.nome,
-      email: usuario.email,
-      dt_criacao: usuario.dt_criacao,
-      dt_atualizacao: usuario.dt_atualizacao,
-    };
-
-    return response.json(usuarioSemSenha);
+    return response.json(classToClass(usuario));
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
@@ -39,15 +32,6 @@ export default class PerfilController {
       senha,
     });
 
-    // Com a atualização do TypeScript, isso se faz necessário
-    const usuarioSemSenha = {
-      id: usuario?.id,
-      name: usuario?.nome,
-      email: usuario?.email,
-      created_at: usuario?.dt_criacao,
-      updated_at: usuario?.dt_atualizacao,
-    };
-
-    return response.json(usuarioSemSenha);
+    return response.json(classToClass(usuario));
   }
 }
