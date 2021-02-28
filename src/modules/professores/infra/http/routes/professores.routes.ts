@@ -14,6 +14,7 @@ professorRouter.post(
       senha: Joi.string().required(),
       confirmacao_senha: Joi.string().required().valid(Joi.ref('senha')),
       nome: Joi.string().required(),
+      sobrenome: Joi.string().required(),
       siape: Joi.string().required(),
       id_curso: Joi.string().uuid().required(),
       id_nivel: Joi.string().uuid().required(),

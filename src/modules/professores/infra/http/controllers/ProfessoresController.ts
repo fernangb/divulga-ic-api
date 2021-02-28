@@ -11,6 +11,7 @@ export default class ProfessoresController {
       email,
       senha,
       nome,
+      sobrenome,
       id_nivel,
       siape,
     } = request.body;
@@ -23,6 +24,7 @@ export default class ProfessoresController {
       senha,
       id_nivel,
       nome,
+      sobrenome,
     });
 
     const professor = await createProfessor.execute({

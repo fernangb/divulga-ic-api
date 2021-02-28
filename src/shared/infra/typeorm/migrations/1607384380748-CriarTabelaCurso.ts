@@ -34,6 +34,11 @@ export class CriarTabelaCurso1607384380748 implements MigrationInterface {
             isNullable: false,
           },
           {
+            name: 'nr_periodos',
+            type: 'integer',
+            isNullable: false,
+          },
+          {
             name: 'tipo',
             type: 'varchar',
             isNullable: false,

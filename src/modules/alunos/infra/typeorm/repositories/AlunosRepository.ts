@@ -49,6 +49,14 @@ class AlunosRepository implements IAlunosRepository {
     return true;
   }
 
+  public validarCR(cr: number): boolean {
+    if (cr < 0 || cr > 10) {
+      return false;
+    }
+
+    return true;
+  }
+
   public async create({
     dre,
     periodo,

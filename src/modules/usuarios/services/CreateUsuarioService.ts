@@ -6,6 +6,7 @@ import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 
 interface IRequest {
   nome: string;
+  sobrenome: string;
   email: string;
   senha: string;
   id_nivel: string;
@@ -26,6 +27,7 @@ class CreateUsuarioService {
     senha,
     id_nivel,
     nome,
+    sobrenome,
   }: IRequest): Promise<Usuario> {
     const usuarioEncontrado = await this.usuariosRepository.encontrarPeloEmail(
       email,
@@ -39,6 +41,7 @@ class CreateUsuarioService {
 
     const user = await this.usuariosRepository.create({
       nome,
+      sobrenome,
       email,
       senha: hashedPassword,
       id_nivel,

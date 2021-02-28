@@ -7,6 +7,7 @@ interface CursoDTO {
   nome: string;
   id_predio: string;
   endereco: string;
+  nr_periodos: number;
   tipo: 'Bacharel' | 'Licenciatura';
   turno: 'Integral' | 'Noturno';
 }
@@ -24,6 +25,7 @@ class CreateCursoService {
     endereco,
     tipo,
     turno,
+    nr_periodos,
   }: CursoDTO): Promise<Curso> {
     const cursoEncontrado = await this.cursosRepository.encontrarCursoExistente(
       nome,
@@ -41,6 +43,7 @@ class CreateCursoService {
       endereco,
       tipo,
       turno,
+      nr_periodos,
     });
 
     return curso;

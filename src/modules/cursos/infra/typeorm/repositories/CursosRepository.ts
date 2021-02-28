@@ -42,6 +42,7 @@ class CursosRepository implements ICursosRepository {
     endereco,
     tipo,
     turno,
+    nr_periodos,
   }: ICreateCursoDTO): Promise<Curso> {
     const curso = this.ormRepository.create({
       nome,
@@ -49,6 +50,7 @@ class CursosRepository implements ICursosRepository {
       endereco,
       tipo,
       turno,
+      nr_periodos,
     });
 
     await this.ormRepository.save(curso);

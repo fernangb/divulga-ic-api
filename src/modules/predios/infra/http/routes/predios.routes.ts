@@ -10,9 +10,9 @@ predioRouter.post(
   '/',
   celebrate({
     [Segments.BODY]: {
-      nome: Joi.number().required(),
-      nome_comum: Joi.number().required(),
-      endereco: Joi.number().required(),
+      nome: Joi.string().required(),
+      nome_comum: Joi.string().required(),
+      endereco: Joi.string().required(),
       id_campus: Joi.string().uuid().required(),
     },
   }),

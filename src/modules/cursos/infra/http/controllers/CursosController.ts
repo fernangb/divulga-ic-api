@@ -5,7 +5,14 @@ import ListCursosService from '@modules/cursos/services/ListCursosService';
 
 export default class CursosController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { nome, id_predio, endereco, tipo, turno } = request.body;
+    const {
+      nome,
+      id_predio,
+      endereco,
+      tipo,
+      turno,
+      nr_periodos,
+    } = request.body;
 
     const createCurso = container.resolve(CreateCursoService);
 
@@ -15,6 +22,7 @@ export default class CursosController {
       endereco,
       tipo,
       turno,
+      nr_periodos,
     });
 
     return response.json(curso);

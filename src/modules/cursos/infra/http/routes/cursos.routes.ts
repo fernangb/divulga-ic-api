@@ -15,6 +15,7 @@ cursosRouter.post(
     [Segments.BODY]: {
       nome: Joi.string().required(),
       endereco: Joi.string().required(),
+      nr_periodos: Joi.number().required(),
       tipo: Joi.string().required(),
       turno: Joi.string().required(),
       id_predio: Joi.string().uuid().required(),

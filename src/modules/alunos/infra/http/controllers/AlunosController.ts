@@ -13,6 +13,7 @@ export default class AlunosController {
       senha,
       id_nivel,
       nome,
+      sobrenome,
     } = request.body;
 
     const createAluno = container.resolve(CreateAlunoService);
@@ -23,6 +24,7 @@ export default class AlunosController {
       senha,
       id_nivel,
       nome,
+      sobrenome,
     });
 
     const aluno = await createAluno.execute({

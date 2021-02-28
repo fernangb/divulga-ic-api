@@ -28,6 +28,9 @@ class Curso {
   endereco: string;
 
   @Column()
+  nr_periodos: number;
+
+  @Column()
   turno: 'Integral' | 'Noturno';
 
   @Column()

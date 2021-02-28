@@ -6,6 +6,7 @@ export default interface IAlunosRepository {
   encontrarPeloDRE(dre: string): Promise<Aluno | undefined>;
   validarDRE(dre: string): boolean;
   validarPeriodo(periodo: number): boolean;
+  validarCR(periodo: number): boolean;
   create(data: ICreateAlunoDTO): Promise<Aluno>;
   save(usuario: Aluno): Promise<Aluno>;
 }

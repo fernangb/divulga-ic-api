@@ -3,4 +3,5 @@ export default interface ICreateUsuarioDTO {
   senha: string;
   id_nivel: string;
   nome: string;
+  sobrenome: string;
 }
