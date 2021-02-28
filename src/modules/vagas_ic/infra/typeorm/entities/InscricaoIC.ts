@@ -18,14 +18,14 @@ class InscricaoIC {
   @Column()
   id_vaga: string;
 
-  @ManyToOne(() => VagaIC)
+  @ManyToOne(() => VagaIC, v => v.nome, { eager: true })
   @JoinColumn({ name: 'id_vaga' })
   vaga_ic: VagaIC;
 
   @Column()
   id_aluno: string;
 
-  @ManyToOne(() => Aluno)
+  @ManyToOne(() => Aluno, a => a.id, { eager: true })
   @JoinColumn({ name: 'id_aluno' })
   aluno: Aluno;
 

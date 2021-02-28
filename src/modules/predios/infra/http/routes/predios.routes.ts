@@ -19,11 +19,6 @@ predioRouter.post(
   prediosController.create,
 );
 
-// predioRouter.get('/', async (request, response) => {
-
-//   const predio = await predioRepository.find();
-
-//   return response.json(predio);
-// });
+predioRouter.get('/', prediosController.index);
 
 export default predioRouter;

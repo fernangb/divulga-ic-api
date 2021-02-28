@@ -20,28 +20,28 @@ class VagaIC {
   @Column()
   id_curso: string;
 
-  @ManyToOne(() => Curso)
+  @ManyToOne(() => Curso, c => c.nome, { eager: true })
   @JoinColumn({ name: 'id_curso' })
   curso: Curso;
 
   @Column()
   id_area: string;
 
-  @ManyToOne(() => Area)
+  @ManyToOne(() => Area, a => a.nome, { eager: true })
   @JoinColumn({ name: 'id_area' })
   area: Area;
 
   @Column()
   id_professor: string;
 
-  @ManyToOne(() => Professor)
+  @ManyToOne(() => Professor, p => p.id, { eager: true })
   @JoinColumn({ name: 'id_professor' })
   professor: Professor;
 
   @Column()
   id_laboratorio: string;
 
-  @ManyToOne(() => Laboratorio)
+  @ManyToOne(() => Laboratorio, l => l.nome, { eager: true })
   @JoinColumn({ name: 'id_laboratorio' })
   laboratorio: Laboratorio;
 

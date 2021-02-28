@@ -20,6 +20,10 @@ class PrediosRepository implements IPrediosRepository {
     return predioEncontrado;
   }
 
+  public async ordenar(predios: Predio[]): Promise<Predio[]> {
+    return predios.sort((a, b) => (a.nome > b.nome ? 1 : -1));
+  }
+
   public async create({
     nome,
     nome_comum,
@@ -36,6 +40,10 @@ class PrediosRepository implements IPrediosRepository {
     await this.ormRepository.save(predio);
 
     return predio;
+  }
+
+  public async index(): Promise<Predio[]> {
+    return this.ormRepository.find();
   }
 }
 

@@ -17,7 +17,7 @@ class Laboratorio {
   @Column()
   id_predio: string;
 
-  @ManyToOne(() => Predio)
+  @ManyToOne(() => Predio, p => p.nome, { eager: true })
   @JoinColumn({ name: 'id_predio' })
   predio: Predio;
 

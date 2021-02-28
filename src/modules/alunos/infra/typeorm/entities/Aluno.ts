@@ -18,14 +18,14 @@ class Aluno {
   @Column()
   id_curso: string;
 
-  @ManyToOne(() => Curso)
+  @ManyToOne(() => Curso, c => c.nome, { eager: true })
   @JoinColumn({ name: 'id_curso' })
   curso: Curso;
 
   @Column()
   id_usuario: string;
 
-  @ManyToOne(() => Usuario)
+  @ManyToOne(() => Usuario, u => u.nome, { eager: true })
   @JoinColumn({ name: 'id_usuario' })
   usuario: Usuario;
 

@@ -22,21 +22,21 @@ class Professor {
   @Column()
   id_curso: string;
 
-  @ManyToOne(() => Curso)
+  @ManyToOne(() => Curso, c => c.nome, { eager: true })
   @JoinColumn({ name: 'id_curso' })
   curso: Curso;
 
   @Column()
   id_usuario: string;
 
-  @ManyToOne(() => Usuario)
+  @ManyToOne(() => Usuario, u => u.nome, { eager: true })
   @JoinColumn({ name: 'id_usuario' })
   usuario: Usuario;
 
   @Column()
   id_laboratorio: string;
 
-  @ManyToOne(() => Laboratorio)
+  @ManyToOne(() => Laboratorio, l => l.nome, { eager: true })
   @JoinColumn({ name: 'id_laboratorio' })
   laboratorio: Laboratorio;
 

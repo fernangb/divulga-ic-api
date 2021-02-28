@@ -17,10 +17,4 @@ areaRouter.post(
 );
 areaRouter.get('/', areasController.index);
 
-// areaRouter.get('/', async (request, response) => {
-//   const area = await areasRepository.find();
-
-//   return response.json(area);
-// });
-
 export default areaRouter;

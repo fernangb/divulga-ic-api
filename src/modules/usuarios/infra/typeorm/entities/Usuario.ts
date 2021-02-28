@@ -19,7 +19,7 @@ class Usuario {
   @Column()
   id_nivel: string;
 
-  @ManyToOne(() => Nivel)
+  @ManyToOne(() => Nivel, n => n.nome, { eager: true })
   @JoinColumn({ name: 'id_nivel' })
   nivel: Nivel;
 

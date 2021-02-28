@@ -1,10 +1,12 @@
 import { celebrate, Joi, Segments } from 'celebrate';
 import { Router } from 'express';
 import NiveisController from '../controllers/NiveisController';
+import NiveisPorNomeController from '../controllers/NiveisPorNomeController';
 
 const nivelRouter = Router();
 
 const niveisController = new NiveisController();
+const niveisPorNomeController = new NiveisPorNomeController();
 
 nivelRouter.post(
   '/',
@@ -16,11 +18,14 @@ nivelRouter.post(
   niveisController.create,
 );
 
-// nivelRouter.get('/', async (request, response) => {
-
-//   const nivel = await nivelRepository.find();
-
-//   return response.json(nivel);
-// });
+nivelRouter.get(
+  '/:nome',
+  celebrate({
+    [Segments.BODY]: {
+      nome: Joi.string().required(),
+    },
+  }),
+  niveisPorNomeController.index,
+);
 
 export default nivelRouter;

@@ -17,7 +17,7 @@ class Predio {
   @Column()
   id_campus: string;
 
-  @ManyToOne(() => Campus)
+  @ManyToOne(() => Campus, c => c.nome, { eager: true })
   @JoinColumn({ name: 'id_campus' })
   campus: Campus;
 
