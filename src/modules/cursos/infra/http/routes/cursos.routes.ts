@@ -26,9 +26,4 @@ cursosRouter.post(
 
 cursosRouter.get('/', cursosController.index);
 
-//   const cursos = await cursosRepository.find();
-
-//   return response.json(cursos);
-// });
-
 export default cursosRouter;
