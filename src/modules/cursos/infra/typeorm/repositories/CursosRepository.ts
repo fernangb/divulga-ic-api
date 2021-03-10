@@ -2,6 +2,7 @@ import { getRepository, Repository } from 'typeorm';
 import Curso from '@modules/cursos/infra/typeorm/entities/Curso';
 import ICursosRepository from '@modules/cursos/repositories/ICursosRepository';
 import ICreateCursoDTO from '@modules/cursos/dtos/ICreateCursoDTO';
+import IListCursosDTO from '@modules/cursos/dtos/IListCursosDTO';
 
 class CursosRepository implements ICursosRepository {
   private ormRepository: Repository<Curso>;
@@ -58,8 +59,13 @@ class CursosRepository implements ICursosRepository {
     return curso;
   }
 
-  public async index(): Promise<Curso[]> {
-    return this.ormRepository.find();
+  public async index(): Promise<IListCursosDTO[]> {
+    return this.ormRepository.find({
+      select: [
+        'nome',
+        'id'
+      ]
+    });
   }
 }
 

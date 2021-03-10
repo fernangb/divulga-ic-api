@@ -1,5 +1,6 @@
 import Curso from '@modules/cursos/infra/typeorm/entities/Curso';
 import ICreateCursoDTO from '../dtos/ICreateCursoDTO';
+import IListCursosDTO from '../dtos/IListCursosDTO';
 
 interface ICursosRepository {
   create(data: ICreateCursoDTO): Promise<Curso>;
@@ -9,7 +10,7 @@ interface ICursosRepository {
     tipo: string,
     turno: string,
   ): Promise<Curso | undefined>;
-  index(): Promise<Curso[]>;
+  index(): Promise<IListCursosDTO[]>;
   ordenar(curso: Curso[]): Promise<Curso[]>;
 }
 
