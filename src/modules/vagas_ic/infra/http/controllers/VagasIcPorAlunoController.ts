@@ -6,8 +6,6 @@ export default class VagasIcController {
   public async index(request: Request, response: Response): Promise<Response> {
     const { id_aluno } = request.body;
 
-    console.log("ALuno: ",id_aluno)
-
     const listVagasIC = container.resolve(ListVagasIcPorAlunoService);
 
     const vagasIC = await listVagasIC.execute({ id_aluno });

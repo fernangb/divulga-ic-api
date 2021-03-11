@@ -10,7 +10,6 @@ export default class AlunosUsuariosController {
       id_usuario,
     } = request.params;
 
-    console.log("id: ", id_usuario);
 
     const showAluno = container.resolve(ShowAlunoPorIdUsuarioService);
 
