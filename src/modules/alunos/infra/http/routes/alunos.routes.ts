@@ -1,10 +1,15 @@
 import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 import AlunosController from '../controllers/AlunosController';
+import AlunosUsuariosController from '../controllers/AlunosUsuariosController';
+import ensureAuthenticated from '@modules/usuarios/infra/http/middlewares/EnsureAuthenticated';
 
 const alunoRouter = Router();
 
+
 const alunosController = new AlunosController();
+const alunosUsuariosController = new AlunosUsuariosController();
+
 
 alunoRouter.post(
   '/',
@@ -22,6 +27,11 @@ alunoRouter.post(
     },
   }),
   alunosController.create,
+);
+
+alunoRouter.get(
+  '/:id_usuario', ensureAuthenticated,
+  alunosUsuariosController.index,
 );
 
 export default alunoRouter;

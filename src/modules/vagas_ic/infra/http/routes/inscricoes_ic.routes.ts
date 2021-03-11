@@ -18,6 +18,8 @@ inscricaoIcRouter.post(
   }),
   inscricoesIcController.create,
 );
-inscricaoIcRouter.get('/', inscricoesIcController.index);
+
+inscricaoIcRouter.get('/me', inscricoesIcController.index);
+
 
 export default inscricaoIcRouter;

@@ -3,6 +3,7 @@ import Aluno from '../infra/typeorm/entities/Aluno';
 
 export default interface IAlunosRepository {
   encontrarPeloId(id: string): Promise<Aluno | undefined>;
+  encontrarPeloIdUsuario(id_usuario: string): Promise<Aluno | undefined>;
   encontrarPeloDRE(dre: string): Promise<Aluno | undefined>;
   validarDRE(dre: string): boolean;
   validarPeriodo(periodo: number): boolean;

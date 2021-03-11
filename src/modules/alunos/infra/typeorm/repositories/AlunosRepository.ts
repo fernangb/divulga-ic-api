@@ -16,6 +16,16 @@ class AlunosRepository implements IAlunosRepository {
     return alunoEncontrado;
   }
 
+  public async encontrarPeloIdUsuario(id_usuario: string): Promise<Aluno | undefined> {
+    const alunoEncontrado = await this.ormRepository.findOne({
+      where: {
+        id_usuario,
+      },
+    });
+
+    return alunoEncontrado;
+  }
+
   public async encontrarPeloDRE(dre: string): Promise<Aluno | undefined> {
     const alunoEncontrado = await this.ormRepository.findOne({
       where: {
