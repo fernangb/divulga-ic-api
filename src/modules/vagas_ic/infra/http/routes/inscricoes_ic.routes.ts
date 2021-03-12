@@ -2,11 +2,13 @@ import ensureAuthenticated from '@modules/usuarios/infra/http/middlewares/Ensure
 import { celebrate, Joi, Segments } from 'celebrate';
 import { Router } from 'express';
 import InscricoesIcController from '../controllers/InscricoesIcController';
+import InscricoesIcPorAlunoController from '../controllers/InscricoesIcPorAlunoController';
 
 const inscricaoIcRouter = Router();
 inscricaoIcRouter.use(ensureAuthenticated);
 
 const inscricoesIcController = new InscricoesIcController();
+const inscricoesIcPorAlunoController = new InscricoesIcPorAlunoController();
 
 inscricaoIcRouter.post(
   '/',
@@ -19,7 +21,7 @@ inscricaoIcRouter.post(
   inscricoesIcController.create,
 );
 
-inscricaoIcRouter.get('/me', inscricoesIcController.index);
+inscricaoIcRouter.get('/me', inscricoesIcPorAlunoController.index);
 
 
 export default inscricaoIcRouter;

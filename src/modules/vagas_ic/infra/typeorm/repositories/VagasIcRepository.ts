@@ -12,6 +12,7 @@ class VagasIcRepository implements IVagasIcRepository {
     this.ormRepository = getRepository(VagaIc);
   }
 
+
   public async create({
     nome,
     descricao,
@@ -89,7 +90,7 @@ class VagasIcRepository implements IVagasIcRepository {
     return this.ormRepository.find({ where: { id_area, es_aberta: true } });
   }
 
-  public async encontrarPorAluno({
+  public async encontrarVagasRecomendadasPorAluno({
     id_curso,
   }: IListVagasIcPorAlunoDTO): Promise<VagaIc[]> {
     return this.ormRepository.find({ where: { id_curso, es_aberta: true } });

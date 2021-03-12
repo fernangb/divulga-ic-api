@@ -9,7 +9,7 @@ export default interface IVagasIcRepository {
     id_laboratorio,
     id_curso,
   }: IVerificarVagasExistentesDTO): Promise<boolean>;
-  encontrarPorAluno(data: IListVagasIcPorAlunoDTO): Promise<VagaIc[]>;
+  encontrarVagasRecomendadasPorAluno(data: IListVagasIcPorAlunoDTO): Promise<VagaIc[]>;
   encontrarPeloId(id: string): Promise<VagaIc | undefined>;
   encontrarPeloNome(nome: string): Promise<VagaIc[]>;
   encontrarPeloCurso(id_curso: string): Promise<VagaIc[]>;

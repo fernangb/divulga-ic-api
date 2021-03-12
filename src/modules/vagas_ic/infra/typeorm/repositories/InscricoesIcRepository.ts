@@ -10,6 +10,11 @@ class InscricoesIcRepository implements IInscricoesIcRepository {
     this.ormRepository = getRepository(InscricaoIc);
   }
 
+  listarVagasInscritasPeloAluno(id_aluno: string): Promise<InscricaoIc[]> {
+    return this.ormRepository.find({ where: { id_aluno, es_ativa: true } });
+
+  }
+
   public async create({
     id_vaga,
     id_aluno,

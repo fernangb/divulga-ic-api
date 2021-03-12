@@ -16,6 +16,16 @@ class ProfessoresRepository implements IProfessoresRepository {
     return professorEncontrado;
   }
 
+  public async encontrarPeloIdUsuario(id_usuario: string): Promise<Professor | undefined> {
+    const professorEncontrado = await this.ormRepository.findOne({
+      where: {
+        id_usuario,
+      },
+    });
+
+    return professorEncontrado;
+  }
+
   public async encontrarPeloSIAPE(
     siape: string,
   ): Promise<Professor | undefined> {
