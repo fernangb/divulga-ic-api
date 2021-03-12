@@ -24,12 +24,14 @@ usuarioRouter.post(
   }),
   usuariosController.create,
 );
+
 usuarioRouter.patch(
   '/avatar',
   ensureAuthenticated,
   upload.single('avatar'),
   avatarUsuariosController.update,
 );
+
 usuarioRouter.delete('/:id', usuariosController.delete);
 
 export default usuarioRouter;

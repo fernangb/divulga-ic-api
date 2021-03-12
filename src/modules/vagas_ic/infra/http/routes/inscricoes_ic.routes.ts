@@ -23,5 +23,6 @@ inscricaoIcRouter.post(
 
 inscricaoIcRouter.get('/me', inscricoesIcPorAlunoController.index);
 
+inscricaoIcRouter.delete('/:id', inscricoesIcController.delete);
 
 export default inscricaoIcRouter;

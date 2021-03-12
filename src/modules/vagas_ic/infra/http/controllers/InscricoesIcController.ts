@@ -2,6 +2,7 @@ import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import CreateInscricaoIcService from '@modules/vagas_ic/services/CreateInscricaoIcService';
 import ListInscricoesIcService from '@modules/vagas_ic/services/ListInscricoesIcService';
+import DeleteInscricaoIcService from '@modules/vagas_ic/services/DeleteInscricaoIcService';
 
 export default class InscricoesIcController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -23,5 +24,17 @@ export default class InscricoesIcController {
     const inscricoesIC = await listInscricoesIC.execute();
 
     return response.json(inscricoesIC);
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const deleteInscricao = container.resolve(DeleteInscricaoIcService);
+
+    await deleteInscricao.execute(id);
+
+    return response
+      .status(200)
+      .json({ message: 'Inscrição cancelada com sucesso' });
   }
 }

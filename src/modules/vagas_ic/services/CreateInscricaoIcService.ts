@@ -4,6 +4,7 @@ import INotificacoesRepository from '@modules/notificacoes/repositories/INotific
 import { format } from 'date-fns';
 import IUsuariosRepository from '@modules/usuarios/repositories/IUsuariosRepository';
 import IAlunosRepository from '@modules/alunos/repositories/IAlunosRepository';
+import AppError from '@shared/errors/AppError';
 import ICreateInscricaoIcDTO from '../dtos/ICreateInscricaoIcDTO';
 import InscricaoIC from '../infra/typeorm/entities/InscricaoIC';
 import IInscricoesIcRepository from '../repositories/IInscricoesIcRepository';
@@ -14,12 +15,6 @@ class CreateInscricaoIcService {
   constructor(
     @inject('InscricoesIcRepository')
     private inscricoesIcRepository: IInscricoesIcRepository,
-    @inject('UsuariosRepository')
-    private usuariosRepository: IUsuariosRepository,
-    @inject('AlunosRepository')
-    private alunosRepository: IAlunosRepository,
-    @inject('VagasIcRepository')
-    private vagasIcRepository: IVagasIcRepository,
     @inject('NotificacoesRepository')
     private notificacoesRepository: INotificacoesRepository,
   ) {}
@@ -28,6 +23,14 @@ class CreateInscricaoIcService {
     id_vaga,
     id_aluno,
   }: ICreateInscricaoIcDTO): Promise<InscricaoIC> {
+    const existeInscricao = await this.inscricoesIcRepository.encontrarInscricaoExistente(
+      { id_aluno, id_vaga },
+    );
+
+    console.log(existeInscricao);
+
+    if (existeInscricao) throw new AppError('Inscrição já realizada.');
+
     const inscricaoIC = await this.inscricoesIcRepository.create({
       id_vaga,
       id_aluno,
