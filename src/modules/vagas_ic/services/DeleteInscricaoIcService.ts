@@ -13,8 +13,7 @@ class DeleteInscricaoIcService {
   public async execute(id: string): Promise<void> {
     const inscricao = await this.inscricoesIcRepository.encontrarPeloId(id);
 
-    if(!inscricao)
-      throw new AppError('Inscrição inexistente.')
+    if (!inscricao) throw new AppError('Inscrição inexistente.');
 
     await this.inscricoesIcRepository.delete(id);
   }
