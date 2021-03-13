@@ -123,6 +123,10 @@ class VagasIcRepository implements IVagasIcRepository {
 
     return this.ormRepository.save(vagaAtualizada);
   }
+
+  public async ordenarVagasPorRecomendacao(vagas: VagaIc[]): Promise<VagaIc[]> {
+    return vagas.sort((a, b) => (a.nome > b.nome ? 1 : -1));
+  }
 }
 
 export default VagasIcRepository;

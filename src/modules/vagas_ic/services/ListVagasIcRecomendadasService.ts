@@ -42,7 +42,11 @@ class ListVagasIcRecomendadasService {
       return !inscricoes.map(inscricao => inscricao.id_vaga).includes(vaga.id);
     });
 
-    return vagasRecomendadas;
+    const vagasRecomendadasOrdenadas = await this.vagasIcRepository.ordenarVagasPorRecomendacao(
+      vagasRecomendadas,
+    );
+
+    return vagasRecomendadasOrdenadas;
   }
 }
 
