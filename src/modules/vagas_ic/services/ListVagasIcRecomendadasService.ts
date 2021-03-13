@@ -26,18 +26,21 @@ class ListVagasIcRecomendadasService {
       throw new AppError('Aluno não encontrado');
     }
 
-    const inscricoes =  await this.inscricoesIcRepository.listarVagasInscritasPeloAluno(aluno.id);
+    const inscricoes = await this.inscricoesIcRepository.listarVagasInscritasPeloAluno(
+      aluno.id,
+    );
 
-    const vagasTotais = await this.vagasIcRepository.encontrarVagasRecomendadasPorAluno({
-      id_curso: aluno.id_curso,
-    });
+    const vagasTotais = await this.vagasIcRepository.encontrarVagasRecomendadasPorAluno(
+      {
+        id_curso: aluno.id_curso,
+      },
+    );
 
-    const vagasRecomendadas = vagasTotais.filter((vaga) => {
+    const vagasRecomendadas = vagasTotais.filter(vaga => {
       return !inscricoes.map(inscricao => inscricao.id_vaga).includes(vaga.id);
     });
 
     return vagasRecomendadas;
-
   }
 }
 

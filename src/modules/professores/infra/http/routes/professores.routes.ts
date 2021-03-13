@@ -1,10 +1,13 @@
+import ensureAuthenticated from '@modules/usuarios/infra/http/middlewares/EnsureAuthenticated';
 import { celebrate, Joi, Segments } from 'celebrate';
 import { Router } from 'express';
 import ProfessoresController from '../controllers/ProfessoresController';
+import ProfessoresUsuariosController from '../controllers/ProfessoresUsuariosController';
 
 const professorRouter = Router();
 
 const professoresController = new ProfessoresController();
+const professoresUsuariosController = new ProfessoresUsuariosController();
 
 professorRouter.post(
   '/',
@@ -22,6 +25,12 @@ professorRouter.post(
     },
   }),
   professoresController.create,
+);
+
+professorRouter.get(
+  '/:id_usuario',
+  ensureAuthenticated,
+  professoresUsuariosController.index,
 );
 
 export default professorRouter;

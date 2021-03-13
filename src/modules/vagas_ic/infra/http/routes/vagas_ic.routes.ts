@@ -2,6 +2,7 @@ import ensureAuthenticated from '@modules/usuarios/infra/http/middlewares/Ensure
 import { celebrate, Joi, Segments } from 'celebrate';
 import { Router } from 'express';
 import VagasIcController from '../controllers/VagasIcController';
+import VagasIcCriadasPorProfessorController from '../controllers/VagasIcCriadasPorProfessorController';
 import VagasIcPorAlunoController from '../controllers/VagasIcPorAlunoController';
 
 const vagaIcRouter = Router();
@@ -9,6 +10,7 @@ vagaIcRouter.use(ensureAuthenticated);
 
 const vagasIcController = new VagasIcController();
 const vagasIcPorAlunoController = new VagasIcPorAlunoController();
+const vagasIcCriadasPorProfessorController = new VagasIcCriadasPorProfessorController();
 
 vagaIcRouter.post(
   '/',
@@ -31,6 +33,8 @@ vagaIcRouter.post(
 );
 vagaIcRouter.get('/', vagasIcController.index);
 
-vagaIcRouter.get('/me', vagasIcPorAlunoController.index);
+vagaIcRouter.get('/aluno/me', vagasIcPorAlunoController.index);
+
+vagaIcRouter.get('/professor/me', vagasIcCriadasPorProfessorController.index);
 
 export default vagaIcRouter;

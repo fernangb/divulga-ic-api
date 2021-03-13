@@ -4,6 +4,7 @@ import IVagasIcRepository from '@modules/vagas_ic/repositories/IVagasIcRepositor
 import ICreateVagaIcDTO from '@modules/vagas_ic/dtos/ICreateVagaIcDTO';
 import IVerificarVagasExistentesDTO from '@modules/vagas_ic/dtos/IVerificarVagasExistentesDTO';
 import IListVagasIcPorAlunoDTO from '@modules/vagas_ic/dtos/IListVagasPorAlunoDTO';
+import IListVagasIcCriadasPorProfessorDTO from '@modules/vagas_ic/dtos/IListVagasIcCriadasPorProfessorDTO';
 
 class VagasIcRepository implements IVagasIcRepository {
   private ormRepository: Repository<VagaIc>;
@@ -11,7 +12,6 @@ class VagasIcRepository implements IVagasIcRepository {
   constructor() {
     this.ormRepository = getRepository(VagaIc);
   }
-
 
   public async create({
     nome,
@@ -94,6 +94,14 @@ class VagasIcRepository implements IVagasIcRepository {
     id_curso,
   }: IListVagasIcPorAlunoDTO): Promise<VagaIc[]> {
     return this.ormRepository.find({ where: { id_curso, es_aberta: true } });
+  }
+
+  public async listarVagasCriadasPeloProfessor({
+    id_professor,
+  }: IListVagasIcCriadasPorProfessorDTO): Promise<VagaIc[]> {
+    return this.ormRepository.find({
+      where: { id_professor, es_aberta: true },
+    });
   }
 }
 

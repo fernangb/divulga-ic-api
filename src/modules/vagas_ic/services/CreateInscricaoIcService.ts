@@ -1,14 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { inject, injectable } from 'tsyringe';
 import INotificacoesRepository from '@modules/notificacoes/repositories/INotificaoesRepository';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { format } from 'date-fns';
-import IUsuariosRepository from '@modules/usuarios/repositories/IUsuariosRepository';
-import IAlunosRepository from '@modules/alunos/repositories/IAlunosRepository';
 import AppError from '@shared/errors/AppError';
 import ICreateInscricaoIcDTO from '../dtos/ICreateInscricaoIcDTO';
 import InscricaoIC from '../infra/typeorm/entities/InscricaoIC';
 import IInscricoesIcRepository from '../repositories/IInscricoesIcRepository';
-import IVagasIcRepository from '../repositories/IVagasIcRepository';
 
 @injectable()
 class CreateInscricaoIcService {
@@ -26,8 +23,6 @@ class CreateInscricaoIcService {
     const existeInscricao = await this.inscricoesIcRepository.encontrarInscricaoExistente(
       { id_aluno, id_vaga },
     );
-
-    console.log(existeInscricao);
 
     if (existeInscricao) throw new AppError('Inscrição já realizada.');
 
