@@ -5,7 +5,7 @@ import InscricaoIC from '../infra/typeorm/entities/InscricaoIC';
 import IInscricoesIcRepository from '../repositories/IInscricoesIcRepository';
 
 interface IRequest {
-  id_aluno: string;
+  id_usuario: string;
 }
 
 @injectable()
@@ -17,8 +17,10 @@ class ListInscricoesRealizadasPeloAlunoService {
     private inscricoesIcRepository: IInscricoesIcRepository,
   ) {}
 
-  public async execute({ id_aluno }: IRequest): Promise<InscricaoIC[]> {
-    const aluno = await this.alunosRepository.encontrarPeloId(id_aluno);
+  public async execute({ id_usuario }: IRequest): Promise<InscricaoIC[]> {
+    const aluno = await this.alunosRepository.encontrarPeloIdUsuario(
+      id_usuario,
+    );
     if (!aluno) {
       throw new AppError('Aluno não encontrado');
     }

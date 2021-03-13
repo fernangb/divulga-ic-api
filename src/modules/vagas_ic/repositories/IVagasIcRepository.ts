@@ -23,10 +23,10 @@ export default interface IVagasIcRepository {
     id_professor,
   }: IListVagasIcCriadasPorProfessorDTO): Promise<VagaIc[]>;
 
-  // aumentarNumeroInscritos(id: string): number;
-  // diminuirNumeroInscritos(id: string): number;
+  aumentarNumeroInscritos(vaga: VagaIc): Promise<VagaIc>;
+  diminuirNumeroInscritos(vaga: VagaIc): Promise<VagaIc>;
 
   create(data: ICreateVagaIcDTO): Promise<VagaIc>;
-  // save(usuario: VagaIc): Promise<VagaIc>;
+  save(vaga: VagaIc): Promise<VagaIc>;
   index(): Promise<VagaIc[]>;
 }

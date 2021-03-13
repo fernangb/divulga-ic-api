@@ -47,6 +47,10 @@ class VagasIcRepository implements IVagasIcRepository {
     return this.ormRepository.find({ where: { es_aberta: true } });
   }
 
+  public async save(vaga: VagaIc): Promise<VagaIc> {
+    return this.ormRepository.save(vaga);
+  }
+
   public async encontrarVagaExistente({
     nome,
     id_curso,
@@ -70,8 +74,8 @@ class VagasIcRepository implements IVagasIcRepository {
     return this.ormRepository.find({ where: { nome, es_aberta: true } });
   }
 
-  public async encontrarPeloId(id_vaga: string): Promise<VagaIc | undefined> {
-    return this.ormRepository.findOne({ where: id_vaga });
+  public async encontrarPeloId(id: string): Promise<VagaIc | undefined> {
+    return this.ormRepository.findOne(id);
   }
 
   public async encontrarPeloCurso(id_curso: string): Promise<VagaIc[]> {
@@ -102,6 +106,22 @@ class VagasIcRepository implements IVagasIcRepository {
     return this.ormRepository.find({
       where: { id_professor, es_aberta: true },
     });
+  }
+
+  public async aumentarNumeroInscritos(vaga: VagaIc): Promise<VagaIc> {
+    const nr_inscritos_atualizado = vaga.nr_inscritos + 1;
+
+    const vagaAtualizada = { ...vaga, nr_inscritos: nr_inscritos_atualizado };
+
+    return this.ormRepository.save(vagaAtualizada);
+  }
+
+  public async diminuirNumeroInscritos(vaga: VagaIc): Promise<VagaIc> {
+    const nr_inscritos_atualizado = vaga.nr_inscritos - 1;
+
+    const vagaAtualizada = { ...vaga, nr_inscritos: nr_inscritos_atualizado };
+
+    return this.ormRepository.save(vagaAtualizada);
   }
 }
 
