@@ -1,8 +1,9 @@
 import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import CreateNivelService from '@modules/usuarios/services/CreateNivelService';
+import { classToClass } from 'class-transformer';
 
-export default class AreasController {
+export default class NiveisController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { nome } = request.body;
 
@@ -12,6 +13,6 @@ export default class AreasController {
       nome,
     });
 
-    return response.json(nivel);
+    return response.json(classToClass(nivel));
   }
 }

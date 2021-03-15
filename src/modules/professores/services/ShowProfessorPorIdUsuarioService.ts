@@ -4,7 +4,7 @@ import Professor from '../infra/typeorm/entities/Professor';
 import IProfessoresRepository from '../repositories/IProfessoresRepository';
 
 @injectable()
-class ListCursosService {
+class ShowProfessorPorIdUsuarioService {
   constructor(
     @inject('ProfessoresRepository')
     private professoresRepository: IProfessoresRepository,
@@ -22,4 +22,4 @@ class ListCursosService {
   }
 }
 
-export default ListCursosService;
+export default ShowProfessorPorIdUsuarioService;

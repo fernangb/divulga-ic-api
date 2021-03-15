@@ -2,6 +2,7 @@ import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import CreateCursoService from '@modules/cursos/services/CreateCursoService';
 import ListCursosService from '@modules/cursos/services/ListCursosService';
+import { classToClass } from 'class-transformer';
 
 export default class CursosController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -25,7 +26,7 @@ export default class CursosController {
       nr_periodos,
     });
 
-    return response.json(curso);
+    return response.json(classToClass(curso));
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
@@ -33,6 +34,6 @@ export default class CursosController {
 
     const cursos = await listCursos.execute();
 
-    return response.json(cursos);
+    return response.json(classToClass(cursos));
   }
 }

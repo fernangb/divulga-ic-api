@@ -32,7 +32,7 @@ class Usuario {
   @Column()
   email: string;
 
-  @Column({ select: false })
+  @Column()
   @Exclude()
   senha: string;
 

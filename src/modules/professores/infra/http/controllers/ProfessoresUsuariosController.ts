@@ -1,6 +1,7 @@
 import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import ShowProfessorPorIdUsuarioService from '@modules/professores/services/ShowProfessorPorIdUsuarioService';
+import { classToClass } from 'class-transformer';
 
 export default class ProfessoresUsuariosController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -8,8 +9,8 @@ export default class ProfessoresUsuariosController {
 
     const showProfessor = container.resolve(ShowProfessorPorIdUsuarioService);
 
-    const aluno = await showProfessor.execute(id_usuario);
+    const professor = await showProfessor.execute(id_usuario);
 
-    return response.json(aluno);
+    return response.json(classToClass(professor));
   }
 }

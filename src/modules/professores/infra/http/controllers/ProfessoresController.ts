@@ -2,6 +2,7 @@ import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import CreateProfessorService from '@modules/professores/services/CreateProfessorService';
 import CreateUsuarioService from '@modules/usuarios/services/CreateUsuarioService';
+import { classToClass } from 'class-transformer';
 
 export default class ProfessoresController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -34,6 +35,6 @@ export default class ProfessoresController {
       siape,
     });
 
-    return response.json(professor);
+    return response.json(classToClass(professor));
   }
 }

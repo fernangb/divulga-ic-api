@@ -2,6 +2,7 @@ import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import CreatePredioService from '@modules/predios/services/CreatePredioService';
 import ListPrediosService from '@modules/predios/services/ListPrediosService';
+import { classToClass } from 'class-transformer';
 
 export default class PrediosController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -16,7 +17,7 @@ export default class PrediosController {
       id_campus,
     });
 
-    return response.json(predio);
+    return response.json(classToClass(predio));
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
@@ -24,6 +25,6 @@ export default class PrediosController {
 
     const predios = await listPredios.execute();
 
-    return response.json(predios);
+    return response.json(classToClass(predios));
   }
 }

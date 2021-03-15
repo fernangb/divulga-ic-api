@@ -1,6 +1,7 @@
 import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import CreateCampusService from '@modules/campus/services/CreateCampusService';
+import { classToClass } from 'class-transformer';
 
 export default class CampussController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -14,6 +15,6 @@ export default class CampussController {
       nome_comum,
     });
 
-    return response.json(campus);
+    return response.json(classToClass(campus));
   }
 }

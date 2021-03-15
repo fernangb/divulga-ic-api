@@ -2,6 +2,7 @@ import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import CreateAlunoService from '@modules/alunos/services/CreateAlunoService';
 import CreateUsuarioService from '@modules/usuarios/services/CreateUsuarioService';
+import { classToClass } from 'class-transformer';
 
 export default class AlunosController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -34,6 +35,6 @@ export default class AlunosController {
       id_usuario: usuario?.id,
     });
 
-    return response.json(aluno);
+    return response.json(classToClass(aluno));
   }
 }
