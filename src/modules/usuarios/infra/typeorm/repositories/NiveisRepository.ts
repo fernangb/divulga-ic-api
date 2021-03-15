@@ -10,6 +10,12 @@ class NiveisRepository implements INiveisRepository {
     this.ormRepository = getRepository(Nivel);
   }
 
+  public async encontrarPeloId(id: string): Promise<Nivel | undefined> {
+    const nivel = await this.ormRepository.findOne(id);
+
+    return nivel;
+  }
+
   public async encontrarPeloNome(nome: string): Promise<Nivel | undefined> {
     const nivelEncontrado = await this.ormRepository.findOne({
       where: {

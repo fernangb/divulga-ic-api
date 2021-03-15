@@ -5,6 +5,7 @@ interface INivelsRepository {
   create(data: ICreateNivelDTO): Promise<Nivel>;
 
   encontrarPeloNome(nome: string): Promise<Nivel | undefined>;
+  encontrarPeloId(id: string): Promise<Nivel | undefined>;
 }
 
 export default INivelsRepository;

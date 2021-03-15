@@ -9,4 +9,5 @@ export default interface IInscricoesIcRepository {
   listarVagasInscritasPeloAluno(id_aluno: string): Promise<InscricaoIc[]>;
   encontrarInscricaoExistente(data: ICreateInscricaoIcDTO): Promise<boolean>;
   encontrarPeloId(id: string): Promise<InscricaoIc | undefined>;
+  listarAlunosInscritosPorVagaIc(id_vaga: string): Promise<InscricaoIc[]>;
 }

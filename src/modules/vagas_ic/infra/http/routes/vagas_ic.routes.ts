@@ -1,6 +1,7 @@
 import ensureAuthenticated from '@modules/usuarios/infra/http/middlewares/EnsureAuthenticated';
 import { celebrate, Joi, Segments } from 'celebrate';
 import { Router } from 'express';
+import AlunosInscritosPorVagaIcController from '../controllers/AlunosInscritosPorVagaIcController';
 import VagasIcController from '../controllers/VagasIcController';
 import VagasIcCriadasPorProfessorController from '../controllers/VagasIcCriadasPorProfessorController';
 import VagasIcPorAlunoController from '../controllers/VagasIcPorAlunoController';

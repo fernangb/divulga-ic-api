@@ -10,29 +10,6 @@ class InscricoesIcRepository implements IInscricoesIcRepository {
     this.ormRepository = getRepository(InscricaoIc);
   }
 
-  public async encontrarPeloId(id: string): Promise<InscricaoIc | undefined> {
-    const inscricaoEncontrada = await this.ormRepository.findOne(id);
-
-    return inscricaoEncontrada;
-  }
-
-  public async encontrarInscricaoExistente({
-    id_aluno,
-    id_vaga,
-  }: ICreateInscricaoIcDTO): Promise<boolean> {
-    const inscricao = await this.ormRepository.find({
-      where: { id_aluno, id_vaga, es_ativa: true },
-    });
-
-    if (inscricao.length) return true;
-
-    return false;
-  }
-
-  listarVagasInscritasPeloAluno(id_aluno: string): Promise<InscricaoIc[]> {
-    return this.ormRepository.find({ where: { id_aluno, es_ativa: true } });
-  }
-
   public async create({
     id_vaga,
     id_aluno,
@@ -53,6 +30,37 @@ class InscricoesIcRepository implements IInscricoesIcRepository {
 
   public async delete(id: string): Promise<void> {
     await this.ormRepository.delete(id);
+  }
+
+  public async encontrarPeloId(id: string): Promise<InscricaoIc | undefined> {
+    const inscricaoEncontrada = await this.ormRepository.findOne(id);
+
+    return inscricaoEncontrada;
+  }
+
+  public async encontrarInscricaoExistente({
+    id_aluno,
+    id_vaga,
+  }: ICreateInscricaoIcDTO): Promise<boolean> {
+    const inscricao = await this.ormRepository.find({
+      where: { id_aluno, id_vaga, es_ativa: true },
+    });
+
+    if (inscricao.length) return true;
+
+    return false;
+  }
+
+  public async listarVagasInscritasPeloAluno(
+    id_aluno: string,
+  ): Promise<InscricaoIc[]> {
+    return this.ormRepository.find({ where: { id_aluno, es_ativa: true } });
+  }
+
+  public async listarAlunosInscritosPorVagaIc(
+    id_vaga: string,
+  ): Promise<InscricaoIc[]> {
+    return this.ormRepository.find({ where: { id_vaga, es_ativa: true } });
   }
 }
 
