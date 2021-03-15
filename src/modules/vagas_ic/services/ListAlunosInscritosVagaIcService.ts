@@ -1,5 +1,4 @@
 import InscricaoIc from '@modules/vagas_ic/infra/typeorm/entities/InscricaoIC';
-import IAlunosRepository from '@modules/alunos/repositories/IAlunosRepository';
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import IInscricoesIcRepository from '../repositories/IInscricoesIcRepository';

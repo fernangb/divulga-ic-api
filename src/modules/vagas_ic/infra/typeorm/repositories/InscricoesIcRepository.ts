@@ -1,4 +1,5 @@
-import { getRepository, Repository } from 'typeorm';
+import VagaIc from '@modules/vagas_ic/infra/typeorm/entities/VagaIC';
+import { getRepository, In, Repository } from 'typeorm';
 import InscricaoIc from '@modules/vagas_ic/infra/typeorm/entities/InscricaoIC';
 import IInscricoesIcRepository from '@modules/vagas_ic/repositories/IInscricoesIcRepository';
 import ICreateInscricaoIcDTO from '@modules/vagas_ic/dtos/ICreateInscricaoIcDTO';
@@ -61,6 +62,14 @@ class InscricoesIcRepository implements IInscricoesIcRepository {
     id_vaga: string,
   ): Promise<InscricaoIc[]> {
     return this.ormRepository.find({ where: { id_vaga, es_ativa: true } });
+  }
+
+  public async listarAlunosInscritosPorProfessor(
+    id_vagas: string[],
+  ): Promise<InscricaoIc[]> {
+    return this.ormRepository.find({
+      where: { id_vaga: In(id_vagas), es_ativa: true },
+    });
   }
 }
 
