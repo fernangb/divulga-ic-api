@@ -84,17 +84,17 @@ export class CriarTabelaVagaIC1614035690564 implements MigrationInterface {
           },
           {
             name: 'dt_criacao',
-            type: 'timestamp',
+            type: 'timestamp with time zone',
             default: 'now()',
           },
           {
             name: 'dt_fechamento',
-            type: 'timestamp',
+            type: 'timestamp with time zone',
             isNullable: true,
           },
           {
             name: 'dt_atualizacao',
-            type: 'timestamp',
+             type: 'timestamp with time zone',
             default: 'now()',
           },
         ],

@@ -2,7 +2,6 @@ import {
   MigrationInterface,
   QueryRunner,
   Table,
-  TableForeignKey,
 } from 'typeorm';
 
 export class CriarTabelaPredio1607384256669 implements MigrationInterface {
@@ -34,40 +33,22 @@ export class CriarTabelaPredio1607384256669 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'id_campus',
-            type: 'uuid',
-            isNullable: true,
-          },
-          {
             name: 'dt_criacao',
-            type: 'timestamp',
+            type: 'timestamp with time zone',
             default: 'now()',
           },
           {
             name: 'dt_atualizacao',
-            type: 'timestamp',
+            type: 'timestamp with time zone',
             default: 'now()',
           },
         ],
       }),
     );
 
-    await queryRunner.createForeignKey(
-      'predio',
-      new TableForeignKey({
-        name: 'CampusPredio',
-        columnNames: ['id_campus'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'campus',
-        onDelete: 'SET NULL',
-        onUpdate: 'CASCADE',
-      }),
-    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('predio', 'CampusPredio');
-
     await queryRunner.dropTable('predio');
   }
 }

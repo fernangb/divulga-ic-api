@@ -6,7 +6,7 @@ import { classToClass } from 'class-transformer';
 
 export default class PrediosController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { nome, nome_comum, endereco, id_campus } = request.body;
+    const { nome, nome_comum, endereco } = request.body;
 
     const createPredio = container.resolve(CreatePredioService);
 
@@ -14,7 +14,6 @@ export default class PrediosController {
       nome,
       nome_comum,
       endereco,
-      id_campus,
     });
 
     return response.json(classToClass(predio));

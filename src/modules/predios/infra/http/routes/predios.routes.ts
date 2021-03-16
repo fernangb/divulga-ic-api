@@ -13,7 +13,6 @@ predioRouter.post(
       nome: Joi.string().required(),
       nome_comum: Joi.string().required(),
       endereco: Joi.string().required(),
-      id_campus: Joi.string().uuid().required(),
     },
   }),
   prediosController.create,

@@ -1,5 +1,7 @@
+/* eslint-disable no-param-reassign */
 import IProfessoresRepository from '@modules/professores/repositories/IProfessoresRepository';
 import InscricaoIc from '@modules/vagas_ic/infra/typeorm/entities/InscricaoIC';
+import IDateProvider from '@shared/container/providers/DateProvider/models/IDateProvider';
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import IInscricoesIcRepository from '../repositories/IInscricoesIcRepository';
@@ -18,6 +20,8 @@ class ListAlunosInscritosPorProfessorService {
     private professoresRepository: IProfessoresRepository,
     @inject('VagasIcRepository')
     private vagasIcRepository: IVagasIcRepository,
+    @inject('DateProvider')
+    private dateProvider: IDateProvider,
   ) {}
 
   public async execute({ id }: IRequest): Promise<InscricaoIc[]> {
@@ -37,7 +41,21 @@ class ListAlunosInscritosPorProfessorService {
       id_vagas,
     );
 
-    return inscricoes;
+    // const vagaAtualizada = { ...vaga, nr_inscritos: nr_inscritos_atualizado };
+
+    const inscricoesComDataAtualizada = inscricoes.map(inscricao => {
+      const date = inscricao.dt_criacao;
+      const dataFormatada = this.dateProvider.converterFormatoISO({
+        date,
+      });
+
+      return {
+        ...inscricao,
+        dt_criacao: dataFormatada,
+      };
+    });
+
+    return inscricoesComDataAtualizada;
   }
 }
 

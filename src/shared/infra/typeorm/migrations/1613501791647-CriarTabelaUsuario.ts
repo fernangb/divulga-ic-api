@@ -47,12 +47,12 @@ export default class CriarTabelaUsuario1613501791647
           },
           {
             name: 'dt_criacao',
-            type: 'timestamp',
+            type: 'timestamp with time zone',
             default: 'now()',
           },
           {
             name: 'dt_atualizacao',
-            type: 'timestamp',
+            type: 'timestamp with time zone',
             default: 'now()',
           },
         ],

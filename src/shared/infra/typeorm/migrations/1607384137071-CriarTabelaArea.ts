@@ -20,12 +20,12 @@ export class CriarTabelaArea1607384137071 implements MigrationInterface {
           },
           {
             name: 'dt_criacao',
-            type: 'timestamp',
+            type: 'timestamp with time zone',
             default: 'now()',
           },
           {
             name: 'dt_atualizacao',
-            type: 'timestamp',
+            type: 'timestamp with time zone',
             default: 'now()',
           },
         ],

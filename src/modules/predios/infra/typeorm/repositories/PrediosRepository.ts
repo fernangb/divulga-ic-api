@@ -28,13 +28,11 @@ class PrediosRepository implements IPrediosRepository {
     nome,
     nome_comum,
     endereco,
-    id_campus,
   }: ICreatePredioDTO): Promise<Predio> {
     const predio = this.ormRepository.create({
       nome,
       nome_comum,
       endereco,
-      id_campus,
     });
 
     await this.ormRepository.save(predio);

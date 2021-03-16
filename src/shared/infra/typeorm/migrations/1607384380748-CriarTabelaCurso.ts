@@ -50,12 +50,12 @@ export class CriarTabelaCurso1607384380748 implements MigrationInterface {
           },
           {
             name: 'dt_criacao',
-            type: 'timestamp',
+            type: 'timestamp with time zone',
             default: 'now()',
           },
           {
             name: 'dt_atualizacao',
-            type: 'timestamp',
+            type: 'timestamp with time zone',
             default: 'now()',
           },
         ],
@@ -76,8 +76,8 @@ export class CriarTabelaCurso1607384380748 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('predio', 'PredioCurso');
+    await queryRunner.dropForeignKey('curso', 'PredioCurso');
 
-    await queryRunner.dropTable('predio');
+    await queryRunner.dropTable('curso');
   }
 }

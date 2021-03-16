@@ -7,7 +7,6 @@ interface IRequest {
   nome: string;
   nome_comum: string;
   endereco: string;
-  id_campus: string;
 }
 
 @injectable()
@@ -21,7 +20,6 @@ class CreatePredioService {
     nome,
     nome_comum,
     endereco,
-    id_campus,
   }: IRequest): Promise<Predio> {
     const predioEncontrado = await this.prediosRepository.encontrarPeloNome(
       nome,
@@ -35,7 +33,6 @@ class CreatePredioService {
       nome,
       nome_comum,
       endereco,
-      id_campus,
     });
 
     return predio;

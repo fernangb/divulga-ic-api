@@ -39,12 +39,12 @@ export class CriarTabelaProfessor1613949032862 implements MigrationInterface {
           },
           {
             name: 'dt_criacao',
-            type: 'timestamp',
+            type: 'timestamp with time zone',
             default: 'now()',
           },
           {
             name: 'dt_atualizacao',
-            type: 'timestamp',
+            type: 'timestamp with time zone',
             default: 'now()',
           },
         ],
