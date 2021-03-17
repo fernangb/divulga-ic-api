@@ -1,5 +1,4 @@
 import Area from '@modules/areas/infra/typeorm/entities/Area';
-import IDateProvider from '@shared/container/providers/DateProvider/models/IDateProvider';
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import IAreasRepository from '../repositories/IAreasRepository';

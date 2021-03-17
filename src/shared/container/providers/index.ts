@@ -5,8 +5,6 @@ import IMailProvider from './MailProvider/models/IMailProvider';
 import EtherealMailProvider from './MailProvider/implementations/EtherealMailProvider';
 import IMailTemplateProvider from './MailTemplateProvider/models/IMailTemplateProvider';
 import HandlebarsMailTemplateProvider from './MailTemplateProvider/implementations/HandlebarsMailTemplateProvider';
-import IDateProvider from './DateProvider/models/IDateProvider';
-import DateFnsDateProvider from './DateProvider/implementations/DateFnsDateProvider';
 
 container.registerSingleton<IStorageProvider>(
   'StorageProvider',
@@ -21,9 +19,4 @@ container.registerSingleton<IMailTemplateProvider>(
 container.registerInstance<IMailProvider>(
   'MailProvider',
   container.resolve(EtherealMailProvider),
-);
-
-container.registerInstance<IDateProvider>(
-  'DateProvider',
-  container.resolve(DateFnsDateProvider),
 );
