@@ -19,7 +19,7 @@ usuarioRouter.post(
       email: Joi.string().email().required(),
       senha: Joi.string().required(),
       nome: Joi.string().required(),
-      id_nivel: Joi.string().uuid().required(),
+      nivel: Joi.string().required(),
     },
   }),
   usuariosController.create,

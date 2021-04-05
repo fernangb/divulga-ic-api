@@ -11,6 +11,16 @@ class CursosRepository implements ICursosRepository {
     this.ormRepository = getRepository(Curso);
   }
 
+  public async encontrarPeloNome(nome: string): Promise<Curso | undefined> {
+    const cursoEncontrado = await this.ormRepository.findOne({
+      where: {
+        nome,
+      },
+    });
+
+    return cursoEncontrado;
+  }
+
   public async encontrarPeloId(id: string): Promise<Curso | undefined> {
     const cursoEncontrado = await this.ormRepository.findOne(id);
 

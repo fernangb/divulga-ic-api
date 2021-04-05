@@ -1,3 +1,4 @@
+import  INiveisRepository  from '@modules/usuarios/repositories/INiveisRepository';
 import Usuario from '@modules/usuarios/infra/typeorm/entities/Usuario';
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
@@ -9,7 +10,7 @@ interface IRequest {
   sobrenome: string;
   email: string;
   senha: string;
-  id_nivel: string;
+  nivel: string;
 }
 
 @injectable()
@@ -17,6 +18,8 @@ class CreateUsuarioService {
   constructor(
     @inject('UsuariosRepository')
     private usuariosRepository: IUsuariosRepository,
+    @inject('NiveisRepository')
+    private niveisRepository: INiveisRepository,
 
     @inject('HashProvider')
     private hashProvider: IHashProvider,
@@ -25,7 +28,7 @@ class CreateUsuarioService {
   public async execute({
     email,
     senha,
-    id_nivel,
+    nivel,
     nome,
     sobrenome,
   }: IRequest): Promise<Usuario> {
@@ -37,6 +40,12 @@ class CreateUsuarioService {
       throw new AppError('Email já cadastrado.');
     }
 
+    const nivelUsuario = await this.niveisRepository.encontrarPeloNome(nivel);
+
+    if(!nivelUsuario){
+      throw new AppError('Nível inválido.')
+    }
+
     const hashedPassword = await this.hashProvider.gerarHash(senha);
 
     const user = await this.usuariosRepository.create({
@@ -44,7 +53,7 @@ class CreateUsuarioService {
       sobrenome,
       email,
       senha: hashedPassword,
-      id_nivel,
+      id_nivel: nivelUsuario.id,
     });
 
     return user;

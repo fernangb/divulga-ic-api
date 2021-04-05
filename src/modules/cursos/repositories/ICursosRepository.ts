@@ -5,6 +5,7 @@ import IListCursosDTO from '../dtos/IListCursosDTO';
 interface ICursosRepository {
   create(data: ICreateCursoDTO): Promise<Curso>;
   encontrarPeloId(id: string): Promise<Curso | undefined>;
+  encontrarPeloNome(id: string): Promise<Curso | undefined>;
   encontrarCursoExistente(
     nome: string,
     tipo: string,

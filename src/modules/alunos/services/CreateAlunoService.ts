@@ -1,4 +1,5 @@
 import Aluno from '@modules/alunos/infra/typeorm/entities/Aluno';
+import ICursosRepository from '@modules/cursos/repositories/ICursosRepository';
 import IUsuariosRepository from '@modules/usuarios/repositories/IUsuariosRepository';
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
@@ -7,7 +8,7 @@ import IAlunosRepository from '../repositories/IAlunosRepository';
 interface IRequest {
   dre: string;
   periodo: number;
-  id_curso: string;
+  curso: string;
   id_usuario: string;
 }
 
@@ -19,12 +20,15 @@ class CreateAlunoService {
 
     @inject('UsuariosRepository')
     private usuariosRepository: IUsuariosRepository,
+
+    @inject('CursosRepository')
+    private cursosRepository: ICursosRepository,
   ) {}
 
   public async execute({
     dre,
     periodo,
-    id_curso,
+    curso,
     id_usuario,
   }: IRequest): Promise<Aluno> {
     if (!id_usuario) {
@@ -49,6 +53,14 @@ class CreateAlunoService {
       throw new AppError('DRE inválido.');
     }
 
+    const cursoAluno = await this.cursosRepository.encontrarPeloNome(curso);
+
+    if (!cursoAluno) {
+      await this.usuariosRepository.delete(id_usuario);
+
+      throw new AppError('Curso inválido.');
+    }
+
     const periodoValido = await this.alunosRepository.validarPeriodo(periodo);
 
     if (!periodoValido) {
@@ -57,10 +69,12 @@ class CreateAlunoService {
       throw new AppError('Período inválido.');
     }
 
+
+
     const aluno = await this.alunosRepository.create({
       periodo,
       dre,
-      id_curso,
+      id_curso: cursoAluno.id,
       id_usuario,
     });
 

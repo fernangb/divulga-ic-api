@@ -9,10 +9,10 @@ export default class AlunosController {
     const {
       dre,
       periodo,
-      id_curso,
+      curso,
       email,
       senha,
-      id_nivel,
+      nivel,
       nome,
       sobrenome,
     } = request.body;
@@ -23,7 +23,7 @@ export default class AlunosController {
     const usuario = await createUsuario.execute({
       email,
       senha,
-      id_nivel,
+      nivel,
       nome,
       sobrenome,
     });
@@ -31,7 +31,7 @@ export default class AlunosController {
     const aluno = await createAluno.execute({
       dre,
       periodo,
-      id_curso,
+      curso,
       id_usuario: usuario?.id,
     });
 
