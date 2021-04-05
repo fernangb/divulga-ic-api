@@ -10,6 +10,7 @@ interface IRequest {
   sobrenome: string;
   email: string;
   senha: string;
+  confirmacao_senha: string;
   nivel: string;
 }
 
@@ -31,6 +32,7 @@ class CreateUsuarioService {
     nivel,
     nome,
     sobrenome,
+    confirmacao_senha
   }: IRequest): Promise<Usuario> {
     const usuarioEncontrado = await this.usuariosRepository.encontrarPeloEmail(
       email,
@@ -43,7 +45,11 @@ class CreateUsuarioService {
     const nivelUsuario = await this.niveisRepository.encontrarPeloNome(nivel);
 
     if(!nivelUsuario){
-      throw new AppError('Nível inválido.')
+      throw new AppError('Nível inválido.');
+    }
+
+    if(senha !== confirmacao_senha){
+      throw new AppError('Confirmação de senha inválida. As senhas não são as mesmas.');
     }
 
     const hashedPassword = await this.hashProvider.gerarHash(senha);

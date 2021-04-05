@@ -18,6 +18,7 @@ usuarioRouter.post(
     [Segments.BODY]: {
       email: Joi.string().email().required(),
       senha: Joi.string().required(),
+      confirmacao_senha: Joi.string().required(),
       nome: Joi.string().required(),
       nivel: Joi.string().required(),
     },

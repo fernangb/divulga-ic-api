@@ -15,7 +15,7 @@ alunoRouter.post(
     [Segments.BODY]: {
       email: Joi.string().email().required(),
       senha: Joi.string().required(),
-      confirmacao_senha: Joi.string().required().valid(Joi.ref('senha')),
+      confirmacao_senha: Joi.string().required(),
       nome: Joi.string().required(),
       sobrenome: Joi.string().required(),
       dre: Joi.string().required(),
