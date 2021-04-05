@@ -7,13 +7,13 @@ import { classToClass } from 'class-transformer';
 export default class ProfessoresController {
   public async create(request: Request, response: Response): Promise<Response> {
     const {
-      id_curso,
-      id_laboratorio,
+      curso,
+      laboratorio,
       email,
       senha,
+      confirmacao_senha,
       nome,
       sobrenome,
-      id_nivel,
       siape,
     } = request.body;
 
@@ -23,14 +23,15 @@ export default class ProfessoresController {
     const usuario = await createUsuario.execute({
       email,
       senha,
-      id_nivel,
+      confirmacao_senha,
+      nivel: 'professor',
       nome,
       sobrenome,
     });
 
     const professor = await createProfessor.execute({
-      id_curso,
-      id_laboratorio,
+      curso,
+      laboratorio,
       id_usuario: usuario?.id,
       siape,
     });

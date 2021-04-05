@@ -12,7 +12,6 @@ export default class AlunosController {
       curso,
       email,
       senha,
-      nivel,
       nome,
       sobrenome,
       confirmacao_senha
@@ -24,7 +23,7 @@ export default class AlunosController {
     const usuario = await createUsuario.execute({
       email,
       senha,
-      nivel,
+      nivel: 'aluno',
       nome,
       sobrenome,
       confirmacao_senha

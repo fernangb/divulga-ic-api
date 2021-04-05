@@ -21,7 +21,6 @@ alunoRouter.post(
       dre: Joi.string().required(),
       periodo: Joi.number().required(),
       curso: Joi.string().required(),
-      nivel: Joi.string().required(),
     },
   }),
   alunosController.create,

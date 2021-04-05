@@ -69,8 +69,6 @@ class CreateAlunoService {
       throw new AppError('Período inválido.');
     }
 
-
-
     const aluno = await this.alunosRepository.create({
       periodo,
       dre,
