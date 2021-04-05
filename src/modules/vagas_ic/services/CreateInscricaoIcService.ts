@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { inject, injectable } from 'tsyringe';
-import INotificacoesRepository from '@modules/notificacoes/repositories/INotificaoesRepository';
 import { format } from 'date-fns';
 import AppError from '@shared/errors/AppError';
 import ICreateInscricaoIcDTO from '../dtos/ICreateInscricaoIcDTO';
@@ -15,8 +14,6 @@ class CreateInscricaoIcService {
     private inscricoesIcRepository: IInscricoesIcRepository,
     @inject('VagasIcRepository')
     private vagasIcRepository: IVagasIcRepository,
-    @inject('NotificacoesRepository')
-    private notificacoesRepository: INotificacoesRepository,
   ) {}
 
   public async execute({
@@ -43,12 +40,6 @@ class CreateInscricaoIcService {
 
     await this.vagasIcRepository.aumentarNumeroInscritos(vagaEncontrada);
 
-    const dataFormatada = format(new Date(), "dd/MM/yyyy 'às' HH:mm");
-
-    await this.notificacoesRepository.create({
-      id_usuario: id_aluno,
-      mensagem: `${id_aluno} se inscreveu na vaga ${id_vaga} no dia ${dataFormatada} `,
-    });
     return inscricaoIC;
   }
 }
