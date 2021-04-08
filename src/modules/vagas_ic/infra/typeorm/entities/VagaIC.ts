@@ -6,39 +6,39 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
-  OneToMany,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import Professor from '@modules/professores/infra/typeorm/entities/Professor';
 import Laboratorio from '@modules/laboratorios/infra/typeorm/entities/Laboratorio';
-import CursosVagasIC from './CursosVagasIC';
-import AreasVagasIC from './AreasVagasIC';
 import Area from '@modules/areas/infra/typeorm/entities/Area';
+import Curso from '@modules/cursos/infra/typeorm/entities/Curso';
 
 @Entity('vaga_ic')
 class VagaIC {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @OneToMany(() => CursosVagasIC, cursosVagas => cursosVagas.curso)
-  @JoinColumn({ name: 'cursos_vagas' })
-  cursosVagas: CursosVagasIC[];
+  @ManyToMany(() => Area, {cascade: true, eager: true})
+  @JoinTable()
+  areas: Area[];
 
-  @OneToMany(() => AreasVagasIC, areasVagas => areasVagas.area, {eager: true})
-  @JoinColumn({ name: 'area' })
-  areasVagas: AreasVagasIC[];
+  @ManyToMany(() => Curso, {cascade: true, eager: true})
+  @JoinTable()
+  cursos: Curso[];
 
   @Column()
-  id_professor: string;
+  professorId: string;
 
   @ManyToOne(() => Professor, produto => produto.id, { eager: true })
-  @JoinColumn({ name: 'id_professor' })
+  @JoinColumn({ name: 'professorId' })
   professor: Professor;
 
   @Column()
-  id_laboratorio: string;
+  laboratorioId: string;
 
   @ManyToOne(() => Laboratorio, laboratorio => laboratorio.nome, { eager: true })
-  @JoinColumn({ name: 'id_laboratorio' })
+  @JoinColumn({ name: 'laboratorioId' })
   laboratorio: Laboratorio;
 
   @Column()
@@ -48,34 +48,34 @@ class VagaIC {
   descricao?: string;
 
   @Column()
-  vl_bolsa: number;
+  vlBolsa: number;
 
   @Column()
-  hr_semana: number;
+  hrSemana: number;
 
   @Column()
-  cr_minimo: number;
+  crMinimo: number;
 
   @Column()
-  periodo_minimo: number;
+  periodoMinimo: number;
 
   @Column()
-  es_aberta: boolean;
+  esAberta: boolean;
 
   @Column()
-  nr_inscritos: number;
+  nrInscritos: number;
 
   @Column()
-  nr_vagas: number;
+  nrVagas: number;
 
   @CreateDateColumn()
-  dt_criacao: Date;
+  dtCriacao: Date;
 
   @CreateDateColumn()
-  dt_fechamento: Date;
+  dtFechamento: Date;
 
   @UpdateDateColumn()
-  dt_atualizacao: Date;
+  dtAtualizacao: Date;
 }
 
 export default VagaIC;

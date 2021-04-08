@@ -13,7 +13,7 @@ laboratoriosRouter.post(
       nome: Joi.string().required(),
       sigla: Joi.string().required(),
       sala: Joi.string().required(),
-      id_predio: Joi.string().uuid().required(),
+      predioId: Joi.string().uuid().required(),
     },
   }),
   laboratoriosController.create,

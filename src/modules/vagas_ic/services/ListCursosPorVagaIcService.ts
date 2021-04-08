@@ -5,7 +5,7 @@ import IVagaIcCursosRepository from '../repositories/ICursosVagasIcRepository';
 import IVagasIcRepository from '../repositories/IVagasIcRepository';
 
 interface IRequest {
-  id_vaga: string;
+  vagaIcId: string;
 }
 
 @injectable()
@@ -17,15 +17,15 @@ class ListCursosPorVagaIcService {
     private vagaIcCursosRepository: IVagaIcCursosRepository,
   ) {}
 
-  public async execute({ id_vaga }: IRequest): Promise<VagaIcCursos[]> {
+  public async execute({ vagaIcId }: IRequest): Promise<VagaIcCursos[]> {
     const vagaIc = await this.vagasIcRepository.encontrarPeloId(
-      id_vaga,
+      vagaIcId,
     );
     if (!vagaIc) {
       throw new AppError('Vaga de IC não encontrada.');
     }
 
-    return this.vagaIcCursosRepository.listarPorVagaIc(id_vaga);
+    return this.vagaIcCursosRepository.listarPorVagaIc(vagaIcId);
   }
 }
 

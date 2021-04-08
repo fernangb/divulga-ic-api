@@ -11,7 +11,7 @@ predioRouter.post(
   celebrate({
     [Segments.BODY]: {
       nome: Joi.string().required(),
-      nome_comum: Joi.string().required(),
+      nomeComum: Joi.string().required(),
       endereco: Joi.string().required(),
     },
   }),

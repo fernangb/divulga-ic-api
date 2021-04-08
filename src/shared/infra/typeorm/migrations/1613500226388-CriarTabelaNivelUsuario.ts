@@ -20,12 +20,12 @@ export default class CriarTabelaNivelUsuario1613500226388
             isNullable: false,
           },
           {
-            name: 'dt_criacao',
+            name: 'dtCriacao',
             type: 'timestamp with time zone',
             default: 'now()',
           },
           {
-            name: 'dt_atualizacao',
+            name: 'dtAtualizacao',
             type: 'timestamp with time zone',
             default: 'now()',
           },

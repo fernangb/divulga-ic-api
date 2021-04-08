@@ -23,27 +23,27 @@ export class CriarTabelaProfessor1613949032862 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'id_curso',
+            name: 'cursoId',
             type: 'uuid',
             isNullable: true,
           },
           {
-            name: 'id_laboratorio',
+            name: 'laboratorioId',
             type: 'uuid',
             isNullable: true,
           },
           {
-            name: 'id_usuario',
+            name: 'usuarioId',
             type: 'uuid',
             isNullable: true,
           },
           {
-            name: 'dt_criacao',
+            name: 'dtCriacao',
             type: 'timestamp with time zone',
             default: 'now()',
           },
           {
-            name: 'dt_atualizacao',
+            name: 'dtAtualizacao',
             type: 'timestamp with time zone',
             default: 'now()',
           },
@@ -55,7 +55,7 @@ export class CriarTabelaProfessor1613949032862 implements MigrationInterface {
       'professor',
       new TableForeignKey({
         name: 'LaboratorioProfessor',
-        columnNames: ['id_laboratorio'],
+        columnNames: ['laboratorioId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'laboratorio',
         onDelete: 'SET NULL',
@@ -67,7 +67,7 @@ export class CriarTabelaProfessor1613949032862 implements MigrationInterface {
       'professor',
       new TableForeignKey({
         name: 'CursoProfessor',
-        columnNames: ['id_curso'],
+        columnNames: ['cursoId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'curso',
         onDelete: 'SET NULL',
@@ -79,7 +79,7 @@ export class CriarTabelaProfessor1613949032862 implements MigrationInterface {
       'professor',
       new TableForeignKey({
         name: 'UsuarioProfessor',
-        columnNames: ['id_usuario'],
+        columnNames: ['usuarioId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'usuario',
         onDelete: 'SET NULL',

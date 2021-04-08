@@ -16,22 +16,26 @@ class VagasIcRepository implements IVagasIcRepository {
   public async create({
     nome,
     descricao,
-    vl_bolsa,
-    hr_semana,
-    cr_minimo,
-    periodo_minimo,
-    id_laboratorio,
-    id_professor,
+    vlBolsa,
+    hrSemana,
+    crMinimo,
+    periodoMinimo,
+    laboratorioId,
+    professorId,
+    areas,
+    cursos,
   }: ICreateVagaIcDTO): Promise<VagaIc> {
     const vagaIc = this.ormRepository.create({
       nome,
       descricao,
-      vl_bolsa,
-      hr_semana,
-      cr_minimo,
-      periodo_minimo,
-      id_laboratorio,
-      id_professor,
+      vlBolsa,
+      hrSemana,
+      crMinimo,
+      periodoMinimo,
+      laboratorioId,
+      professorId,
+      areas,
+      cursos,
     });
 
     await this.ormRepository.save(vagaIc);
@@ -40,7 +44,7 @@ class VagasIcRepository implements IVagasIcRepository {
   }
 
   public async index(): Promise<VagaIc[]> {
-    return this.ormRepository.find({ where: { es_aberta: true } });
+    return this.ormRepository.find({ where: { esAberta: true } });
   }
 
   public async save(vaga: VagaIc): Promise<VagaIc> {
@@ -49,13 +53,13 @@ class VagasIcRepository implements IVagasIcRepository {
 
   public async encontrarVagaExistente({
     nome,
-    id_laboratorio,
+    laboratorioId,
   }: IVerificarVagasExistentesDTO): Promise<boolean> {
     const vagaEncontrada = await this.ormRepository.findOne({
       where: {
         nome,
-        id_laboratorio,
-        es_aberta: true,
+        laboratorioId,
+        esAberta: true,
       },
     });
 
@@ -65,55 +69,55 @@ class VagasIcRepository implements IVagasIcRepository {
   }
 
   public async encontrarPeloNome(nome: string): Promise<VagaIc[]> {
-    return this.ormRepository.find({ where: { nome, es_aberta: true } });
+    return this.ormRepository.find({ where: { nome, esAberta: true } });
   }
 
   public async encontrarPeloId(id: string): Promise<VagaIc | undefined> {
     return this.ormRepository.findOne(id);
   }
 
-  public async encontrarPeloCurso(id_curso: string): Promise<VagaIc[]> {
-    return this.ormRepository.find({ where: { id_curso, es_aberta: true } });
+  public async encontrarPeloCurso(cursoId: string): Promise<VagaIc[]> {
+    return this.ormRepository.find({ where: { cursoId, esAberta: true } });
   }
 
   public async encontrarPeloLaboratorio(
-    id_laboratorio: string,
+    laboratorioId: string,
   ): Promise<VagaIc[]> {
     return this.ormRepository.find({
-      where: { id_laboratorio, es_aberta: true },
+      where: { laboratorioId, esAberta: true },
     });
   }
 
-  public async encontrarPelaArea(id_area: string): Promise<VagaIc[]> {
-    return this.ormRepository.find({ where: { id_area, es_aberta: true } });
+  public async encontrarPelaArea(areaId: string): Promise<VagaIc[]> {
+    return this.ormRepository.find({ where: { areaId, esAberta: true } });
   }
 
   public async encontrarVagasRecomendadasPorAluno({
-    id_curso,
+    cursoId,
   }: IListVagasIcPorAlunoDTO): Promise<VagaIc[]> {
-    return this.ormRepository.find({ where: { id_curso, es_aberta: true } });
+    return this.ormRepository.find({ where: { cursoId, esAberta: true } });
   }
 
   public async listarVagasCriadasPeloProfessor({
-    id_professor,
+    professorId,
   }: IListVagasIcCriadasPorProfessorDTO): Promise<VagaIc[]> {
     return this.ormRepository.find({
-      where: { id_professor, es_aberta: true },
+      where: { professorId, esAberta: true },
     });
   }
 
   public async aumentarNumeroInscritos(vaga: VagaIc): Promise<VagaIc> {
-    const nr_inscritos_atualizado = vaga.nr_inscritos + 1;
+    const nrInscritos_atualizado = vaga.nrInscritos + 1;
 
-    const vagaAtualizada = { ...vaga, nr_inscritos: nr_inscritos_atualizado };
+    const vagaAtualizada = { ...vaga, nrInscritos: nrInscritos_atualizado };
 
     return this.ormRepository.save(vagaAtualizada);
   }
 
   public async diminuirNumeroInscritos(vaga: VagaIc): Promise<VagaIc> {
-    const nr_inscritos_atualizado = vaga.nr_inscritos - 1;
+    const nrInscritos_atualizado = vaga.nrInscritos - 1;
 
-    const vagaAtualizada = { ...vaga, nr_inscritos: nr_inscritos_atualizado };
+    const vagaAtualizada = { ...vaga, nrInscritos: nrInscritos_atualizado };
 
     return this.ormRepository.save(vagaAtualizada);
   }

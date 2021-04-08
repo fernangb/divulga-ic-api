@@ -19,7 +19,7 @@ export class CriarTabelaCurso1607384380748 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'id_predio',
+            name: 'predioId',
             type: 'uuid',
             isNullable: true,
           },
@@ -34,7 +34,7 @@ export class CriarTabelaCurso1607384380748 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'nr_periodos',
+            name: 'nrPeriodos',
             type: 'integer',
             isNullable: false,
           },
@@ -49,12 +49,12 @@ export class CriarTabelaCurso1607384380748 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'dt_criacao',
+            name: 'dtCriacao',
             type: 'timestamp with time zone',
             default: 'now()',
           },
           {
-            name: 'dt_atualizacao',
+            name: 'dtAtualizacao',
             type: 'timestamp with time zone',
             default: 'now()',
           },
@@ -66,7 +66,7 @@ export class CriarTabelaCurso1607384380748 implements MigrationInterface {
       'curso',
       new TableForeignKey({
         name: 'PredioCurso',
-        columnNames: ['id_predio'],
+        columnNames: ['predioId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'predio',
         onDelete: 'SET NULL',

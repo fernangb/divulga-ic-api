@@ -35,22 +35,22 @@ export class CriarTabelaAluno1613923142406 implements MigrationInterface {
             isNullable: true,
           },
           {
-            name: 'id_curso',
+            name: 'cursoId',
             type: 'uuid',
             isNullable: true,
           },
           {
-            name: 'id_usuario',
+            name: 'usuarioId',
             type: 'uuid',
             isNullable: true,
           },
           {
-            name: 'dt_criacao',
+            name: 'dtCriacao',
             type: 'timestamp with time zone',
             default: 'now()',
           },
           {
-            name: 'dt_atualizacao',
+            name: 'dtAtualizacao',
             type: 'timestamp with time zone',
             default: 'now()',
           },
@@ -62,7 +62,7 @@ export class CriarTabelaAluno1613923142406 implements MigrationInterface {
       'aluno',
       new TableForeignKey({
         name: 'CursoAluno',
-        columnNames: ['id_curso'],
+        columnNames: ['cursoId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'curso',
         onDelete: 'SET NULL',
@@ -74,7 +74,7 @@ export class CriarTabelaAluno1613923142406 implements MigrationInterface {
       'aluno',
       new TableForeignKey({
         name: 'UsuarioAluno',
-        columnNames: ['id_usuario'],
+        columnNames: ['usuarioId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'usuario',
         onDelete: 'SET NULL',

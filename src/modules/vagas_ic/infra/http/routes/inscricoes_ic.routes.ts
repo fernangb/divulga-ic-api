@@ -18,8 +18,8 @@ inscricaoIcRouter.post(
   '/',
   celebrate({
     [Segments.BODY]: {
-      id_vaga: Joi.string().uuid().required(),
-      id_aluno: Joi.string().uuid(),
+      vagaIcId: Joi.string().uuid().required(),
+      alunoId: Joi.string().uuid(),
     },
   }),
   inscricoesIcController.create,

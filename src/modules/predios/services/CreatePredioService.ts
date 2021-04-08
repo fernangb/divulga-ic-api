@@ -5,7 +5,7 @@ import IPrediosRepository from '../repositories/IPrediosRepository';
 
 interface IRequest {
   nome: string;
-  nome_comum: string;
+  nomeComum: string;
   endereco: string;
 }
 
@@ -18,7 +18,7 @@ class CreatePredioService {
 
   public async execute({
     nome,
-    nome_comum,
+    nomeComum,
     endereco,
   }: IRequest): Promise<Predio> {
     const predioEncontrado = await this.prediosRepository.encontrarPeloNome(
@@ -31,7 +31,7 @@ class CreatePredioService {
 
     const predio = await this.prediosRepository.create({
       nome,
-      nome_comum,
+      nomeComum,
       endereco,
     });
 

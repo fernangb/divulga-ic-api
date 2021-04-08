@@ -33,14 +33,14 @@ class ResetarSenhaService {
       throw new AppError('Token do usuário não existe.');
     }
     const usuario = await this.usuariosRepository.encontrarPeloId(
-      tokenUsuario.id_usuario,
+      tokenUsuario.usuarioId,
     );
 
     if (!usuario) {
       throw new AppError('Usuário não existe.');
     }
 
-    const dtCriacaoToken = tokenUsuario.dt_criacao;
+    const dtCriacaoToken = tokenUsuario.dtCriacao;
     const dataLimite = addHours(dtCriacaoToken, 2);
 
     if (isAfter(Date.now(), dataLimite)) {

@@ -17,7 +17,7 @@ perfilRouter.put(
       email: Joi.string().email().required(),
       senha: Joi.string(),
       senha_antiga: Joi.string(),
-      confirmacao_senha: Joi.string().valid(Joi.ref('senha')),
+      confirmacaoSenha: Joi.string().valid(Joi.ref('senha')),
       nome: Joi.string().required(),
     },
   }),

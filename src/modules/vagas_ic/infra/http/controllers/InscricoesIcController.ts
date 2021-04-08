@@ -6,13 +6,13 @@ import DeleteInscricaoIcService from '@modules/vagas_ic/services/DeleteInscricao
 
 export default class InscricoesIcController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { id_vaga, id_aluno } = request.body;
+    const { vagaIcId, alunoId } = request.body;
 
     const createInscricaoIC = container.resolve(CreateInscricaoIcService);
 
     const inscricaoIC = await createInscricaoIC.execute({
-      id_vaga,
-      id_aluno,
+      vagaIcId,
+      alunoId,
     });
 
     return response.json(inscricaoIC);

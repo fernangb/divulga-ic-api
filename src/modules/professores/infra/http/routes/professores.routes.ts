@@ -15,7 +15,7 @@ professorRouter.post(
     [Segments.BODY]: {
       email: Joi.string().email().required(),
       senha: Joi.string().required(),
-      confirmacao_senha: Joi.string().required().valid(Joi.ref('senha')),
+      confirmacaoSenha: Joi.string().required().valid(Joi.ref('senha')),
       nome: Joi.string().required(),
       sobrenome: Joi.string().required(),
       siape: Joi.string().required(),
@@ -27,7 +27,7 @@ professorRouter.post(
 );
 
 professorRouter.get(
-  '/:id_usuario',
+  '/:usuarioId',
   ensureAuthenticated,
   professoresUsuariosController.index,
 );

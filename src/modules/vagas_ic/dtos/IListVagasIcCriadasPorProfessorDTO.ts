@@ -1,3 +1,3 @@
 export default interface IListVagasIcCriadasPorProfessorDTO {
-  id_professor: string;
+  professorId: string;
 }

@@ -10,9 +10,9 @@ class ShowProfessorPorIdUsuarioService {
     private professoresRepository: IProfessoresRepository,
   ) {}
 
-  public async execute(id_usuario: string): Promise<Professor | undefined> {
+  public async execute(usuarioId: string): Promise<Professor | undefined> {
     const professor = await this.professoresRepository.encontrarPeloIdUsuario(
-      id_usuario,
+      usuarioId,
     );
 
     if (!professor)

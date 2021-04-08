@@ -1,4 +1,4 @@
 export default interface IVerificarVagasExistentesDTO {
-  id_laboratorio: string;
+  laboratorioId: string;
   nome: string;
 }

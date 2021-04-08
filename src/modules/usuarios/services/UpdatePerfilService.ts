@@ -5,7 +5,7 @@ import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import IUsuariosRepository from '../repositories/IUsuariosRepository';
 
 interface IRequest {
-  id_usuario: string;
+  usuarioId: string;
   nome: string;
   email: string;
   senha?: string;
@@ -23,13 +23,13 @@ class UpdatePerfilService {
   ) {}
 
   public async execute({
-    id_usuario,
+    usuarioId,
     nome,
     email,
     senha,
     senha_antiga,
   }: IRequest): Promise<Usuario | undefined> {
-    const usuario = await this.usuariosRepository.encontrarPeloId(id_usuario);
+    const usuario = await this.usuariosRepository.encontrarPeloId(usuarioId);
 
     if (!usuario) {
       throw new AppError('Usuário não encontrado');
@@ -41,7 +41,7 @@ class UpdatePerfilService {
 
     if (
       usuarioComEmailAtualizado &&
-      usuarioComEmailAtualizado.id !== id_usuario
+      usuarioComEmailAtualizado.id !== usuarioId
     ) {
       throw new AppError('Email já cadastrado no sistema');
     }

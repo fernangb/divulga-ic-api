@@ -1,8 +1,8 @@
 export default interface ICreateCursoDTO {
   nome: string;
-  id_predio: string;
+  predioId: string;
   endereco: string;
-  nr_periodos: number;
+  nrPeriodos: number;
   tipo: 'Bacharel' | 'Licenciatura';
   turno: 'Integral' | 'Noturno';
 }

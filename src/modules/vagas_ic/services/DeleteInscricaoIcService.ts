@@ -19,7 +19,7 @@ class DeleteInscricaoIcService {
     if (!inscricao) throw new AppError('Inscrição inexistente.');
 
     const vaga = await this.vagasIcRepository.encontrarPeloId(
-      inscricao.id_vaga,
+      inscricao.vagaIcId,
     );
 
     if (!vaga) throw new AppError('Vaga inexistente.');

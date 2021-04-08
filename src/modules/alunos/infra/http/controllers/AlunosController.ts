@@ -14,7 +14,7 @@ export default class AlunosController {
       senha,
       nome,
       sobrenome,
-      confirmacao_senha
+      confirmacaoSenha
     } = request.body;
 
     const createAluno = container.resolve(CreateAlunoService);
@@ -26,14 +26,14 @@ export default class AlunosController {
       nivel: 'aluno',
       nome,
       sobrenome,
-      confirmacao_senha
+      confirmacaoSenha
     });
 
     const aluno = await createAluno.execute({
       dre,
       periodo,
       curso,
-      id_usuario: usuario?.id,
+      usuarioId: usuario?.id,
     });
 
     return response.json(classToClass(aluno));

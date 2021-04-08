@@ -6,14 +6,14 @@ import { classToClass } from 'class-transformer';
 
 export default class UsuariosController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { email, senha, nivel, nome, sobrenome, confirmacao_senha } = request.body;
+    const { email, senha, nivel, nome, sobrenome, confirmacaoSenha } = request.body;
 
     const createUsuario = container.resolve(CreateUsuarioService);
 
     const user = await createUsuario.execute({
       email,
       senha,
-      confirmacao_senha,
+      confirmacaoSenha,
       nivel,
       nome,
       sobrenome,

@@ -19,8 +19,8 @@ class TokensUsuarioRepository implements ITokenUsuarioRepository {
     return tokenUsuario;
   }
 
-  public async gerarToken(id_usuario: string): Promise<TokenUsuario> {
-    const tokenUsuario = this.ormRepository.create({ id_usuario });
+  public async gerarToken(usuarioId: string): Promise<TokenUsuario> {
+    const tokenUsuario = this.ormRepository.create({ usuarioId });
 
     await this.ormRepository.save(tokenUsuario);
 

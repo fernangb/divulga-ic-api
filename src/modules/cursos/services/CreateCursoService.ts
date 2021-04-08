@@ -5,9 +5,9 @@ import ICursosRepository from '../repositories/ICursosRepository';
 
 interface CursoDTO {
   nome: string;
-  id_predio: string;
+  predioId: string;
   endereco: string;
-  nr_periodos: number;
+  nrPeriodos: number;
   tipo: 'Bacharel' | 'Licenciatura';
   turno: 'Integral' | 'Noturno';
 }
@@ -21,11 +21,11 @@ class CreateCursoService {
 
   public async execute({
     nome,
-    id_predio,
+    predioId,
     endereco,
     tipo,
     turno,
-    nr_periodos,
+    nrPeriodos,
   }: CursoDTO): Promise<Curso> {
     const cursoEncontrado = await this.cursosRepository.encontrarCursoExistente(
       nome,
@@ -39,11 +39,11 @@ class CreateCursoService {
 
     const curso = await this.cursosRepository.create({
       nome,
-      id_predio,
+      predioId,
       endereco,
       tipo,
       turno,
-      nr_periodos,
+      nrPeriodos,
     });
 
     return curso;

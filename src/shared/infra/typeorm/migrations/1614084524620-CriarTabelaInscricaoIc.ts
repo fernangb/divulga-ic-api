@@ -19,12 +19,12 @@ export class CriarTabelaInscricaoIc1614084524620 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'id_vaga',
+            name: 'vagaIcId',
             type: 'uuid',
             isNullable: true,
           },
           {
-            name: 'id_aluno',
+            name: 'alunoId',
             type: 'uuid',
             isNullable: true,
           },
@@ -40,12 +40,12 @@ export class CriarTabelaInscricaoIc1614084524620 implements MigrationInterface {
             default: true,
           },
           {
-            name: 'dt_criacao',
+            name: 'dtCriacao',
             type: 'timestamp with time zone',
             default: 'now()',
           },
           {
-            name: 'dt_atualizacao',
+            name: 'dtAtualizacao',
             type: 'timestamp with time zone',
             default: 'now()',
           },
@@ -57,7 +57,7 @@ export class CriarTabelaInscricaoIc1614084524620 implements MigrationInterface {
       'inscricao_ic',
       new TableForeignKey({
         name: 'VagaInscricao',
-        columnNames: ['id_vaga'],
+        columnNames: ['vagaIcId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'vaga_ic',
         onDelete: 'SET NULL',
@@ -69,7 +69,7 @@ export class CriarTabelaInscricaoIc1614084524620 implements MigrationInterface {
       'inscricao_ic',
       new TableForeignKey({
         name: 'AlunoInscricao',
-        columnNames: ['id_aluno'],
+        columnNames: ['alunoId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'aluno',
         onDelete: 'SET NULL',

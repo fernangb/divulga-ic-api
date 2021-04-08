@@ -5,7 +5,7 @@ export class CriarTabelaCursosVagas1617832688985 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'cursos_vagas',
+        name: 'vaga_ic_cursos_curso',
         columns: [
           {
             name: 'id',
@@ -15,34 +15,24 @@ export class CriarTabelaCursosVagas1617832688985 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'id_vaga',
+            name: 'vagaIcId',
             type: 'uuid',
             isNullable: true,
           },
           {
-            name: 'id_curso',
+            name: 'cursoId',
             type: 'uuid',
             isNullable: true,
-          },
-          {
-            name: 'dt_criacao',
-            type: 'timestamp with time zone',
-            default: 'now()',
-          },
-          {
-            name: 'dt_atualizacao',
-            type: 'timestamp with time zone',
-            default: 'now()',
           },
         ],
       }),
     );
 
     await queryRunner.createForeignKey(
-      'cursos_vagas',
+      'vaga_ic_cursos_curso',
       new TableForeignKey({
         name: 'Vaga',
-        columnNames: ['id_vaga'],
+        columnNames: ['vagaIcId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'vaga_ic',
         onDelete: 'SET NULL',
@@ -51,10 +41,10 @@ export class CriarTabelaCursosVagas1617832688985 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      'cursos_vagas',
+      'vaga_ic_cursos_curso',
       new TableForeignKey({
         name: 'Curso',
-        columnNames: ['id_curso'],
+        columnNames: ['cursoId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'curso',
         onDelete: 'SET NULL',
@@ -64,9 +54,9 @@ export class CriarTabelaCursosVagas1617832688985 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('cursos_vagas', 'Curso');
-    await queryRunner.dropForeignKey('cursos_vagas', 'Vaga');
+    await queryRunner.dropForeignKey('vaga_ic_cursos_curso', 'Curso');
+    await queryRunner.dropForeignKey('vaga_ic_cursos_curso', 'Vaga');
 
-    await queryRunner.dropTable('cursos_vagas');
+    await queryRunner.dropTable('vaga_ic_cursos_curso');
   }
 }

@@ -41,17 +41,17 @@ export default class CriarTabelaUsuario1613501791647
             isNullable: false,
           },
           {
-            name: 'id_nivel',
+            name: 'nivelId',
             type: 'uuid',
             isNullable: true,
           },
           {
-            name: 'dt_criacao',
+            name: 'dtCriacao',
             type: 'timestamp with time zone',
             default: 'now()',
           },
           {
-            name: 'dt_atualizacao',
+            name: 'dtAtualizacao',
             type: 'timestamp with time zone',
             default: 'now()',
           },
@@ -63,7 +63,7 @@ export default class CriarTabelaUsuario1613501791647
       'usuario',
       new TableForeignKey({
         name: 'NivelUsuario',
-        columnNames: ['id_nivel'],
+        columnNames: ['nivelId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'nivel',
         onDelete: 'SET NULL',

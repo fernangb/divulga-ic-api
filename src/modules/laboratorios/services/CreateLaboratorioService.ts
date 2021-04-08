@@ -7,7 +7,7 @@ interface IRequest {
   nome: string;
   sigla: string;
   sala: string;
-  id_predio: string;
+  predioId: string;
 }
 
 @injectable()
@@ -21,7 +21,7 @@ class CreateLaboratorioService {
     nome,
     sigla,
     sala,
-    id_predio,
+    predioId,
   }: IRequest): Promise<Laboratorio> {
     const laboratorioEncontrado = await this.laboratoriosRepository.encontrarPelaSigla(
       sigla,
@@ -34,7 +34,7 @@ class CreateLaboratorioService {
     const laboratorio = await this.laboratoriosRepository.create({
       nome,
       sigla,
-      id_predio,
+      predioId,
       sala,
     });
 

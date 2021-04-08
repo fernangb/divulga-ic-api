@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, In, Repository } from 'typeorm';
 import Curso from '@modules/cursos/infra/typeorm/entities/Curso';
 import ICursosRepository from '@modules/cursos/repositories/ICursosRepository';
 import ICreateCursoDTO from '@modules/cursos/dtos/ICreateCursoDTO';
@@ -9,6 +9,10 @@ class CursosRepository implements ICursosRepository {
 
   constructor() {
     this.ormRepository = getRepository(Curso);
+  }
+
+  public async encontrarPelosNomes(nomes: string[]): Promise<Curso[]> {
+    return await this.ormRepository.find({ where: {nome: In(nomes)}});
   }
 
   public async encontrarPeloNome(nome: string): Promise<Curso | undefined> {
@@ -49,19 +53,19 @@ class CursosRepository implements ICursosRepository {
 
   public async create({
     nome,
-    id_predio,
+    predioId,
     endereco,
     tipo,
     turno,
-    nr_periodos,
+    nrPeriodos,
   }: ICreateCursoDTO): Promise<Curso> {
     const curso = this.ormRepository.create({
       nome,
-      id_predio,
+      predioId,
       endereco,
       tipo,
       turno,
-      nr_periodos,
+      nrPeriodos,
     });
 
     await this.ormRepository.save(curso);

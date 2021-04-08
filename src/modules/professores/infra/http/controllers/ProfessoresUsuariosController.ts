@@ -5,11 +5,11 @@ import { classToClass } from 'class-transformer';
 
 export default class ProfessoresUsuariosController {
   public async index(request: Request, response: Response): Promise<Response> {
-    const { id_usuario } = request.params;
+    const { usuarioId } = request.params;
 
     const showProfessor = container.resolve(ShowProfessorPorIdUsuarioService);
 
-    const professor = await showProfessor.execute(id_usuario);
+    const professor = await showProfessor.execute(usuarioId);
 
     return response.json(classToClass(professor));
   }

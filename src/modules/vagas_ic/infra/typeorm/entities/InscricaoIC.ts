@@ -16,17 +16,17 @@ class InscricaoIC {
   id: string;
 
   @Column()
-  id_vaga: string;
+  vagaIcId: string;
 
   @ManyToOne(() => VagaIC, v => v.nome, { eager: true })
-  @JoinColumn({ name: 'id_vaga' })
+  @JoinColumn({ name: 'vagaIcId' })
   vaga_ic: VagaIC;
 
   @Column()
-  id_aluno: string;
+  alunoId: string;
 
   @ManyToOne(() => Aluno, a => a.id, { eager: true })
-  @JoinColumn({ name: 'id_aluno' })
+  @JoinColumn({ name: 'alunoId' })
   aluno: Aluno;
 
   @Column()
@@ -36,10 +36,10 @@ class InscricaoIC {
   dt_inscricao: Date;
 
   @CreateDateColumn()
-  dt_criacao: Date;
+  dtCriacao: Date;
 
   @UpdateDateColumn()
-  dt_atualizacao: Date;
+  dtAtualizacao: Date;
 }
 
 export default InscricaoIC;

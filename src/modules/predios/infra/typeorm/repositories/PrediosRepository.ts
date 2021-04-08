@@ -26,12 +26,12 @@ class PrediosRepository implements IPrediosRepository {
 
   public async create({
     nome,
-    nome_comum,
+    nomeComum,
     endereco,
   }: ICreatePredioDTO): Promise<Predio> {
     const predio = this.ormRepository.create({
       nome,
-      nome_comum,
+      nomeComum,
       endereco,
     });
 

@@ -6,13 +6,13 @@ import { classToClass } from 'class-transformer';
 
 export default class PrediosController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { nome, nome_comum, endereco } = request.body;
+    const { nome, nomeComum, endereco } = request.body;
 
     const createPredio = container.resolve(CreatePredioService);
 
     const predio = await createPredio.execute({
       nome,
-      nome_comum,
+      nomeComum,
       endereco,
     });
 

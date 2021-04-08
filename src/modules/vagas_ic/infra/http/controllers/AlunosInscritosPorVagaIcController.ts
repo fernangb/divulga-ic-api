@@ -5,13 +5,13 @@ import { classToClass } from 'class-transformer';
 
 export default class AlunosInscritosPorVagaIcController {
   public async index(request: Request, response: Response): Promise<Response> {
-    const id_vaga = request.params;
+    const vagaIcId = request.params;
 
     const listAlunosInscritos = container.resolve(
       ListAlunosInscritosVagaIcService,
     );
 
-    const inscricoesIC = await listAlunosInscritos.execute({ id_vaga });
+    const inscricoesIC = await listAlunosInscritos.execute({ vagaIcId });
 
     return response.json(classToClass(inscricoesIC));
   }

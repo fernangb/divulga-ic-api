@@ -8,22 +8,22 @@ export default class CursosController {
   public async create(request: Request, response: Response): Promise<Response> {
     const {
       nome,
-      id_predio,
+      predioId,
       endereco,
       tipo,
       turno,
-      nr_periodos,
+      nrPeriodos,
     } = request.body;
 
     const createCurso = container.resolve(CreateCursoService);
 
     const curso = await createCurso.execute({
       nome,
-      id_predio,
+      predioId,
       endereco,
       tipo,
       turno,
-      nr_periodos,
+      nrPeriodos,
     });
 
     return response.json(classToClass(curso));

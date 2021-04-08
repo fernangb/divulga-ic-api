@@ -1,7 +1,7 @@
 export default interface IUpdateAlunoDTO {
-  id_usuario: string;
+  usuarioId: string;
   dre?: string;
   periodo?: number;
-  id_curso?: string;
+  cursoId?: string;
   cr?: number;
 }

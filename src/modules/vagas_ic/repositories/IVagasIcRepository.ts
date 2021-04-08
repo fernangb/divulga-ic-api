@@ -7,19 +7,19 @@ import VagaIc from '../infra/typeorm/entities/VagaIC';
 export default interface IVagasIcRepository {
   encontrarVagaExistente({
     nome,
-    id_laboratorio,
+    laboratorioId,
   }: IVerificarVagasExistentesDTO): Promise<boolean>;
   encontrarVagasRecomendadasPorAluno(
     data: IListVagasIcPorAlunoDTO,
   ): Promise<VagaIc[]>;
   encontrarPeloId(id: string): Promise<VagaIc | undefined>;
   encontrarPeloNome(nome: string): Promise<VagaIc[]>;
-  encontrarPeloCurso(id_curso: string): Promise<VagaIc[]>;
-  encontrarPeloLaboratorio(id_laboratorio: string): Promise<VagaIc[]>;
-  encontrarPelaArea(id_area: string): Promise<VagaIc[]>;
+  encontrarPeloCurso(cursoId: string): Promise<VagaIc[]>;
+  encontrarPeloLaboratorio(laboratorioId: string): Promise<VagaIc[]>;
+  encontrarPelaArea(areaId: string): Promise<VagaIc[]>;
 
   listarVagasCriadasPeloProfessor({
-    id_professor,
+    professorId,
   }: IListVagasIcCriadasPorProfessorDTO): Promise<VagaIc[]>;
 
   ordenarVagasPorRecomendacao(vagas: VagaIc[]): Promise<VagaIc[]>;

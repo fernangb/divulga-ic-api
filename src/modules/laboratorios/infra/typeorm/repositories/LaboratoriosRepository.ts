@@ -36,13 +36,13 @@ class LaboratoriosRepository implements ILaboratoriosRepository {
     nome,
     sigla,
     sala,
-    id_predio,
+    predioId,
   }: ICreateLaboratorioDTO): Promise<Laboratorio> {
     const laboratorio = this.ormRepository.create({
       nome,
       sigla,
       sala,
-      id_predio,
+      predioId,
     });
 
     await this.ormRepository.save(laboratorio);

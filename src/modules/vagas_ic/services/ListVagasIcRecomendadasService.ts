@@ -6,7 +6,7 @@ import IInscricoesIcRepository from '../repositories/IInscricoesIcRepository';
 import IVagasIcRepository from '../repositories/IVagasIcRepository';
 
 interface IRequest {
-  id_usuario: string;
+  usuarioId: string;
 }
 
 @injectable()
@@ -20,9 +20,9 @@ class ListVagasIcRecomendadasService {
     private inscricoesIcRepository: IInscricoesIcRepository,
   ) {}
 
-  public async execute({ id_usuario }: IRequest): Promise<VagaIc[]> {
+  public async execute({ usuarioId }: IRequest): Promise<VagaIc[]> {
     const aluno = await this.alunosRepository.encontrarPeloIdUsuario(
-      id_usuario,
+      usuarioId,
     );
     if (!aluno) {
       throw new AppError('Aluno não encontrado');
@@ -34,12 +34,12 @@ class ListVagasIcRecomendadasService {
 
     const vagasTotais = await this.vagasIcRepository.encontrarVagasRecomendadasPorAluno(
       {
-        id_curso: aluno.id_curso,
+        cursoId: aluno.cursoId,
       },
     );
 
     const vagasRecomendadas = vagasTotais.filter(vaga => {
-      return !inscricoes.map(inscricao => inscricao.id_vaga).includes(vaga.id);
+      return !inscricoes.map(inscricao => inscricao.vagaIcId).includes(vaga.id);
     });
 
     const vagasRecomendadasOrdenadas = await this.vagasIcRepository.ordenarVagasPorRecomendacao(

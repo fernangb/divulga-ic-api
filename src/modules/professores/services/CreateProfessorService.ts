@@ -9,7 +9,7 @@ import IProfessoresRepository from '../repositories/IProfessoresRepository';
 interface IRequest {
   curso: string;
   laboratorio: string;
-  id_usuario: string;
+  usuarioId: string;
   siape: string;
 }
 
@@ -32,11 +32,11 @@ class CreateProfessorService {
   public async execute({
     laboratorio,
     curso,
-    id_usuario,
+    usuarioId,
     siape,
   }: IRequest): Promise<Professor> {
-    if (!id_usuario) {
-      await this.usuariosRepository.delete(id_usuario);
+    if (!usuarioId) {
+      await this.usuariosRepository.delete(usuarioId);
 
       throw new AppError('ID usuário não existe.');
     }
@@ -44,7 +44,7 @@ class CreateProfessorService {
     const cursoProfessor = await this.cursosRepository.encontrarPeloNome(curso);
 
     if (!cursoProfessor) {
-      await this.usuariosRepository.delete(id_usuario);
+      await this.usuariosRepository.delete(usuarioId);
 
       throw new AppError('Curso inválido.');
     }
@@ -52,7 +52,7 @@ class CreateProfessorService {
     const laboratorioProfessor = await this.laboratoriosRepository.encontrarPelaSigla(laboratorio);
 
     if (!laboratorioProfessor) {
-      await this.usuariosRepository.delete(id_usuario);
+      await this.usuariosRepository.delete(usuarioId);
 
       throw new AppError('Laboratório inválido.');
     }
@@ -62,7 +62,7 @@ class CreateProfessorService {
     );
 
     if (professorEncotrado) {
-      await this.usuariosRepository.delete(id_usuario);
+      await this.usuariosRepository.delete(usuarioId);
 
       throw new AppError('Professor já cadastrado.');
     }
@@ -70,15 +70,15 @@ class CreateProfessorService {
     const siapeValido = this.professoresRepository.validarSIAPE(siape);
 
     if (!siapeValido) {
-      await this.usuariosRepository.delete(id_usuario);
+      await this.usuariosRepository.delete(usuarioId);
 
       throw new AppError('SIAPE inválido.');
     }
 
     const professor = await this.professoresRepository.create({
-      id_laboratorio: laboratorioProfessor.id,
-      id_curso: cursoProfessor.id,
-      id_usuario,
+      laboratorioId: laboratorioProfessor.id,
+      cursoId: cursoProfessor.id,
+      usuarioId,
       siape,
     });
 

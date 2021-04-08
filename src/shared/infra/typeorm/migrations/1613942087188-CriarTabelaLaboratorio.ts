@@ -31,17 +31,17 @@ export class CriarTabelaLaboratorio1613942087188 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'id_predio',
+            name: 'predioId',
             type: 'uuid',
             isNullable: true,
           },
           {
-            name: 'dt_criacao',
+            name: 'dtCriacao',
             type: 'timestamp with time zone',
             default: 'now()',
           },
           {
-            name: 'dt_atualizacao',
+            name: 'dtAtualizacao',
             type: 'timestamp with time zone',
             default: 'now()',
           },
@@ -53,7 +53,7 @@ export class CriarTabelaLaboratorio1613942087188 implements MigrationInterface {
       'laboratorio',
       new TableForeignKey({
         name: 'PredioLaboratorio',
-        columnNames: ['id_predio'],
+        columnNames: ['predioId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'predio',
         onDelete: 'SET NULL',

@@ -9,7 +9,7 @@ interface IRequest {
   dre: string;
   periodo: number;
   curso: string;
-  id_usuario: string;
+  usuarioId: string;
 }
 
 @injectable()
@@ -29,10 +29,10 @@ class CreateAlunoService {
     dre,
     periodo,
     curso,
-    id_usuario,
+    usuarioId,
   }: IRequest): Promise<Aluno> {
-    if (!id_usuario) {
-      await this.usuariosRepository.delete(id_usuario);
+    if (!usuarioId) {
+      await this.usuariosRepository.delete(usuarioId);
 
       throw new AppError('ID usuário não existe.');
     }
@@ -40,7 +40,7 @@ class CreateAlunoService {
     const alunoEncontrado = await this.alunosRepository.encontrarPeloDRE(dre);
 
     if (alunoEncontrado) {
-      await this.usuariosRepository.delete(id_usuario);
+      await this.usuariosRepository.delete(usuarioId);
 
       throw new AppError('Aluno já cadastrado.');
     }
@@ -48,7 +48,7 @@ class CreateAlunoService {
     const dreValido = this.alunosRepository.validarDRE(dre);
 
     if (!dreValido) {
-      await this.usuariosRepository.delete(id_usuario);
+      await this.usuariosRepository.delete(usuarioId);
 
       throw new AppError('DRE inválido.');
     }
@@ -56,7 +56,7 @@ class CreateAlunoService {
     const cursoAluno = await this.cursosRepository.encontrarPeloNome(curso);
 
     if (!cursoAluno) {
-      await this.usuariosRepository.delete(id_usuario);
+      await this.usuariosRepository.delete(usuarioId);
 
       throw new AppError('Curso inválido.');
     }
@@ -64,7 +64,7 @@ class CreateAlunoService {
     const periodoValido = await this.alunosRepository.validarPeriodo(periodo);
 
     if (!periodoValido) {
-      await this.usuariosRepository.delete(id_usuario);
+      await this.usuariosRepository.delete(usuarioId);
 
       throw new AppError('Período inválido.');
     }
@@ -72,8 +72,8 @@ class CreateAlunoService {
     const aluno = await this.alunosRepository.create({
       periodo,
       dre,
-      id_curso: cursoAluno.id,
-      id_usuario,
+      cursoId: cursoAluno.id,
+      usuarioId,
     });
 
     return aluno;

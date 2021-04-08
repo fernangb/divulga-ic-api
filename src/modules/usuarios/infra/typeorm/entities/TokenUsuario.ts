@@ -18,13 +18,13 @@ class TokenUsuario {
   token: string;
 
   @Column()
-  id_usuario: string;
+  usuarioId: string;
 
   @CreateDateColumn()
-  dt_criacao: Date;
+  dtCriacao: Date;
 
   @UpdateDateColumn()
-  dt_atualizacao: Date;
+  dtAtualizacao: Date;
 }
 
 export default TokenUsuario;

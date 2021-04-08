@@ -29,14 +29,14 @@ class UsuariosRepository implements IUsuariosRepository {
   public async create({
     email,
     senha,
-    id_nivel,
+    nivelId,
     nome,
     sobrenome,
   }: ICreateUsuarioDTO): Promise<Usuario> {
     const usuario = this.ormRepository.create({
       email,
       senha,
-      id_nivel,
+      nivelId,
       nome,
       sobrenome,
     });

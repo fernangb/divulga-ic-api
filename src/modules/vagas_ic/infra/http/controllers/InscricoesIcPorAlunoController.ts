@@ -5,13 +5,13 @@ import ListInscricoesRealizadasPeloAlunoService from '@modules/vagas_ic/services
 
 export default class InscricoesIcPorAlunoController {
   public async index(request: Request, response: Response): Promise<Response> {
-    const id_usuario = request.usuario.id;
+    const usuarioId = request.usuario.id;
 
     const listInscricoesIC = container.resolve(
       ListInscricoesRealizadasPeloAlunoService,
     );
 
-    const vagasIC = await listInscricoesIC.execute({ id_usuario });
+    const vagasIC = await listInscricoesIC.execute({ usuarioId });
 
     return response.json(vagasIC);
   }

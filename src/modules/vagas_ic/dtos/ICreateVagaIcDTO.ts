@@ -1,14 +1,16 @@
 import Area from "@modules/areas/infra/typeorm/entities/Area";
-import AreasVagasIC from "../infra/typeorm/entities/AreasVagasIC";
+import Curso from "@modules/cursos/infra/typeorm/entities/Curso";
 
 export default interface ICreateVagaIcDTO {
   nome: string;
   descricao?: string;
-  vl_bolsa?: number;
-  hr_semana?: number;
-  cr_minimo?: number;
-  nr_vagas?: number;
-  periodo_minimo?: number;
-  id_laboratorio: string;
-  id_professor: string;
+  vlBolsa?: number;
+  hrSemana?: number;
+  crMinimo?: number;
+  nrVagas?: number;
+  periodoMinimo?: number;
+  laboratorioId: string;
+  professorId: string;
+  areas: Area[];
+  cursos: Curso[];
 }

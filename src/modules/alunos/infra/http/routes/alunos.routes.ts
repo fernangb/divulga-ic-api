@@ -15,7 +15,7 @@ alunoRouter.post(
     [Segments.BODY]: {
       email: Joi.string().email().required(),
       senha: Joi.string().required(),
-      confirmacao_senha: Joi.string().required(),
+      confirmacaoSenha: Joi.string().required(),
       nome: Joi.string().required(),
       sobrenome: Joi.string().required(),
       dre: Joi.string().required(),
@@ -27,7 +27,7 @@ alunoRouter.post(
 );
 
 alunoRouter.get(
-  '/:id_usuario',
+  '/:usuarioId',
   ensureAuthenticated,
   alunosUsuariosController.index,
 );

@@ -17,25 +17,25 @@ class CreateInscricaoIcService {
   ) {}
 
   public async execute({
-    id_vaga,
-    id_aluno,
+    vagaIcId,
+    alunoId,
   }: ICreateInscricaoIcDTO): Promise<InscricaoIC> {
     const vagaEncontrada = await this.vagasIcRepository.encontrarPeloId(
-      id_vaga,
+      vagaIcId,
     );
 
     if (!vagaEncontrada)
       throw new AppError('Não existe a vaga de IC desejada.');
 
     const existeInscricao = await this.inscricoesIcRepository.encontrarInscricaoExistente(
-      { id_aluno, id_vaga },
+      { alunoId, vagaIcId },
     );
 
     if (existeInscricao) throw new AppError('Inscrição já realizada.');
 
     const inscricaoIC = await this.inscricoesIcRepository.create({
-      id_vaga,
-      id_aluno,
+      vagaIcId,
+      alunoId,
     });
 
     await this.vagasIcRepository.aumentarNumeroInscritos(vagaEncontrada);

@@ -23,7 +23,7 @@ senhaRouter.post(
     [Segments.BODY]: {
       token: Joi.string().uuid().required(),
       senha: Joi.string().required(),
-      confirmacao_senha: Joi.string().required().valid(Joi.ref('senha')),
+      confirmacaoSenha: Joi.string().required().valid(Joi.ref('senha')),
     },
   }),
   resetarSenhaController.create,

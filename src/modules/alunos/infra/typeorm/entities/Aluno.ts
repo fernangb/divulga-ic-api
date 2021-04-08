@@ -16,17 +16,17 @@ class Aluno {
   id: string;
 
   @Column()
-  id_curso: string;
+  cursoId: string;
 
   @ManyToOne(() => Curso, c => c.nome, { eager: true })
-  @JoinColumn({ name: 'id_curso' })
+  @JoinColumn({ name: 'cursoId' })
   curso: Curso;
 
   @Column()
-  id_usuario: string;
+  usuarioId: string;
 
   @ManyToOne(() => Usuario, u => u.nome, { eager: true })
-  @JoinColumn({ name: 'id_usuario' })
+  @JoinColumn({ name: 'usuarioId' })
   usuario: Usuario;
 
   @Column()
@@ -39,10 +39,10 @@ class Aluno {
   cr?: number;
 
   @CreateDateColumn()
-  dt_criacao: Date;
+  dtCriacao: Date;
 
   @UpdateDateColumn()
-  dt_atualizacao: Date;
+  dtAtualizacao: Date;
 }
 
 export default Aluno;

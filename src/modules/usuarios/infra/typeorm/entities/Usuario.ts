@@ -17,10 +17,10 @@ class Usuario {
   id: string;
 
   @Column()
-  id_nivel: string;
+  nivelId: string;
 
   @ManyToOne(() => Nivel, n => n.nome, { eager: true })
-  @JoinColumn({ name: 'id_nivel' })
+  @JoinColumn({ name: 'nivelId' })
   nivel: Nivel;
 
   @Column()
@@ -40,10 +40,10 @@ class Usuario {
   avatar: string;
 
   @CreateDateColumn()
-  dt_criacao: Date;
+  dtCriacao: Date;
 
   @UpdateDateColumn()
-  dt_atualizacao: Date;
+  dtAtualizacao: Date;
 
   @Expose({ name: 'avatar_url' })
   getAvatarURL(): string | null {

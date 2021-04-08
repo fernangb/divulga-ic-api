@@ -23,7 +23,7 @@ export class CriarTabelaPredio1607384256669 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'nome_comum',
+            name: 'nomeComum',
             type: 'varchar',
             isNullable: false,
           },
@@ -33,12 +33,12 @@ export class CriarTabelaPredio1607384256669 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'dt_criacao',
+            name: 'dtCriacao',
             type: 'timestamp with time zone',
             default: 'now()',
           },
           {
-            name: 'dt_atualizacao',
+            name: 'dtAtualizacao',
             type: 'timestamp with time zone',
             default: 'now()',
           },

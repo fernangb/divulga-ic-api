@@ -12,12 +12,12 @@ class InscricoesIcRepository implements IInscricoesIcRepository {
   }
 
   public async create({
-    id_vaga,
-    id_aluno,
+    vagaIcId,
+    alunoId,
   }: ICreateInscricaoIcDTO): Promise<InscricaoIc> {
     const inscricaoIc = this.ormRepository.create({
-      id_vaga,
-      id_aluno,
+      vagaIcId,
+      alunoId,
     });
 
     await this.ormRepository.save(inscricaoIc);
@@ -40,11 +40,11 @@ class InscricoesIcRepository implements IInscricoesIcRepository {
   }
 
   public async encontrarInscricaoExistente({
-    id_aluno,
-    id_vaga,
+    alunoId,
+    vagaIcId,
   }: ICreateInscricaoIcDTO): Promise<boolean> {
     const inscricao = await this.ormRepository.find({
-      where: { id_aluno, id_vaga, es_ativa: true },
+      where: { alunoId, vagaIcId, es_ativa: true },
     });
 
     if (inscricao.length) return true;
@@ -53,22 +53,22 @@ class InscricoesIcRepository implements IInscricoesIcRepository {
   }
 
   public async listarVagasInscritasPeloAluno(
-    id_aluno: string,
+    alunoId: string,
   ): Promise<InscricaoIc[]> {
-    return this.ormRepository.find({ where: { id_aluno, es_ativa: true } });
+    return this.ormRepository.find({ where: { alunoId, es_ativa: true } });
   }
 
   public async listarAlunosInscritosPorVagaIc(
-    id_vaga: string,
+    vagaIcId: string,
   ): Promise<InscricaoIc[]> {
-    return this.ormRepository.find({ where: { id_vaga, es_ativa: true } });
+    return this.ormRepository.find({ where: { vagaIcId, es_ativa: true } });
   }
 
   public async listarAlunosInscritosPorProfessor(
-    id_vagas: string[],
+    vagaIcIds: string[],
   ): Promise<InscricaoIc[]> {
     return this.ormRepository.find({
-      where: { id_vaga: In(id_vagas), es_ativa: true },
+      where: { vagaIcId: In(vagaIcIds), es_ativa: true },
     });
   }
 }

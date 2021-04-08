@@ -11,7 +11,7 @@ export default class ProfessoresController {
       laboratorio,
       email,
       senha,
-      confirmacao_senha,
+      confirmacaoSenha,
       nome,
       sobrenome,
       siape,
@@ -23,7 +23,7 @@ export default class ProfessoresController {
     const usuario = await createUsuario.execute({
       email,
       senha,
-      confirmacao_senha,
+      confirmacaoSenha,
       nivel: 'professor',
       nome,
       sobrenome,
@@ -32,7 +32,7 @@ export default class ProfessoresController {
     const professor = await createProfessor.execute({
       curso,
       laboratorio,
-      id_usuario: usuario?.id,
+      usuarioId: usuario?.id,
       siape,
     });
 

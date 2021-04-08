@@ -7,9 +7,9 @@ export default interface IInscricoesIcRepository {
   index(): Promise<InscricaoIc[]>;
   delete(id: string): Promise<void>;
 
-  listarVagasInscritasPeloAluno(id_aluno: string): Promise<InscricaoIc[]>;
+  listarVagasInscritasPeloAluno(alunoId: string): Promise<InscricaoIc[]>;
   encontrarInscricaoExistente(data: ICreateInscricaoIcDTO): Promise<boolean>;
   encontrarPeloId(id: string): Promise<InscricaoIc | undefined>;
-  listarAlunosInscritosPorVagaIc(id_vaga: string): Promise<InscricaoIc[]>;
-  listarAlunosInscritosPorProfessor(id_vagas: string[]): Promise<InscricaoIc[]>;
+  listarAlunosInscritosPorVagaIc(vagaIcId: string): Promise<InscricaoIc[]>;
+  listarAlunosInscritosPorProfessor(vagaIcIds: string[]): Promise<InscricaoIc[]>;
 }

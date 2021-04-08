@@ -5,7 +5,7 @@ import IInscricoesIcRepository from '../repositories/IInscricoesIcRepository';
 import IVagasIcRepository from '../repositories/IVagasIcRepository';
 
 interface IRequest {
-  id_vaga: string;
+  vagaIcId: string;
 }
 
 @injectable()
@@ -17,8 +17,8 @@ class ListVagasIcRecomendadasService {
     private inscricoesIcRepository: IInscricoesIcRepository,
   ) {}
 
-  public async execute({ id_vaga }: IRequest): Promise<InscricaoIc[]> {
-    const vaga = await this.vagasIcRepository.encontrarPeloId(id_vaga);
+  public async execute({ vagaIcId }: IRequest): Promise<InscricaoIc[]> {
+    const vaga = await this.vagasIcRepository.encontrarPeloId(vagaIcId);
 
     if (!vaga) {
       throw new AppError('Vaga não encontrada');

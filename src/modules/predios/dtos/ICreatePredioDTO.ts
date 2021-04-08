@@ -1,5 +1,5 @@
 export default interface ICreatePredioDTO {
   nome: string;
-  nome_comum: string;
+  nomeComum: string;
   endereco: string;
 }

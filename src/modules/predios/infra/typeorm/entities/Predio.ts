@@ -14,16 +14,16 @@ class Predio {
   nome: string;
 
   @Column()
-  nome_comum: string;
+  nomeComum: string;
 
   @Column()
   endereco: string;
 
   @CreateDateColumn()
-  dt_criacao: Date;
+  dtCriacao: Date;
 
   @UpdateDateColumn()
-  dt_atualizacao: Date;
+  dtAtualizacao: Date;
 }
 
 export default Predio;

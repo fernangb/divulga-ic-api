@@ -6,7 +6,7 @@ import { classToClass } from 'class-transformer';
 
 export default class LaboratoriosController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { nome, sigla, sala, id_predio } = request.body;
+    const { nome, sigla, sala, predioId } = request.body;
 
     const createLaboratorio = container.resolve(CreateLaboratorioService);
 
@@ -14,7 +14,7 @@ export default class LaboratoriosController {
       nome,
       sigla,
       sala,
-      id_predio,
+      predioId,
     });
 
     return response.json(classToClass(laboratorio));

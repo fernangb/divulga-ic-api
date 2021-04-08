@@ -4,11 +4,11 @@ import ListVagasIcPorAlunoService from '@modules/vagas_ic/services/ListVagasIcRe
 
 export default class VagasIcPorAlunoController {
   public async index(request: Request, response: Response): Promise<Response> {
-    const id_usuario = request.usuario.id;
+    const usuarioId = request.usuario.id;
 
     const listVagasIC = container.resolve(ListVagasIcPorAlunoService);
 
-    const vagasIC = await listVagasIC.execute({ id_usuario });
+    const vagasIC = await listVagasIC.execute({ usuarioId });
 
     return response.json(vagasIC);
   }

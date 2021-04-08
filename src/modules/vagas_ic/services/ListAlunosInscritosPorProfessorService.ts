@@ -27,15 +27,15 @@ class ListAlunosInscritosPorProfessorService {
     if (!professor) throw new AppError('Professor não encontrado');
 
     const vagas = await this.vagasIcRepository.listarVagasCriadasPeloProfessor({
-      id_professor: professor.id,
+      professorId: professor.id,
     });
 
     if (!vagas) throw new AppError('Vaga não encontrada');
 
-    const id_vagas = vagas.map(v => v.id);
+    const vagaIcIds = vagas.map(v => v.id);
 
     const inscricoes = await this.inscricoesIcRepository.listarAlunosInscritosPorProfessor(
-      id_vagas,
+      vagaIcIds,
     );
 
     return inscricoes;

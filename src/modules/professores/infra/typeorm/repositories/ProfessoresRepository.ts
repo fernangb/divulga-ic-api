@@ -17,11 +17,11 @@ class ProfessoresRepository implements IProfessoresRepository {
   }
 
   public async encontrarPeloIdUsuario(
-    id_usuario: string,
+    usuarioId: string,
   ): Promise<Professor | undefined> {
     const professorEncontrado = await this.ormRepository.findOne({
       where: {
-        id_usuario,
+        usuarioId,
       },
     });
 
@@ -56,15 +56,15 @@ class ProfessoresRepository implements IProfessoresRepository {
   }
 
   public async create({
-    id_curso,
-    id_usuario,
-    id_laboratorio,
+    cursoId,
+    usuarioId,
+    laboratorioId,
     siape,
   }: ICreateProfessorDTO): Promise<Professor> {
     const professor = this.ormRepository.create({
-      id_curso,
-      id_usuario,
-      id_laboratorio,
+      cursoId,
+      usuarioId,
+      laboratorioId,
       siape,
     });
 

@@ -9,14 +9,14 @@ export default class VagasIcController {
     const {
       nome,
       descricao,
-      vl_bolsa,
-      hr_semana,
-      cr_minimo,
-      periodo_minimo,
-      nr_vagas,
-      id_laboratorio,
+      vlBolsa,
+      hrSemana,
+      crMinimo,
+      periodoMinimo,
+      nrVagas,
+      laboratorioId,
       cursos,
-      id_professor,
+      professorId,
       areas,
     } = request.body;
 
@@ -25,14 +25,14 @@ export default class VagasIcController {
     const vagaIC = await createVagaIC.execute({
       nome,
       descricao,
-      vl_bolsa,
-      hr_semana,
-      cr_minimo,
-      periodo_minimo,
-      nr_vagas,
-      id_laboratorio,
+      vlBolsa,
+      hrSemana,
+      crMinimo,
+      periodoMinimo,
+      nrVagas,
+      laboratorioId,
       cursos,
-      id_professor,
+      professorId,
       areas,
     });
 

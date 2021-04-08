@@ -6,6 +6,7 @@ interface ICursosRepository {
   create(data: ICreateCursoDTO): Promise<Curso>;
   encontrarPeloId(id: string): Promise<Curso | undefined>;
   encontrarPeloNome(id: string): Promise<Curso | undefined>;
+  encontrarPelosNomes(nomes: string[]): Promise<Curso[]>;
   encontrarCursoExistente(
     nome: string,
     tipo: string,

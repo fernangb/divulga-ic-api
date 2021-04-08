@@ -21,16 +21,16 @@ export default class CriarTabelaTokensUsuario1613860289165
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'id_usuario',
+            name: 'usuarioId',
             type: 'uuid',
           },
           {
-            name: 'dt_criacao',
+            name: 'dtCriacao',
             type: 'timestamp with time zone',
             default: 'now()',
           },
           {
-            name: 'dt_atualizacao',
+            name: 'dtAtualizacao',
             type: 'timestamp with time zone',
             default: 'now()',
           },
@@ -40,7 +40,7 @@ export default class CriarTabelaTokensUsuario1613860289165
             name: 'TokenUsuario',
             referencedTableName: 'usuario',
             referencedColumnNames: ['id'],
-            columnNames: ['id_usuario'],
+            columnNames: ['usuarioId'],
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
           },

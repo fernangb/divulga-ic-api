@@ -15,10 +15,10 @@ class Curso {
   id: string;
 
   @Column()
-  id_predio: string;
+  predioId: string;
 
   @ManyToOne(() => Predio, p => p.nome)
-  @JoinColumn({ name: 'id_predio' })
+  @JoinColumn({ name: 'predioId' })
   predio: Predio;
 
   @Column()
@@ -28,7 +28,7 @@ class Curso {
   endereco: string;
 
   @Column()
-  nr_periodos: number;
+  nrPeriodos: number;
 
   @Column()
   turno: 'Integral' | 'Noturno';
@@ -37,10 +37,10 @@ class Curso {
   tipo: 'Bacharel' | 'Licenciatura';
 
   @CreateDateColumn()
-  dt_criacao: Date;
+  dtCriacao: Date;
 
   @UpdateDateColumn()
-  dt_atualizacao: Date;
+  dtAtualizacao: Date;
 }
 
 export default Curso;
