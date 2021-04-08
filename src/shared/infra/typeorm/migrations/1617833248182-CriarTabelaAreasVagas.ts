@@ -1,10 +1,11 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class CriarTabelaVagaCursos1617744458355 implements MigrationInterface {
+export class CriarTabelaAreasVagas1617833248182 implements MigrationInterface {
+
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'vagas_cursos',
+        name: 'areas_vagas',
         columns: [
           {
             name: 'id',
@@ -19,7 +20,7 @@ export class CriarTabelaVagaCursos1617744458355 implements MigrationInterface {
             isNullable: true,
           },
           {
-            name: 'id_curso',
+            name: 'id_area',
             type: 'uuid',
             isNullable: true,
           },
@@ -38,7 +39,7 @@ export class CriarTabelaVagaCursos1617744458355 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      'vagas_cursos',
+      'areas_vagas',
       new TableForeignKey({
         name: 'Vaga',
         columnNames: ['id_vaga'],
@@ -50,12 +51,12 @@ export class CriarTabelaVagaCursos1617744458355 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      'vagas_cursos',
+      'areas_vagas',
       new TableForeignKey({
-        name: 'Curso',
-        columnNames: ['id_curso'],
+        name: 'Area',
+        columnNames: ['id_area'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'curso',
+        referencedTableName: 'area',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       }),
@@ -63,9 +64,9 @@ export class CriarTabelaVagaCursos1617744458355 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('vagas_cursos', 'Curso');
-    await queryRunner.dropForeignKey('vagas_cursos', 'Vaga');
+    await queryRunner.dropForeignKey('areas_vagas', 'Area');
+    await queryRunner.dropForeignKey('areas_vagas', 'Vaga');
 
-    await queryRunner.dropTable('vagas_cursos');
+    await queryRunner.dropTable('areas_vagas');
   }
 }

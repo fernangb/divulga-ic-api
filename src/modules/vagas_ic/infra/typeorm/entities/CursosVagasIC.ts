@@ -10,22 +10,22 @@ import {
 import VagaIC from './VagaIC';
 import Curso from '@modules/cursos/infra/typeorm/entities/Curso';
 
-@Entity('vagas_cursos')
-class VagaIcCursos {
+@Entity('cursos_vagas')
+class CursosVagasIC {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
   id_vaga: string;
 
-  @ManyToOne(() => VagaIC, v => v.nome, { eager: true })
-  @JoinColumn({ name: 'id_vaga' })
+  @ManyToOne(() => VagaIC, vaga => vaga.cursosVagas)
+  // @JoinColumn({ name: 'id_vaga' })
   vaga_ic: VagaIC;
 
   @Column()
   id_curso: string;
 
-  @ManyToOne(() => Curso, c => c.id, { eager: true })
+  @ManyToOne(() => Curso, curso => curso.id)
   @JoinColumn({ name: 'id_curso' })
   curso: Curso;
 
@@ -36,4 +36,4 @@ class VagaIcCursos {
   dt_atualizacao: Date;
 }
 
-export default VagaIcCursos;
+export default CursosVagasIC;

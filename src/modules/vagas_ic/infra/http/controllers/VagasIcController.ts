@@ -2,6 +2,7 @@ import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import CreateVagaIcService from '@modules/vagas_ic/services/CreateVagaIcService';
 import ListVagasIcService from '@modules/vagas_ic/services/ListVagasIcService';
+import { classToClass } from 'class-transformer';
 
 export default class VagasIcController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -14,9 +15,9 @@ export default class VagasIcController {
       periodo_minimo,
       nr_vagas,
       id_laboratorio,
-      id_curso,
+      cursos,
       id_professor,
-      id_area,
+      areas,
     } = request.body;
 
     const createVagaIC = container.resolve(CreateVagaIcService);
@@ -30,12 +31,13 @@ export default class VagasIcController {
       periodo_minimo,
       nr_vagas,
       id_laboratorio,
-      id_curso,
+      cursos,
       id_professor,
-      id_area,
+      areas,
     });
 
-    return response.json(vagaIC);
+    return response.json(classToClass(vagaIC));
+
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
@@ -43,6 +45,6 @@ export default class VagasIcController {
 
     const vagasIC = await listVagasIC.execute();
 
-    return response.json(vagasIC);
+    return response.json(classToClass(vagasIC));
   }
 }

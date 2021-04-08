@@ -73,16 +73,6 @@ export class CriarTabelaVagaIC1614035690564 implements MigrationInterface {
             isNullable: true,
           },
           {
-            name: 'id_area',
-            type: 'uuid',
-            isNullable: true,
-          },
-          {
-            name: 'id_curso',
-            type: 'uuid',
-            isNullable: true,
-          },
-          {
             name: 'dt_criacao',
             type: 'timestamp with time zone',
             default: 'now()',
@@ -120,30 +110,6 @@ export class CriarTabelaVagaIC1614035690564 implements MigrationInterface {
         columnNames: ['id_professor'],
         referencedColumnNames: ['id'],
         referencedTableName: 'professor',
-        onDelete: 'SET NULL',
-        onUpdate: 'CASCADE',
-      }),
-    );
-
-    await queryRunner.createForeignKey(
-      'vaga_ic',
-      new TableForeignKey({
-        name: 'AreaVaga',
-        columnNames: ['id_area'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'area',
-        onDelete: 'SET NULL',
-        onUpdate: 'CASCADE',
-      }),
-    );
-
-    await queryRunner.createForeignKey(
-      'vaga_ic',
-      new TableForeignKey({
-        name: 'CursoVaga',
-        columnNames: ['id_curso'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'curso',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       }),

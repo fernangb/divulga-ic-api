@@ -6,42 +6,38 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
-import Curso from '@modules/cursos/infra/typeorm/entities/Curso';
-import Area from '@modules/areas/infra/typeorm/entities/Area';
 import Professor from '@modules/professores/infra/typeorm/entities/Professor';
 import Laboratorio from '@modules/laboratorios/infra/typeorm/entities/Laboratorio';
+import CursosVagasIC from './CursosVagasIC';
+import AreasVagasIC from './AreasVagasIC';
+import Area from '@modules/areas/infra/typeorm/entities/Area';
 
 @Entity('vaga_ic')
 class VagaIC {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  id_curso: string;
+  @OneToMany(() => CursosVagasIC, cursosVagas => cursosVagas.curso)
+  @JoinColumn({ name: 'cursos_vagas' })
+  cursosVagas: CursosVagasIC[];
 
-  @ManyToOne(() => Curso, c => c.nome, { eager: true })
-  @JoinColumn({ name: 'id_curso' })
-  curso: Curso;
-
-  @Column()
-  id_area: string;
-
-  @ManyToOne(() => Area, a => a.nome, { eager: true })
-  @JoinColumn({ name: 'id_area' })
-  area: Area;
+  @OneToMany(() => AreasVagasIC, areasVagas => areasVagas.area, {eager: true})
+  @JoinColumn({ name: 'area' })
+  areasVagas: AreasVagasIC[];
 
   @Column()
   id_professor: string;
 
-  @ManyToOne(() => Professor, p => p.id, { eager: true })
+  @ManyToOne(() => Professor, produto => produto.id, { eager: true })
   @JoinColumn({ name: 'id_professor' })
   professor: Professor;
 
   @Column()
   id_laboratorio: string;
 
-  @ManyToOne(() => Laboratorio, l => l.nome, { eager: true })
+  @ManyToOne(() => Laboratorio, laboratorio => laboratorio.nome, { eager: true })
   @JoinColumn({ name: 'id_laboratorio' })
   laboratorio: Laboratorio;
 

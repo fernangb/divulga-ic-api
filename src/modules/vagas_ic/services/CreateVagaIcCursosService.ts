@@ -2,9 +2,9 @@ import  ICreateVagaIcCursosDTO  from '@modules/vagas_ic/dtos/ICreateVagaIcCursos
 import { inject, injectable } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
 import IVagasIcRepository from '../repositories/IVagasIcRepository';
-import IVagaIcCursosRepository from '../repositories/IVagaIcCursosRepository';
+import IVagaIcCursosRepository from '../repositories/ICursosVagasIcRepository';
 import ICursosRepository from '@modules/cursos/repositories/ICursosRepository';
-import VagaIcCursos from '../infra/typeorm/entities/VagaIcCursos';
+import VagaIcCursos from '../infra/typeorm/entities/CursosVagasIC';
 
 @injectable()
 class CreateVagaIcCursosService {

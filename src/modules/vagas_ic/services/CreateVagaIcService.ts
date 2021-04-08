@@ -3,10 +3,24 @@ import ICursosRepository from '@modules/cursos/repositories/ICursosRepository';
 import ILaboratoriosRepository from '@modules/laboratorios/repositories/ILaboratoriosRepository';
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
-import ICreateVagaIcDTO from '../dtos/ICreateVagaIcDTO';
 import VagaIC from '../infra/typeorm/entities/VagaIC';
+import IAreasVagasIcRepository from '../repositories/IAreasVagasIcRepository';
+import ICursosVagasIcRepository from '../repositories/ICursosVagasIcRepository';
 import IVagasIcRepository from '../repositories/IVagasIcRepository';
 
+interface IRequest {
+  nome: string;
+  descricao?: string;
+  vl_bolsa?: number;
+  hr_semana?: number;
+  cr_minimo?: number;
+  nr_vagas?: number;
+  periodo_minimo?: number;
+  id_laboratorio: string;
+  cursos: string[];
+  id_professor: string;
+  areas: string[];
+}
 @injectable()
 class CreateVagaIcService {
   constructor(
@@ -18,6 +32,10 @@ class CreateVagaIcService {
     private cursosRepository: ICursosRepository,
     @inject('AreasRepository')
     private areasRepository: IAreasRepository,
+    @inject('CursosVagasIcRepository')
+    private cursosVagasIcRepository: ICursosVagasIcRepository,
+    @inject('AreasVagasIcRepository')
+    private areasVagasIcRepository: IAreasVagasIcRepository,
   ) {}
 
   public async execute({
@@ -29,11 +47,10 @@ class CreateVagaIcService {
     periodo_minimo,
     nr_vagas,
     id_laboratorio,
-    id_curso,
+    cursos,
     id_professor,
-    id_area,
-  }: ICreateVagaIcDTO): Promise<VagaIC> {
-    // Verificações de dados inválidos
+    areas,
+  }: IRequest): Promise<VagaIC> {
     const laboratorio = await this.laboratoriosRepository.encontrarPeloId(
       id_laboratorio,
     );
@@ -42,24 +59,33 @@ class CreateVagaIcService {
       throw new AppError('Laboratório não existe.');
     }
 
-    const curso = await this.cursosRepository.encontrarPeloId(id_curso);
+    // if(cursos){
+    //   cursos.map(curso => {
+    //     const cursoExistente = this.cursosRepository.encontrarPeloId(curso);
 
-    if (!curso) {
-      throw new AppError('Curso não existe.');
-    }
+    //     if (!cursoExistente) {
+    //       throw new AppError('Curso não existe.');
+    //     }
 
-    if (id_area) {
-      const area = await this.areasRepository.encontrarPeloId(id_area);
+    //   });
+    // }
 
-      if (!area) {
-        throw new AppError('Área não existe.');
-      }
-    }
+
+    // if(areas){
+    //   areas.map(area => {
+    //     const areaExistente = this.areasRepository.encontrarPeloId(area);
+
+    //     if (!areaExistente) {
+    //       throw new AppError('Área não existe.');
+    //     }
+
+    //   });
+    // }
+
 
     const vagaEncontrada = await this.vagasIcRepository.encontrarVagaExistente({
       nome,
       id_laboratorio,
-      id_curso,
     });
 
     if (vagaEncontrada) {
@@ -86,6 +112,21 @@ class CreateVagaIcService {
       throw new AppError('Número de vagas não pode ser negativo.');
     }
 
+    const areasExistentes = await this.areasRepository.encontrarPelosNomes(areas);
+
+    console.log('Areas existentes: ',areasExistentes);
+
+    const areaIds = areasExistentes.map(area => area.id);
+
+    // const encontrarAreasInexistentes = areas.filter(area => !are);
+
+    console.log(areasExistentes)
+
+    const areasSerializadas = areasExistentes.map(area => ({
+      id: area.id,
+      nome: area.nome,
+    }))
+
     const vagaIC = await this.vagasIcRepository.create({
       nome,
       descricao,
@@ -95,10 +136,14 @@ class CreateVagaIcService {
       periodo_minimo,
       nr_vagas,
       id_laboratorio,
-      id_curso,
       id_professor,
-      id_area,
     });
+
+
+    areasExistentes.map(area => {
+       this.areasVagasIcRepository.create({id_area: area.id, id_vaga: vagaIC.id});
+    })
+
 
     return vagaIC;
   }

@@ -6,7 +6,7 @@ interface IAreasRepository {
   index(): Promise<Area[]>;
   encontrarPeloNome(nome: string): Promise<Area | undefined>;
   encontrarPeloId(id: string): Promise<Area | undefined>;
-  ordenar(areas: Area[]): Promise<Area[]>;
+  encontrarPelosNomes(nomes: string[]): Promise<Area[]>;
 }
 
 export default IAreasRepository;

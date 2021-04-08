@@ -1,6 +1,6 @@
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
-import IVagaIcCursosRepository from '../repositories/IVagaIcCursosRepository';
+import IVagaIcCursosRepository from '../repositories/ICursosVagasIcRepository';
 import IVagasIcRepository from '../repositories/IVagasIcRepository';
 
 @injectable()

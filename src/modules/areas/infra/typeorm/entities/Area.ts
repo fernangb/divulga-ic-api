@@ -1,9 +1,12 @@
+import AreasVagasIC from '@modules/vagas_ic/infra/typeorm/entities/AreasVagasIC';
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity('area')
@@ -13,6 +16,10 @@ class Area {
 
   @Column()
   nome: string;
+
+  @OneToMany(() => AreasVagasIC, areasVagas => areasVagas.area)
+  @JoinColumn({ name: 'id_area' })
+  areasVagas: AreasVagasIC[];
 
   @CreateDateColumn()
   dt_criacao: Date;

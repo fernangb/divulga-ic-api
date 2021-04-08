@@ -10,12 +10,12 @@ export default class InscricoesIcController {
 
     const createInscricaoIC = container.resolve(CreateInscricaoIcService);
 
-    const vagaIC = await createInscricaoIC.execute({
+    const inscricaoIC = await createInscricaoIC.execute({
       id_vaga,
       id_aluno,
     });
 
-    return response.json(vagaIC);
+    return response.json(inscricaoIC);
   }
 
   public async index(request: Request, response: Response): Promise<Response> {

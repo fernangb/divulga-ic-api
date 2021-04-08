@@ -15,21 +15,19 @@ const vagasIcCriadasPorProfessorController = new VagasIcCriadasPorProfessorContr
 
 vagaIcRouter.post(
   '/',
-  celebrate({
-    [Segments.BODY]: {
-      nome: Joi.string().required(),
-      descricao: Joi.string(),
-      vl_bolsa: Joi.number(),
-      hr_semana: Joi.number(),
-      cr_minimo: Joi.number(),
-      nr_vagas: Joi.number(),
-      periodo_minimo: Joi.number(),
-      id_laboratorio: Joi.string().uuid().required(),
-      id_curso: Joi.string().uuid().required(),
-      id_professor: Joi.string().uuid().required(),
-      id_area: Joi.string().uuid(),
-    },
-  }),
+  // celebrate({
+  //   [Segments.BODY]: {
+  //     nome: Joi.string().required(),
+  //     descricao: Joi.string(),
+  //     vl_bolsa: Joi.number(),
+  //     hr_semana: Joi.number(),
+  //     cr_minimo: Joi.number(),
+  //     nr_vagas: Joi.number(),
+  //     periodo_minimo: Joi.number(),
+  //     id_laboratorio: Joi.string().uuid().required(),
+  //     id_professor: Joi.string().uuid().required(),
+  //   },
+  // }),
   vagasIcController.create,
 );
 vagaIcRouter.get('/', vagasIcController.index);

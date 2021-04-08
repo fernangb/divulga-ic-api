@@ -8,7 +8,6 @@ export default interface IVagasIcRepository {
   encontrarVagaExistente({
     nome,
     id_laboratorio,
-    id_curso,
   }: IVerificarVagasExistentesDTO): Promise<boolean>;
   encontrarVagasRecomendadasPorAluno(
     data: IListVagasIcPorAlunoDTO,

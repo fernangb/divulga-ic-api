@@ -1,10 +1,11 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class CriarTabelaAreasProfessor1617744517171 implements MigrationInterface {
+export class CriarTabelaCursosVagas1617832688985 implements MigrationInterface {
+
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'areas_professores',
+        name: 'cursos_vagas',
         columns: [
           {
             name: 'id',
@@ -14,12 +15,12 @@ export class CriarTabelaAreasProfessor1617744517171 implements MigrationInterfac
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'id_professor',
+            name: 'id_vaga',
             type: 'uuid',
             isNullable: true,
           },
           {
-            name: 'id_area',
+            name: 'id_curso',
             type: 'uuid',
             isNullable: true,
           },
@@ -38,24 +39,24 @@ export class CriarTabelaAreasProfessor1617744517171 implements MigrationInterfac
     );
 
     await queryRunner.createForeignKey(
-      'areas_professores',
+      'cursos_vagas',
       new TableForeignKey({
-        name: 'Professor',
-        columnNames: ['id_professor'],
+        name: 'Vaga',
+        columnNames: ['id_vaga'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'professor',
+        referencedTableName: 'vaga_ic',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       }),
     );
 
     await queryRunner.createForeignKey(
-      'areas_professores',
+      'cursos_vagas',
       new TableForeignKey({
-        name: 'Area',
-        columnNames: ['id_area'],
+        name: 'Curso',
+        columnNames: ['id_curso'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'area',
+        referencedTableName: 'curso',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       }),
@@ -63,9 +64,9 @@ export class CriarTabelaAreasProfessor1617744517171 implements MigrationInterfac
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('areas_professores', 'Area');
-    await queryRunner.dropForeignKey('areas_professores', 'Professor');
+    await queryRunner.dropForeignKey('cursos_vagas', 'Curso');
+    await queryRunner.dropForeignKey('cursos_vagas', 'Vaga');
 
-    await queryRunner.dropTable('areas_professores');
+    await queryRunner.dropTable('cursos_vagas');
   }
 }

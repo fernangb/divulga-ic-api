@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, In, Repository } from 'typeorm';
 import Area from '@modules/areas/infra/typeorm/entities/Area';
 import IAreasRepository from '@modules/areas/repositories/IAreasRepository';
 import ICreateAreaDTO from '@modules/areas/dtos/ICreateAreaDTO';
@@ -8,6 +8,10 @@ class AreasRepository implements IAreasRepository {
 
   constructor() {
     this.ormRepository = getRepository(Area);
+  }
+
+  public async encontrarPelosNomes(nomes: string[]): Promise<Area[]> {
+    return await this.ormRepository.find({ where: {nome: In(nomes)}});
   }
 
   public async encontrarPeloNome(nome: string): Promise<Area | undefined> {
@@ -26,10 +30,6 @@ class AreasRepository implements IAreasRepository {
     return areaEncontrada;
   }
 
-  public async ordenar(areas: Area[]): Promise<Area[]> {
-    return areas.sort((a, b) => (a.nome > b.nome ? 1 : -1));
-  }
-
   public async create({ nome }: ICreateAreaDTO): Promise<Area> {
     const area = this.ormRepository.create({ nome });
 
@@ -39,7 +39,9 @@ class AreasRepository implements IAreasRepository {
   }
 
   public async index(): Promise<Area[]> {
-    return this.ormRepository.find();
+    return this.ormRepository.find({ order: {
+      nome: "ASC"
+    }});
   }
 }
 

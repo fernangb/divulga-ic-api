@@ -1,9 +1,9 @@
 import { getRepository, In, Repository } from 'typeorm';
-import IVagaIcCursosRepository from '@modules/vagas_ic/repositories/IVagaIcCursosRepository';
-import VagaIcCursos from '../entities/VagaIcCursos';
+import ICursosVagasIcRepository from '@modules/vagas_ic/repositories/ICursosVagasIcRepository';
+import VagaIcCursos from '../entities/CursosVagasIC';
 import ICreateVagaIcCursosDTO from '@modules/vagas_ic/dtos/ICreateVagaIcCursosDTO';
 
-class VagaIcCursosRepository implements IVagaIcCursosRepository {
+class CursosVagasIcRepository implements ICursosVagasIcRepository {
   private ormRepository: Repository<VagaIcCursos>;
 
   constructor() {
@@ -31,4 +31,4 @@ class VagaIcCursosRepository implements IVagaIcCursosRepository {
 
 }
 
-export default VagaIcCursosRepository;
+export default CursosVagasIcRepository;

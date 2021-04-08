@@ -1,7 +1,7 @@
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
-import VagaIcCursos from '../infra/typeorm/entities/VagaIcCursos';
-import IVagaIcCursosRepository from '../repositories/IVagaIcCursosRepository';
+import VagaIcCursos from '../infra/typeorm/entities/CursosVagasIC';
+import IVagaIcCursosRepository from '../repositories/ICursosVagasIcRepository';
 import IVagasIcRepository from '../repositories/IVagasIcRepository';
 
 interface IRequest {
