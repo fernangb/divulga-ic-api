@@ -95,7 +95,13 @@ class VagasIcRepository implements IVagasIcRepository {
   public async encontrarVagasRecomendadasPorAluno({
     cursoId,
   }: IListVagasIcPorAlunoDTO): Promise<VagaIc[]> {
-    return this.ormRepository.find({ where: { cursoId, esAberta: true } });
+    const vagas = await  this.ormRepository.find({relations: ["cursos"], where: { esAberta: true } });
+
+    const vagasFiltradas = vagas.filter(vaga => {
+      return vaga.cursos.some(curso => curso.id === cursoId)
+    });
+
+    return vagasFiltradas;
   }
 
   public async listarVagasCriadasPeloProfessor({
