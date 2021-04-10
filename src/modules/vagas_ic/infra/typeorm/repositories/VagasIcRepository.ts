@@ -109,6 +109,9 @@ class VagasIcRepository implements IVagasIcRepository {
   }: IListVagasIcCriadasPorProfessorDTO): Promise<VagaIc[]> {
     return this.ormRepository.find({
       where: { professorId, esAberta: true },
+      order: {
+        nome: "ASC"
+      }
     });
   }
 
@@ -126,10 +129,6 @@ class VagasIcRepository implements IVagasIcRepository {
     const vagaAtualizada = { ...vaga, nrInscritos: nrInscritos_atualizado };
 
     return this.ormRepository.save(vagaAtualizada);
-  }
-
-  public async ordenarVagasPorRecomendacao(vagas: VagaIc[]): Promise<VagaIc[]> {
-    return vagas.sort((a, b) => (a.nome > b.nome ? 1 : -1));
   }
 }
 

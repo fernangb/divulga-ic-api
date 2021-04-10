@@ -10,9 +10,7 @@ class ListPrediosService {
   ) {}
 
   public async execute(): Promise<Predio[]> {
-    const predios = await this.prediosRepository.index();
-
-    return this.prediosRepository.ordenar(predios);
+    return this.prediosRepository.index();
   }
 }
 

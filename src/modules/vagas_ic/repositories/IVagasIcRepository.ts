@@ -22,8 +22,6 @@ export default interface IVagasIcRepository {
     professorId,
   }: IListVagasIcCriadasPorProfessorDTO): Promise<VagaIc[]>;
 
-  ordenarVagasPorRecomendacao(vagas: VagaIc[]): Promise<VagaIc[]>;
-
   aumentarNumeroInscritos(vaga: VagaIc): Promise<VagaIc>;
   diminuirNumeroInscritos(vaga: VagaIc): Promise<VagaIc>;
 

@@ -13,7 +13,6 @@ interface ICursosRepository {
     turno: string,
   ): Promise<Curso | undefined>;
   index(): Promise<IListCursosDTO[]>;
-  ordenar(curso: Curso[]): Promise<Curso[]>;
 }
 
 export default ICursosRepository;

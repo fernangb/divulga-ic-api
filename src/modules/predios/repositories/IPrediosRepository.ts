@@ -6,7 +6,6 @@ interface IPrediosRepository {
   index(): Promise<Predio[]>;
 
   encontrarPeloNome(nome: string): Promise<Predio | undefined>;
-  ordenar(areas: Predio[]): Promise<Predio[]>;
 }
 
 export default IPrediosRepository;

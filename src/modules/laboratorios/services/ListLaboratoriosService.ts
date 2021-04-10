@@ -10,9 +10,8 @@ class ListLaboratoriosService {
   ) {}
 
   public async execute(): Promise<Laboratorio[]> {
-    const laboratorios = await this.laboratoriosRepository.index();
+    return this.laboratoriosRepository.index();
 
-    return this.laboratoriosRepository.ordenar(laboratorios);
   }
 }
 

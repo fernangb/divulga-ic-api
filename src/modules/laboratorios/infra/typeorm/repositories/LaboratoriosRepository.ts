@@ -28,10 +28,6 @@ class LaboratoriosRepository implements ILaboratoriosRepository {
     return laboratorioEncontrado;
   }
 
-  public async ordenar(laboratorios: Laboratorio[]): Promise<Laboratorio[]> {
-    return laboratorios.sort((a, b) => (a.nome > b.nome ? 1 : -1));
-  }
-
   public async create({
     nome,
     sigla,
@@ -55,7 +51,9 @@ class LaboratoriosRepository implements ILaboratoriosRepository {
   }
 
   public async index(): Promise<Laboratorio[]> {
-    return this.ormRepository.find();
+    return this.ormRepository.find({order: {
+      nome: "ASC"
+    }});
   }
 }
 

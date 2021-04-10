@@ -12,7 +12,9 @@ class CursosRepository implements ICursosRepository {
   }
 
   public async encontrarPelosNomes(nomes: string[]): Promise<Curso[]> {
-    return await this.ormRepository.find({ where: {nome: In(nomes)}});
+    return await this.ormRepository.find({ where: {nome: In(nomes), order: {
+      nome: "ASC"
+    }}});
   }
 
   public async encontrarPeloNome(nome: string): Promise<Curso | undefined> {
@@ -47,10 +49,6 @@ class CursosRepository implements ICursosRepository {
     return cursoEncontrado;
   }
 
-  public async ordenar(cursos: Curso[]): Promise<Curso[]> {
-    return cursos.sort((a, b) => (a.nome > b.nome ? 1 : -1));
-  }
-
   public async create({
     nome,
     predioId,
@@ -78,7 +76,10 @@ class CursosRepository implements ICursosRepository {
       select: [
         'nome',
         'id'
-      ]
+      ],
+      order: {
+        nome: "ASC"
+      }
     });
   }
 }

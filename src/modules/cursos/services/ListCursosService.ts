@@ -11,9 +11,7 @@ class ListCursosService {
   ) {}
 
   public async execute(): Promise<IListCursosDTO[]> {
-    const cursos = await this.cursosRepository.index();
-
-    return this.cursosRepository.ordenar(cursos);
+    return this.cursosRepository.index();
   }
 }
 
