@@ -44,7 +44,7 @@ class ResetarSenhaService {
     const dataLimite = addHours(dtCriacaoToken, 2);
 
     if (isAfter(Date.now(), dataLimite)) {
-      throw new AppError('Token expirado');
+      throw new AppError('Token expirado.');
     }
 
     usuario.senha = await this.hashProvider.gerarHash(senha);

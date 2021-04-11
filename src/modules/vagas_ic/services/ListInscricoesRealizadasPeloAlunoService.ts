@@ -22,7 +22,7 @@ class ListInscricoesRealizadasPeloAlunoService {
       usuarioId,
     );
     if (!aluno) {
-      throw new AppError('Aluno não encontrado');
+      throw new AppError('Aluno não encontrado.');
     }
 
     return this.inscricoesIcRepository.listarVagasInscritasPeloAluno(aluno.id);

@@ -24,13 +24,13 @@ class ListAlunosInscritosPorProfessorService {
   public async execute({ id }: IRequest): Promise<InscricaoIc[]> {
     const professor = await this.professoresRepository.encontrarPeloId(id);
 
-    if (!professor) throw new AppError('Professor não encontrado');
+    if (!professor) throw new AppError('Professor não encontrado.');
 
     const vagas = await this.vagasIcRepository.listarVagasCriadasPeloProfessor({
       professorId: professor.id,
     });
 
-    if (!vagas) throw new AppError('Vaga não encontrada');
+    if (!vagas) throw new AppError('Vaga não encontrada.');
 
     const vagaIcIds = vagas.map(v => v.id);
 

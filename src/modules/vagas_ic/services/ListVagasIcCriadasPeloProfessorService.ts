@@ -22,7 +22,7 @@ class ListVagasIcCriadasPeloProfessorService {
       usuarioId,
     );
     if (!professor) {
-      throw new AppError('Professor não encontrado');
+      throw new AppError('Professor não encontrado.');
     }
 
     const vagasCriadas = await this.vagasIcRepository.listarVagasCriadasPeloProfessor(

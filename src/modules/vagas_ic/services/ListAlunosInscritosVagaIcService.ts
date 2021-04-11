@@ -21,7 +21,7 @@ class ListVagasIcRecomendadasService {
     const vaga = await this.vagasIcRepository.encontrarPeloId(vagaIcId);
 
     if (!vaga) {
-      throw new AppError('Vaga não encontrada');
+      throw new AppError('Vaga não encontrada.');
     }
 
     const inscricoes = await this.inscricoesIcRepository.listarAlunosInscritosPorVagaIc(

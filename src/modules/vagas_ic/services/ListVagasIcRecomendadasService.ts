@@ -25,7 +25,7 @@ class ListVagasIcRecomendadasService {
       usuarioId,
     );
     if (!aluno) {
-      throw new AppError('Aluno não encontrado');
+      throw new AppError('Aluno não encontrado.');
     }
 
     const inscricoes = await this.inscricoesIcRepository.listarVagasInscritasPeloAluno(

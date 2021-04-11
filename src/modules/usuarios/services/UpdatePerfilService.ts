@@ -32,7 +32,7 @@ class UpdatePerfilService {
     const usuario = await this.usuariosRepository.encontrarPeloId(usuarioId);
 
     if (!usuario) {
-      throw new AppError('Usuário não encontrado');
+      throw new AppError('Usuário não encontrado.');
     }
 
     const usuarioComEmailAtualizado = await this.usuariosRepository.encontrarPeloEmail(
@@ -43,7 +43,7 @@ class UpdatePerfilService {
       usuarioComEmailAtualizado &&
       usuarioComEmailAtualizado.id !== usuarioId
     ) {
-      throw new AppError('Email já cadastrado no sistema');
+      throw new AppError('Email já cadastrado no sistema.');
     }
 
     usuario.nome = nome;
@@ -51,7 +51,7 @@ class UpdatePerfilService {
 
     if (senha && !senha_antiga) {
       throw new AppError(
-        'Você precisa informar a senha antiga para atualizá-la',
+        'Você precisa informar a senha antiga para atualizá-la.',
       );
     }
 
@@ -62,7 +62,7 @@ class UpdatePerfilService {
       );
 
       if (!verificarSenhaAntiga) {
-        throw new AppError('Senha antiga inválida');
+        throw new AppError('Senha antiga inválida.');
       }
 
       usuario.senha = await this.hashProvider.gerarHash(senha);

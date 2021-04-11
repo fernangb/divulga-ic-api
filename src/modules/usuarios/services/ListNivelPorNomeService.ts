@@ -18,7 +18,7 @@ class ListNivelPorNomeService {
     const nivel = await this.niveisRepository.encontrarPeloNome(nome);
 
     if (!nivel) {
-      throw new AppError('Nível não encontrado');
+      throw new AppError('Nível não encontrado.');
     }
 
     return this.niveisRepository.encontrarPeloNome(nome);

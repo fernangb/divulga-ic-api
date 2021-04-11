@@ -20,7 +20,7 @@ class ShowPerfilService {
     const usuario = await this.usuariosRepository.encontrarPeloId(usuarioId);
 
     if (!usuario) {
-      throw new AppError('Usuário não encontrado');
+      throw new AppError('Usuário não encontrado.');
     }
 
     return usuario;

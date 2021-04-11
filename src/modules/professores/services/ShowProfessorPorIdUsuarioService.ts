@@ -16,7 +16,7 @@ class ShowProfessorPorIdUsuarioService {
     );
 
     if (!professor)
-      throw new AppError('Não existe professor com o id especificado');
+      throw new AppError('Não existe professor com o id especificado.');
 
     return professor;
   }

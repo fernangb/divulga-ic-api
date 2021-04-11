@@ -15,7 +15,7 @@ class ListCursosService {
       usuarioId,
     );
 
-    if (!aluno) throw new AppError('Não existe aluno com o id especificado');
+    if (!aluno) throw new AppError('Não existe aluno com o id especificado.');
 
     return aluno;
   }
