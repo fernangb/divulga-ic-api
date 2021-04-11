@@ -36,4 +36,6 @@ vagaIcRouter.get('/aluno/me', vagasIcPorAlunoController.index);
 
 vagaIcRouter.get('/professor/me', vagasIcCriadasPorProfessorController.index);
 
+vagaIcRouter.put('/', vagasIcController.update);
+
 export default vagaIcRouter;

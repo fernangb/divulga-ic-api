@@ -61,7 +61,9 @@ class InscricoesIcRepository implements IInscricoesIcRepository {
   public async listarAlunosInscritosPorVagaIc(
     vagaIcId: string,
   ): Promise<InscricaoIc[]> {
-    return this.ormRepository.find({ where: { vagaIcId, es_ativa: true } });
+    return this.ormRepository.find({ where: { vagaIcId, es_ativa: true }, order: {
+      dtCriacao: "DESC"
+    } });
   }
 
   public async listarAlunosInscritosPorProfessor(

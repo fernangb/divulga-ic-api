@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import CreateVagaIcService from '@modules/vagas_ic/services/CreateVagaIcService';
 import ListVagasIcService from '@modules/vagas_ic/services/ListVagasIcService';
 import { classToClass } from 'class-transformer';
+import UpdateVagaIcService from '@modules/vagas_ic/services/UpdateVagaIcService';
 
 export default class VagasIcController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -46,5 +47,39 @@ export default class VagasIcController {
     const vagasIC = await listVagasIC.execute();
 
     return response.json(classToClass(vagasIC));
+  }
+
+  public async update(request: Request, response: Response): Promise<Response>{
+    const {
+      id,
+      nome,
+      descricao,
+      vlBolsa,
+      nrVagas,
+      crMinimo,
+      hrSemana,
+      periodoMinimo,
+      laboratorio,
+      areas,
+      cursos,
+    } = request.body;
+    const updateVagaIc = container.resolve(UpdateVagaIcService);
+
+    const vagaIC = await updateVagaIc.execute({
+      id,
+      nome,
+      descricao,
+      vlBolsa,
+      nrVagas,
+      crMinimo,
+      hrSemana,
+      periodoMinimo,
+      laboratorio,
+      areas,
+      cursos,
+    });
+
+    return response.json(classToClass(vagaIC));
+
   }
 }

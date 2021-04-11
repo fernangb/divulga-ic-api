@@ -17,6 +17,12 @@ export default interface IVagasIcRepository {
   encontrarPeloCurso(cursoId: string): Promise<VagaIc[]>;
   encontrarPeloLaboratorio(laboratorioId: string): Promise<VagaIc[]>;
   encontrarPelaArea(areaId: string): Promise<VagaIc[]>;
+  validarValorBolsa(vlBolsa: number): boolean;
+  validarHorasSemanais(hrSemana: number): boolean;
+  validarCrMinimo(crMinimo: number): boolean;
+  validarPeriodoMinimo(periodoMinimo: number): boolean;
+  validarNumeroVagas(nrVagas: number): boolean;
+  validarNumeroInscritos(nrInscritos: number): boolean;
 
   listarVagasCriadasPeloProfessor({
     professorId,

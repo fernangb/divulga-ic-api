@@ -62,29 +62,45 @@ class CreateVagaIcService {
       throw new AppError('Vaga já cadastrada no sistema.');
     }
 
-    if (vlBolsa && vlBolsa < 0) {
+
+    if (vlBolsa && !this.vagasIcRepository.validarValorBolsa(vlBolsa)) {
       throw new AppError('Valor da bolsa não pode ser negativo.');
     }
 
-    if (hrSemana && (hrSemana < 0 || hrSemana > 20)) {
+    if (hrSemana && !this.vagasIcRepository.validarHorasSemanais(hrSemana)) {
       throw new AppError('Horas semanais inválida. ');
     }
 
-    if (crMinimo && (crMinimo < 0 || crMinimo > 10)) {
+    if (crMinimo && !this.vagasIcRepository.validarCrMinimo(crMinimo)) {
       throw new AppError('CR mínimo inválido.');
     }
 
-    if (periodoMinimo && (periodoMinimo < 1 || periodoMinimo > 10)) {
+    if (periodoMinimo && !this.vagasIcRepository.validarPeriodoMinimo(periodoMinimo)) {
       throw new AppError('Período mínimo inválido.');
     }
 
-    if (nrVagas && nrVagas < 0) {
+    if (nrVagas && !this.vagasIcRepository.validarNumeroVagas(nrVagas)) {
       throw new AppError('Número de vagas não pode ser negativo.');
+    }
+
+    if(areas.length === 0){
+      throw new AppError('Número mínimo de áreas inválido.');
     }
 
     const areasExistentes = await this.areasRepository.encontrarPelosNomes(areas);
 
+    if(areasExistentes.length !== areas.length)
+      throw new AppError('Áreas inválidas.');
+
+
+    if(cursos.length === 0){
+      throw new AppError('Número mínimo de cursos inválido.');
+    }
+
     const cursosExistentes = await this.cursosRepository.encontrarPelosNomes(cursos);
+
+    if(cursosExistentes.length !== cursos.length)
+      throw new AppError('Cursos inválidos.');
 
     const vagaIC = await this.vagasIcRepository.create({
       nome,
