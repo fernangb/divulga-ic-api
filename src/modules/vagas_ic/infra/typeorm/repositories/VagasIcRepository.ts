@@ -13,6 +13,10 @@ class VagasIcRepository implements IVagasIcRepository {
     this.ormRepository = getRepository(VagaIc);
   }
 
+  public async delete(id: string): Promise<void> {
+    await this.ormRepository.delete(id);
+  }
+
   public validarValorBolsa(vlBolsa: number): boolean {
     if(vlBolsa < 0)
       return false;

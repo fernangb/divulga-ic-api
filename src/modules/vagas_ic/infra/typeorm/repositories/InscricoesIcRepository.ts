@@ -44,7 +44,7 @@ class InscricoesIcRepository implements IInscricoesIcRepository {
     vagaIcId,
   }: ICreateInscricaoIcDTO): Promise<boolean> {
     const inscricao = await this.ormRepository.find({
-      where: { alunoId, vagaIcId, es_ativa: true },
+      where: { alunoId, vagaIcId, esAtiva: true },
     });
 
     if (inscricao.length) return true;
@@ -55,13 +55,13 @@ class InscricoesIcRepository implements IInscricoesIcRepository {
   public async listarVagasInscritasPeloAluno(
     alunoId: string,
   ): Promise<InscricaoIc[]> {
-    return this.ormRepository.find({ where: { alunoId, es_ativa: true } });
+    return this.ormRepository.find({ where: { alunoId, esAtiva: true } });
   }
 
   public async listarAlunosInscritosPorVagaIc(
     vagaIcId: string,
   ): Promise<InscricaoIc[]> {
-    return this.ormRepository.find({ where: { vagaIcId, es_ativa: true }, order: {
+    return this.ormRepository.find({ where: { vagaIcId, esAtiva: true }, order: {
       dtCriacao: "DESC"
     } });
   }
@@ -70,7 +70,7 @@ class InscricoesIcRepository implements IInscricoesIcRepository {
     vagaIcIds: string[],
   ): Promise<InscricaoIc[]> {
     return this.ormRepository.find({
-      where: { vagaIcId: In(vagaIcIds), es_ativa: true },
+      where: { vagaIcId: In(vagaIcIds), esAtiva: true },
     });
   }
 }

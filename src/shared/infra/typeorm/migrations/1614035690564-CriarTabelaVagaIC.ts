@@ -117,8 +117,6 @@ export class CriarTabelaVagaIC1614035690564 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('vaga_ic', 'CursoVaga');
-    await queryRunner.dropForeignKey('vaga_ic', 'AreaVaga');
     await queryRunner.dropForeignKey('vaga_ic', 'ProfessorVaga');
     await queryRunner.dropForeignKey('vaga_ic', 'LaboratorioVaga');
 

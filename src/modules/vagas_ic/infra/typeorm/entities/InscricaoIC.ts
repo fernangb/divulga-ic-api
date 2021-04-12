@@ -30,10 +30,10 @@ class InscricaoIC {
   aluno: Aluno;
 
   @Column()
-  es_ativa: boolean;
+  esAtiva: boolean;
 
   @CreateDateColumn()
-  dt_inscricao: Date;
+  dtInscricao: Date;
 
   @CreateDateColumn()
   dtCriacao: Date;

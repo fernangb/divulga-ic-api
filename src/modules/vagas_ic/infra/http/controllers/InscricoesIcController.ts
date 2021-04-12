@@ -35,6 +35,6 @@ export default class InscricoesIcController {
 
     return response
       .status(200)
-      .json({ message: 'Inscrição cancelada com sucesso' });
+      .json({ message: 'Inscrição cancelada com sucesso.' });
   }
 }

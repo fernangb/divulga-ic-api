@@ -38,4 +38,6 @@ vagaIcRouter.get('/professor/me', vagasIcCriadasPorProfessorController.index);
 
 vagaIcRouter.put('/', vagasIcController.update);
 
+vagaIcRouter.delete('/:id', vagasIcController.delete);
+
 export default vagaIcRouter;

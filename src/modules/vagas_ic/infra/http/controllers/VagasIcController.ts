@@ -4,6 +4,7 @@ import CreateVagaIcService from '@modules/vagas_ic/services/CreateVagaIcService'
 import ListVagasIcService from '@modules/vagas_ic/services/ListVagasIcService';
 import { classToClass } from 'class-transformer';
 import UpdateVagaIcService from '@modules/vagas_ic/services/UpdateVagaIcService';
+import DeleteVagaIcService from '@modules/vagas_ic/services/DeleteVagaIcService';
 
 export default class VagasIcController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -80,6 +81,17 @@ export default class VagasIcController {
     });
 
     return response.json(classToClass(vagaIC));
+  }
 
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const deleteVagaIc = container.resolve(DeleteVagaIcService);
+
+    await deleteVagaIc.execute(id);
+
+    return response
+      .status(200)
+      .json({ message: 'Vaga IC removida com sucesso.' });
   }
 }

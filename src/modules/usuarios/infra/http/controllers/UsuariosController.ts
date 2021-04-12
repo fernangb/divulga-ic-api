@@ -31,6 +31,6 @@ export default class UsuariosController {
 
     return response
       .status(200)
-      .json({ message: 'Usuário removido com sucesso' });
+      .json({ message: 'Usuário removido com sucesso.' });
   }
 }

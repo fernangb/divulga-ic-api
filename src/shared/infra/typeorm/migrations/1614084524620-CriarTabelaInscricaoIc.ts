@@ -29,12 +29,12 @@ export class CriarTabelaInscricaoIc1614084524620 implements MigrationInterface {
             isNullable: true,
           },
           {
-            name: 'dt_inscricao',
+            name: 'dtInscricao',
             type: 'timestamp with time zone',
             default: 'now()',
           },
           {
-            name: 'es_ativa',
+            name: 'esAtiva',
             type: 'boolean',
             isNullable: true,
             default: true,
@@ -60,7 +60,7 @@ export class CriarTabelaInscricaoIc1614084524620 implements MigrationInterface {
         columnNames: ['vagaIcId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'vaga_ic',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       }),
     );

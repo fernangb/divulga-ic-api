@@ -34,4 +34,5 @@ export default interface IVagasIcRepository {
   create(data: ICreateVagaIcDTO): Promise<VagaIc>;
   save(vaga: VagaIc): Promise<VagaIc>;
   index(): Promise<VagaIc[]>;
+  delete(id: string): Promise<void>;
 }

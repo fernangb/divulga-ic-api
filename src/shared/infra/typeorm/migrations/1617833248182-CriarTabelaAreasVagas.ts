@@ -35,7 +35,7 @@ export class CriarTabelaAreasVagas1617833248182 implements MigrationInterface {
         columnNames: ['vagaIcId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'vaga_ic',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       }),
     );
