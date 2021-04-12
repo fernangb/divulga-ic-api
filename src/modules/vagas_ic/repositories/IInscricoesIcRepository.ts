@@ -6,6 +6,9 @@ export default interface IInscricoesIcRepository {
   create(data: ICreateInscricaoIcDTO): Promise<InscricaoIc>;
   index(): Promise<InscricaoIc[]>;
   delete(id: string): Promise<void>;
+  update(inscricaoIc: InscricaoIc): Promise<InscricaoIc>;
+  ativarInscricoes(vagaId: string): Promise<void>;
+  desativarInscricoes(vagaId: string): Promise<void>;
 
   listarVagasInscritasPeloAluno(alunoId: string): Promise<InscricaoIc[]>;
   encontrarInscricaoExistente(data: ICreateInscricaoIcDTO): Promise<boolean>;

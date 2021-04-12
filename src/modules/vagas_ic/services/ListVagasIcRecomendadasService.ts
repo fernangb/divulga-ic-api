@@ -32,12 +32,15 @@ class ListVagasIcRecomendadasService {
       aluno.id,
     );
 
-    const vagasRecomendadas = await this.vagasIcRepository.encontrarVagasRecomendadasPorAluno(
+    const vagasTotais = await this.vagasIcRepository.encontrarVagasRecomendadasPorAluno(
       {
         cursoId: aluno.cursoId,
       },
     );
 
+    const vagasRecomendadas = vagasTotais.filter(vaga => {
+      return !inscricoes.map(inscricao => inscricao.vagaIcId).includes(vaga.id);
+    });
 
     return vagasRecomendadas;
   }

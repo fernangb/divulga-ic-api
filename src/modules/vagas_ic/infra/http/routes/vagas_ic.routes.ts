@@ -2,6 +2,8 @@ import ensureAuthenticated from '@modules/usuarios/infra/http/middlewares/Ensure
 import { celebrate, Joi, Segments } from 'celebrate';
 import { Router } from 'express';
 import AlunosInscritosPorVagaIcController from '../controllers/AlunosInscritosPorVagaIcController';
+import AtivarVagaIcController from '../controllers/AtivarVagaIcController';
+import EncerrarVagaIcController from '../controllers/EncerrarVagaIcController';
 import VagasIcController from '../controllers/VagasIcController';
 import VagasIcCriadasPorProfessorController from '../controllers/VagasIcCriadasPorProfessorController';
 import VagasIcPorAlunoController from '../controllers/VagasIcPorAlunoController';
@@ -12,6 +14,8 @@ vagaIcRouter.use(ensureAuthenticated);
 const vagasIcController = new VagasIcController();
 const vagasIcPorAlunoController = new VagasIcPorAlunoController();
 const vagasIcCriadasPorProfessorController = new VagasIcCriadasPorProfessorController();
+const encerrarVagaIc = new EncerrarVagaIcController();
+const ativarVagaIc = new AtivarVagaIcController();
 
 vagaIcRouter.post(
   '/',
@@ -37,6 +41,10 @@ vagaIcRouter.get('/aluno/me', vagasIcPorAlunoController.index);
 vagaIcRouter.get('/professor/me', vagasIcCriadasPorProfessorController.index);
 
 vagaIcRouter.put('/', vagasIcController.update);
+
+vagaIcRouter.put('/encerrar/:id', encerrarVagaIc.update);
+
+vagaIcRouter.put('/ativar/:id', ativarVagaIc.update);
 
 vagaIcRouter.delete('/:id', vagasIcController.delete);
 

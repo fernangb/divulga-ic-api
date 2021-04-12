@@ -11,6 +11,28 @@ class InscricoesIcRepository implements IInscricoesIcRepository {
     this.ormRepository = getRepository(InscricaoIc);
   }
 
+  public async ativarInscricoes(vagaId: string): Promise<void> {
+    await this.ormRepository
+      .createQueryBuilder()
+      .update(InscricaoIc)
+      .set({esAtiva: true})
+      .where("vagaIcId = :vagaId", {vagaId})
+      .execute();
+  }
+
+  public async desativarInscricoes(vagaId: string): Promise<void> {
+    await this.ormRepository
+      .createQueryBuilder()
+      .update(InscricaoIc)
+      .set({esAtiva: false})
+      .where("vagaIcId = :vagaId", {vagaId})
+      .execute();
+  }
+
+  public async update(inscricaoIc: InscricaoIc): Promise<InscricaoIc> {
+    return this.ormRepository.save(inscricaoIc);
+  }
+
   public async create({
     vagaIcId,
     alunoId,
