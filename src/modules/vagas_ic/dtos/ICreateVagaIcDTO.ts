@@ -1,5 +1,5 @@
-import Area from "@modules/areas/infra/typeorm/entities/Area";
-import Curso from "@modules/cursos/infra/typeorm/entities/Curso";
+import Area from '@modules/areas/infra/typeorm/entities/Area';
+import Curso from '@modules/cursos/infra/typeorm/entities/Curso';
 
 export default interface ICreateVagaIcDTO {
   nome: string;

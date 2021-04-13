@@ -1,43 +1,43 @@
 {
-    "env": {
-        "es2021": true,
-        "node": true
-    },
-    "extends": [
-        "airbnb-base",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:prettier/recommended"
+  "env": {
+      "es2021": true,
+      "node": true
+  },
+  "extends": [
+      "airbnb-base",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+      "ecmaVersion": 12,
+      "sourceType": "module"
+  },
+  "plugins": [
+      "@typescript-eslint",
+      "prettier"
+  ],
+  "rules": {
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": [
+      "error"
     ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": 12,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "@typescript-eslint",
-        "prettier"
-    ],
-    "rules": {
-      "no-use-before-define": "off",
-      "@typescript-eslint/no-use-before-define": [
-        "error"
-      ],
-      "import/extensions": [
-        "error",
-        "ignorePackages",
-        {
-          "ts": "never"
-        }
-      ],
-      "prettier/prettier": "error",
-      "camelcase": "off",
-      "no-useless-constructor": "off",
-      "class-methods-use-this": "off",
-    "import/prefer-default-export": "off",
-    },
-    "settings": {
-      "import/resolver": {
-        "typescript": {}
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never"
       }
+    ],
+    "prettier/prettier": "error",
+    "camelcase": "off",
+    "no-useless-constructor": "off",
+    "class-methods-use-this": "off",
+  "import/prefer-default-export": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
     }
+  }
 }

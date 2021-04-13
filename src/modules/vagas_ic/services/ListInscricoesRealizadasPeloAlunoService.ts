@@ -18,9 +18,7 @@ class ListInscricoesRealizadasPeloAlunoService {
   ) {}
 
   public async execute({ usuarioId }: IRequest): Promise<InscricaoIC[]> {
-    const aluno = await this.alunosRepository.encontrarPeloIdUsuario(
-      usuarioId,
-    );
+    const aluno = await this.alunosRepository.encontrarPeloIdUsuario(usuarioId);
     if (!aluno) {
       throw new AppError('Aluno não encontrado.');
     }

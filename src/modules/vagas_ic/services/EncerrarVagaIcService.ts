@@ -19,10 +19,9 @@ class EncerrarVagaIcService {
       throw new AppError('Vaga IC não encontrada.');
     }
 
-    if(!vagaIc.esAberta)
-      throw new AppError('Vaga IC já está fechada.');
+    if (!vagaIc.esAberta) throw new AppError('Vaga IC já está fechada.');
 
-      vagaIc.esAberta = false;
+    vagaIc.esAberta = false;
 
     await this.inscricoesIcRepository.desativarInscricoes(vagaIc.id);
 

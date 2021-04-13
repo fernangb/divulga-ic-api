@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { inject, injectable } from 'tsyringe';
-import { format } from 'date-fns';
 import AppError from '@shared/errors/AppError';
 import ICreateInscricaoIcDTO from '../dtos/ICreateInscricaoIcDTO';
 import InscricaoIC from '../infra/typeorm/entities/InscricaoIC';

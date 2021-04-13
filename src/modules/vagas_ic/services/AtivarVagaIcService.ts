@@ -19,8 +19,7 @@ class AtivarVagaIcService {
       throw new AppError('Vaga IC não encontrada.');
     }
 
-    if(vagaIc.esAberta)
-      throw new AppError('Vaga IC já está aberta.');
+    if (vagaIc.esAberta) throw new AppError('Vaga IC já está aberta.');
 
     vagaIc.esAberta = true;
 
