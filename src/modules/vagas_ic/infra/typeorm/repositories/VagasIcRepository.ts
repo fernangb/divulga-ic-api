@@ -18,43 +18,37 @@ class VagasIcRepository implements IVagasIcRepository {
   }
 
   public validarValorBolsa(vlBolsa: number): boolean {
-    if(vlBolsa < 0)
-      return false;
+    if (vlBolsa < 0) return false;
 
     return true;
   }
 
   public validarHorasSemanais(hrSemana: number): boolean {
-    if((hrSemana < 0) || (hrSemana > 20))
-      return false;
+    if (hrSemana < 0 || hrSemana > 20) return false;
 
     return true;
   }
 
   public validarCrMinimo(crMinimo: number): boolean {
-    if((crMinimo < 0) || (crMinimo > 10))
-      return false;
+    if (crMinimo < 0 || crMinimo > 10) return false;
 
     return true;
   }
 
   public validarPeriodoMinimo(periodoMinimo: number): boolean {
-    if((periodoMinimo < 1) || (periodoMinimo > 10))
-      return false;
+    if (periodoMinimo < 1 || periodoMinimo > 10) return false;
 
     return true;
   }
 
   public validarNumeroVagas(nrVagas: number) {
-    if(nrVagas < 0)
-      return false;
+    if (nrVagas < 0) return false;
 
     return true;
   }
 
   public validarNumeroInscritos(nrInscritos: number): boolean {
-    if(nrInscritos < 0)
-      return false;
+    if (nrInscritos < 0) return false;
 
     return true;
   }
@@ -141,10 +135,13 @@ class VagasIcRepository implements IVagasIcRepository {
   public async encontrarVagasRecomendadasPorAluno({
     cursoId,
   }: IListVagasIcPorAlunoDTO): Promise<VagaIc[]> {
-    const vagas = await  this.ormRepository.find({relations: ["cursos"], where: { esAberta: true } });
+    const vagas = await this.ormRepository.find({
+      relations: ['cursos'],
+      where: { esAberta: true },
+    });
 
     const vagasFiltradas = vagas.filter(vaga => {
-      return vaga.cursos.some(curso => curso.id === cursoId)
+      return vaga.cursos.some(curso => curso.id === cursoId);
     });
 
     return vagasFiltradas;
@@ -156,8 +153,8 @@ class VagasIcRepository implements IVagasIcRepository {
     return this.ormRepository.find({
       where: { professorId, esAberta: true },
       order: {
-        nome: "ASC"
-      }
+        nome: 'ASC',
+      },
     });
   }
 

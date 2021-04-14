@@ -20,7 +20,7 @@ class InscricaoIC {
 
   @ManyToOne(() => VagaIC, v => v.nome, { eager: true })
   @JoinColumn({ name: 'vagaIcId' })
-  vaga_ic: VagaIC;
+  vagaIc: VagaIC;
 
   @Column()
   alunoId: string;
