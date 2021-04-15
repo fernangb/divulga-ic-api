@@ -1,4 +1,3 @@
-import VagaIc from '@modules/vagas_ic/infra/typeorm/entities/VagaIC';
 import { getRepository, In, Repository } from 'typeorm';
 import InscricaoIc from '@modules/vagas_ic/infra/typeorm/entities/InscricaoIC';
 import IInscricoesIcRepository from '@modules/vagas_ic/repositories/IInscricoesIcRepository';
@@ -15,8 +14,8 @@ class InscricoesIcRepository implements IInscricoesIcRepository {
     await this.ormRepository
       .createQueryBuilder()
       .update(InscricaoIc)
-      .set({esAtiva: true})
-      .where("vagaIcId = :vagaId", {vagaId})
+      .set({ esAtiva: true })
+      .where('vagaIcId = :vagaId', { vagaId })
       .execute();
   }
 
@@ -24,13 +23,22 @@ class InscricoesIcRepository implements IInscricoesIcRepository {
     await this.ormRepository
       .createQueryBuilder()
       .update(InscricaoIc)
-      .set({esAtiva: false})
-      .where("vagaIcId = :vagaId", {vagaId})
+      .set({ esAtiva: false })
+      .where('vagaIcId = :vagaId', { vagaId })
       .execute();
   }
 
   public async update(inscricaoIc: InscricaoIc): Promise<InscricaoIc> {
     return this.ormRepository.save(inscricaoIc);
+  }
+
+  public async eliminarAlunoInscrito(inscricaoIc: InscricaoIc): Promise<void> {
+    const novaInscricaoIc = {
+      ...inscricaoIc,
+      esAtiva: false,
+    };
+
+    await this.ormRepository.save(novaInscricaoIc);
   }
 
   public async create({
@@ -77,15 +85,24 @@ class InscricoesIcRepository implements IInscricoesIcRepository {
   public async listarVagasInscritasPeloAluno(
     alunoId: string,
   ): Promise<InscricaoIc[]> {
+    return this.ormRepository.find({ where: { alunoId } });
+  }
+
+  public async listarVagasInscritasAtivasPeloAluno(
+    alunoId: string,
+  ): Promise<InscricaoIc[]> {
     return this.ormRepository.find({ where: { alunoId, esAtiva: true } });
   }
 
   public async listarAlunosInscritosPorVagaIc(
     vagaIcId: string,
   ): Promise<InscricaoIc[]> {
-    return this.ormRepository.find({ where: { vagaIcId, esAtiva: true }, order: {
-      dtCriacao: "DESC"
-    } });
+    return this.ormRepository.find({
+      where: { vagaIcId, esAtiva: true },
+      order: {
+        dtCriacao: 'DESC',
+      },
+    });
   }
 
   public async listarAlunosInscritosPorProfessor(

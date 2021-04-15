@@ -36,4 +36,6 @@ inscricaoIcRouter.get(
   alunosInscritosPorProfessorController.index,
 );
 
+inscricaoIcRouter.put('/:id', inscricoesIcPorAlunoController.update);
+
 export default inscricaoIcRouter;
