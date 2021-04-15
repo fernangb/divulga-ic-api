@@ -41,7 +41,7 @@ class VagasIcRepository implements IVagasIcRepository {
     return true;
   }
 
-  public validarNumeroVagas(nrVagas: number) {
+  public validarNumeroVagas(nrVagas: number): boolean {
     if (nrVagas < 0) return false;
 
     return true;
