@@ -40,21 +40,6 @@ class ProfessoresRepository implements IProfessoresRepository {
     return professorEncontrado;
   }
 
-  public validarSIAPE(siape: string): boolean {
-    if (siape.length !== 7) {
-      return false;
-    }
-
-    // eslint-disable-next-line radix
-    const siapeInt = parseInt(siape);
-
-    if (!siapeInt) {
-      return false;
-    }
-
-    return true;
-  }
-
   public async create({
     cursoId,
     usuarioId,

@@ -1,5 +1,7 @@
 import { container } from 'tsyringe';
 import '@modules/usuarios/providers';
+import '@modules/alunos/providers';
+import '@modules/professores/providers';
 import './providers';
 
 import IAlunosRepository from '@modules/alunos/repositories/IAlunosRepository';
@@ -24,7 +26,6 @@ import IVagasIcRepository from '@modules/vagas_ic/repositories/IVagasIcRepositor
 import VagasIcRepository from '@modules/vagas_ic/infra/typeorm/repositories/VagasIcRepository';
 import IInscricoesIcRepository from '@modules/vagas_ic/repositories/IInscricoesIcRepository';
 import InscricoesIcRepository from '@modules/vagas_ic/infra/typeorm/repositories/InscricoesIcRepository';
-
 
 container.registerSingleton<IAreasRepository>(
   'AreasRepository',

@@ -3,6 +3,7 @@ import ICursosRepository from '@modules/cursos/repositories/ICursosRepository';
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import IUpdateAlunoDTO from '../dtos/IUpdateAlunoDTO';
+import IAlunoProvider from '../providers/AlunoProvider/models/IAlunoProvider';
 import IAlunosRepository from '../repositories/IAlunosRepository';
 
 @injectable()
@@ -13,6 +14,8 @@ class UpdateAlunoService {
 
     @inject('CursosRepository')
     private cursosRepository: ICursosRepository,
+    @inject('AlunoProvider')
+    private alunoProvider: IAlunoProvider,
   ) {}
 
   public async execute({
@@ -33,7 +36,7 @@ class UpdateAlunoService {
     }
 
     if (dre) {
-      const dreValido = this.alunosRepository.validarDRE(dre);
+      const dreValido = this.alunoProvider.validarDRE(dre);
 
       if (!dreValido) {
         throw new AppError('DRE inválido.');
@@ -43,7 +46,7 @@ class UpdateAlunoService {
     }
 
     if (periodo) {
-      const periodoValido = this.alunosRepository.validarPeriodo(periodo);
+      const periodoValido = this.alunoProvider.validarPeriodo(periodo);
 
       if (!periodoValido) {
         throw new AppError('Período inválido.');
@@ -53,7 +56,7 @@ class UpdateAlunoService {
     }
 
     if (cr) {
-      const crValido = this.alunosRepository.validarCR(cr);
+      const crValido = this.alunoProvider.validarCR(cr);
 
       if (!crValido) {
         throw new AppError('CR inválido.');

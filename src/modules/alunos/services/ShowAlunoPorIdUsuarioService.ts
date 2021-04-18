@@ -11,9 +11,7 @@ class ListCursosService {
   ) {}
 
   public async execute(usuarioId: string): Promise<Aluno | undefined> {
-    const aluno = await this.alunosRepository.encontrarPeloIdUsuario(
-      usuarioId,
-    );
+    const aluno = await this.alunosRepository.encontrarPeloIdUsuario(usuarioId);
 
     if (!aluno) throw new AppError('Não existe aluno com o id especificado.');
 

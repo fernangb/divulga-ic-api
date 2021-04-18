@@ -4,6 +4,7 @@ import Professor from '@modules/professores/infra/typeorm/entities/Professor';
 import IUsuariosRepository from '@modules/usuarios/repositories/IUsuariosRepository';
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
+import IProfessorProvider from '../providers/ProfessorProvider/models/IProfessorProvider';
 import IProfessoresRepository from '../repositories/IProfessoresRepository';
 
 interface IRequest {
@@ -27,6 +28,8 @@ class CreateProfessorService {
 
     @inject('LaboratoriosRepository')
     private laboratoriosRepository: ILaboratoriosRepository,
+    @inject('ProfessorProvider')
+    private professorProvider: IProfessorProvider,
   ) {}
 
   public async execute({
@@ -49,7 +52,9 @@ class CreateProfessorService {
       throw new AppError('Curso inválido.');
     }
 
-    const laboratorioProfessor = await this.laboratoriosRepository.encontrarPelaSigla(laboratorio);
+    const laboratorioProfessor = await this.laboratoriosRepository.encontrarPelaSigla(
+      laboratorio,
+    );
 
     if (!laboratorioProfessor) {
       await this.usuariosRepository.delete(usuarioId);
@@ -67,7 +72,7 @@ class CreateProfessorService {
       throw new AppError('Professor já cadastrado.');
     }
 
-    const siapeValido = this.professoresRepository.validarSIAPE(siape);
+    const siapeValido = this.professorProvider.validarSIAPE(siape);
 
     if (!siapeValido) {
       await this.usuariosRepository.delete(usuarioId);

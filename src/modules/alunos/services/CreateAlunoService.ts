@@ -3,6 +3,7 @@ import ICursosRepository from '@modules/cursos/repositories/ICursosRepository';
 import IUsuariosRepository from '@modules/usuarios/repositories/IUsuariosRepository';
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
+import IAlunoProvider from '../providers/AlunoProvider/models/IAlunoProvider';
 import IAlunosRepository from '../repositories/IAlunosRepository';
 
 interface IRequest {
@@ -23,6 +24,9 @@ class CreateAlunoService {
 
     @inject('CursosRepository')
     private cursosRepository: ICursosRepository,
+
+    @inject('AlunoProvider')
+    private alunoProvider: IAlunoProvider,
   ) {}
 
   public async execute({
@@ -45,7 +49,7 @@ class CreateAlunoService {
       throw new AppError('Aluno já cadastrado.');
     }
 
-    const dreValido = this.alunosRepository.validarDRE(dre);
+    const dreValido = this.alunoProvider.validarDRE(dre);
 
     if (!dreValido) {
       await this.usuariosRepository.delete(usuarioId);
@@ -61,7 +65,7 @@ class CreateAlunoService {
       throw new AppError('Curso inválido.');
     }
 
-    const periodoValido = await this.alunosRepository.validarPeriodo(periodo);
+    const periodoValido = await this.alunoProvider.validarPeriodo(periodo);
 
     if (!periodoValido) {
       await this.usuariosRepository.delete(usuarioId);
