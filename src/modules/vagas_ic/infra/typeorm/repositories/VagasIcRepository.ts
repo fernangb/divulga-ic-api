@@ -13,6 +13,12 @@ class VagasIcRepository implements IVagasIcRepository {
     this.ormRepository = getRepository(VagaIc);
   }
 
+  public async fecharVaga(vaga: VagaIc): Promise<void> {
+    const vagaAtualizada = { ...vaga, esAberta: false };
+
+    await this.ormRepository.save(vagaAtualizada);
+  }
+
   public async delete(id: string): Promise<void> {
     await this.ormRepository.delete(id);
   }

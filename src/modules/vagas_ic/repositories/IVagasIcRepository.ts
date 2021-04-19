@@ -23,6 +23,7 @@ export default interface IVagasIcRepository {
   validarPeriodoMinimo(periodoMinimo: number): boolean;
   validarNumeroVagas(nrVagas: number): boolean;
   validarNumeroInscritos(nrInscritos: number): boolean;
+  fecharVaga(vaga: VagaIc): Promise<void>;
 
   listarVagasCriadasPeloProfessor({
     professorId,

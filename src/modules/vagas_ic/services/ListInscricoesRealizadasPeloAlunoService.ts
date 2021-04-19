@@ -23,9 +23,7 @@ class ListInscricoesRealizadasPeloAlunoService {
       throw new AppError('Aluno não encontrado.');
     }
 
-    return this.inscricoesIcRepository.listarVagasInscritasAtivasPeloAluno(
-      aluno.id,
-    );
+    return this.inscricoesIcRepository.listarVagasInscritasPeloAluno(aluno.id);
   }
 }
 

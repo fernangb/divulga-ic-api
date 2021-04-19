@@ -85,7 +85,12 @@ class InscricoesIcRepository implements IInscricoesIcRepository {
   public async listarVagasInscritasPeloAluno(
     alunoId: string,
   ): Promise<InscricaoIc[]> {
-    return this.ormRepository.find({ where: { alunoId } });
+    return this.ormRepository.find({
+      where: { alunoId },
+      order: {
+        esAtiva: 'DESC',
+      },
+    });
   }
 
   public async listarVagasInscritasAtivasPeloAluno(
