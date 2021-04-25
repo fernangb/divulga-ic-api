@@ -18,7 +18,7 @@ export default class VagasIcController {
       nrVagas,
       laboratorioId,
       cursos,
-      professorId,
+      usuarioId,
       areas,
     } = request.body;
 
@@ -34,12 +34,11 @@ export default class VagasIcController {
       nrVagas,
       laboratorioId,
       cursos,
-      professorId,
+      usuarioId,
       areas,
     });
 
     return response.json(classToClass(vagaIC));
-
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
@@ -50,7 +49,7 @@ export default class VagasIcController {
     return response.json(classToClass(vagasIC));
   }
 
-  public async update(request: Request, response: Response): Promise<Response>{
+  public async update(request: Request, response: Response): Promise<Response> {
     const {
       id,
       nome,
