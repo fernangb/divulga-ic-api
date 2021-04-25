@@ -29,8 +29,11 @@ export default interface IVagasIcRepository {
     professorId,
   }: IListVagasIcCriadasPorProfessorDTO): Promise<VagaIc[]>;
 
-  aumentarNumeroInscritos(vaga: VagaIc): Promise<VagaIc>;
-  diminuirNumeroInscritos(vaga: VagaIc): Promise<VagaIc>;
+  aumentarNumeroAlunosInscritos(vaga: VagaIc): Promise<VagaIc>;
+  diminuirNumeroAlunosInscritos(vaga: VagaIc): Promise<VagaIc>;
+
+  aumentarNumeroAlunosSelecionados(vaga: VagaIc): Promise<VagaIc>;
+  diminuirNumeroAlunosSelecionados(vaga: VagaIc): Promise<VagaIc>;
 
   create(data: ICreateVagaIcDTO): Promise<VagaIc>;
   save(vaga: VagaIc): Promise<VagaIc>;

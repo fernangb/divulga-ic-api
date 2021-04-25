@@ -40,6 +40,12 @@ export class CriarTabelaInscricaoIc1614084524620 implements MigrationInterface {
             default: true,
           },
           {
+            name: 'esSelecionado',
+            type: 'boolean',
+            isNullable: true,
+            default: false,
+          },
+          {
             name: 'dtCriacao',
             type: 'timestamp with time zone',
             default: 'now()',

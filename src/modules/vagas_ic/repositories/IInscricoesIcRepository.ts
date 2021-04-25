@@ -18,4 +18,5 @@ export default interface IInscricoesIcRepository {
     vagaIcIds: string[],
   ): Promise<InscricaoIc[]>;
   eliminarAlunoInscrito(inscricaoIc: InscricaoIc): Promise<void>;
+  selecionarAlunoInscrito(inscricaoIc: InscricaoIc): Promise<void>;
 }

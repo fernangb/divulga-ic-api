@@ -164,18 +164,40 @@ class VagasIcRepository implements IVagasIcRepository {
     });
   }
 
-  public async aumentarNumeroInscritos(vaga: VagaIc): Promise<VagaIc> {
-    const nrInscritos_atualizado = vaga.nrInscritos + 1;
+  public async aumentarNumeroAlunosInscritos(vaga: VagaIc): Promise<VagaIc> {
+    const nrInscritosAtualizado = vaga.nrInscritos + 1;
 
-    const vagaAtualizada = { ...vaga, nrInscritos: nrInscritos_atualizado };
+    const vagaAtualizada = { ...vaga, nrInscritos: nrInscritosAtualizado };
 
     return this.ormRepository.save(vagaAtualizada);
   }
 
-  public async diminuirNumeroInscritos(vaga: VagaIc): Promise<VagaIc> {
-    const nrInscritos_atualizado = vaga.nrInscritos - 1;
+  public async diminuirNumeroAlunosInscritos(vaga: VagaIc): Promise<VagaIc> {
+    const nrInscritosAtualizado = vaga.nrInscritos - 1;
 
-    const vagaAtualizada = { ...vaga, nrInscritos: nrInscritos_atualizado };
+    const vagaAtualizada = { ...vaga, nrInscritos: nrInscritosAtualizado };
+
+    return this.ormRepository.save(vagaAtualizada);
+  }
+
+  public async aumentarNumeroAlunosSelecionados(vaga: VagaIc): Promise<VagaIc> {
+    const nrSelecionadosAtualizado = vaga.nrSelecionados + 1;
+
+    const vagaAtualizada = {
+      ...vaga,
+      nrSelecionados: nrSelecionadosAtualizado,
+    };
+
+    return this.ormRepository.save(vagaAtualizada);
+  }
+
+  public async diminuirNumeroAlunosSelecionados(vaga: VagaIc): Promise<VagaIc> {
+    const nrSelecionadosAtualizado = vaga.nrSelecionados - 1;
+
+    const vagaAtualizada = {
+      ...vaga,
+      nrSelecionados: nrSelecionadosAtualizado,
+    };
 
     return this.ormRepository.save(vagaAtualizada);
   }

@@ -24,7 +24,7 @@ class EliminarInscricaoAlunoIcService {
 
     if (!vaga) throw new AppError('Vaga inexistente.');
 
-    await this.vagasIcRepository.diminuirNumeroInscritos(vaga);
+    await this.vagasIcRepository.diminuirNumeroAlunosInscritos(vaga);
 
     if (!inscricao.esAtiva) throw new AppError('Inscrição já está fechada.');
 

@@ -41,6 +41,17 @@ class InscricoesIcRepository implements IInscricoesIcRepository {
     await this.ormRepository.save(novaInscricaoIc);
   }
 
+  public async selecionarAlunoInscrito(
+    inscricaoIc: InscricaoIc,
+  ): Promise<void> {
+    const novaInscricaoIc = {
+      ...inscricaoIc,
+      esSelecionado: true,
+    };
+
+    await this.ormRepository.save(novaInscricaoIc);
+  }
+
   public async create({
     vagaIcId,
     alunoId,

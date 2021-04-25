@@ -37,7 +37,7 @@ class CreateInscricaoIcService {
       alunoId,
     });
 
-    await this.vagasIcRepository.aumentarNumeroInscritos(vagaEncontrada);
+    await this.vagasIcRepository.aumentarNumeroAlunosInscritos(vagaEncontrada);
 
     return inscricaoIC;
   }

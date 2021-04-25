@@ -24,11 +24,14 @@ class SelecionarInscricaoAlunoIcService {
 
     if (!vaga) throw new AppError('Vaga inexistente.');
 
-    await this.vagasIcRepository.diminuirNumeroInscritos(vaga);
-
     if (!inscricao.esAtiva) throw new AppError('Inscrição já está fechada.');
 
-    await this.inscricoesIcRepository.eliminarAlunoInscrito(inscricao);
+    if (vaga.nrSelecionados >= vaga.nrVagas)
+      throw new AppError('Todas as vagas já foram preenchidas.');
+
+    await this.vagasIcRepository.aumentarNumeroAlunosSelecionados(vaga);
+
+    await this.inscricoesIcRepository.selecionarAlunoInscrito(inscricao);
   }
 }
 

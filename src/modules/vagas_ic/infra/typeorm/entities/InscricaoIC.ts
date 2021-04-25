@@ -32,6 +32,9 @@ class InscricaoIC {
   @Column()
   esAtiva: boolean;
 
+  @Column()
+  esSelecionado: boolean;
+
   @CreateDateColumn()
   dtInscricao: Date;
 

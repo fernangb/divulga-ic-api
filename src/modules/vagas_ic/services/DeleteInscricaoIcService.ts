@@ -24,7 +24,7 @@ class DeleteInscricaoIcService {
 
     if (!vaga) throw new AppError('Vaga inexistente.');
 
-    await this.vagasIcRepository.diminuirNumeroInscritos(vaga);
+    await this.vagasIcRepository.diminuirNumeroAlunosInscritos(vaga);
 
     await this.inscricoesIcRepository.delete(id);
   }

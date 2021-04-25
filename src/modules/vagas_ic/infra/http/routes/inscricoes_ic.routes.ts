@@ -5,6 +5,7 @@ import AlunosInscritosPorProfessorController from '../controllers/AlunosInscrito
 import AlunosInscritosPorVagaIcController from '../controllers/AlunosInscritosPorVagaIcController';
 import InscricoesIcController from '../controllers/InscricoesIcController';
 import InscricoesIcPorAlunoController from '../controllers/InscricoesIcPorAlunoController';
+import InscricoesSelecionadasController from '../controllers/InscricoesSelecionadasController';
 
 const inscricaoIcRouter = Router();
 inscricaoIcRouter.use(ensureAuthenticated);
@@ -13,6 +14,7 @@ const inscricoesIcController = new InscricoesIcController();
 const inscricoesIcPorAlunoController = new InscricoesIcPorAlunoController();
 const alunosInscritosPorVagaIcController = new AlunosInscritosPorVagaIcController();
 const alunosInscritosPorProfessorController = new AlunosInscritosPorProfessorController();
+const inscricoesSelecionadasController = new InscricoesSelecionadasController();
 
 inscricaoIcRouter.post(
   '/',
@@ -36,6 +38,11 @@ inscricaoIcRouter.get(
   alunosInscritosPorProfessorController.index,
 );
 
-inscricaoIcRouter.put('/:id', inscricoesIcPorAlunoController.update);
+inscricaoIcRouter.put('/eliminar/:id', inscricoesIcPorAlunoController.update);
+
+inscricaoIcRouter.put(
+  '/selecionar/:id',
+  inscricoesSelecionadasController.update,
+);
 
 export default inscricaoIcRouter;
