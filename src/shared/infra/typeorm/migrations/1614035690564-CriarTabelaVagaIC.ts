@@ -58,6 +58,11 @@ export class CriarTabelaVagaIC1614035690564 implements MigrationInterface {
             default: 0,
           },
           {
+            name: 'nrSelecionados',
+            type: 'integer',
+            default: 0,
+          },
+          {
             name: 'nrVagas',
             type: 'integer',
             default: 1,
@@ -84,7 +89,7 @@ export class CriarTabelaVagaIC1614035690564 implements MigrationInterface {
           },
           {
             name: 'dtAtualizacao',
-             type: 'timestamp with time zone',
+            type: 'timestamp with time zone',
             default: 'now()',
           },
         ],

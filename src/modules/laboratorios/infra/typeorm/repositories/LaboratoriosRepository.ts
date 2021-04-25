@@ -51,9 +51,11 @@ class LaboratoriosRepository implements ILaboratoriosRepository {
   }
 
   public async index(): Promise<Laboratorio[]> {
-    return this.ormRepository.find({order: {
-      nome: "ASC"
-    }});
+    return this.ormRepository.find({
+      order: {
+        sigla: 'ASC',
+      },
+    });
   }
 }
 

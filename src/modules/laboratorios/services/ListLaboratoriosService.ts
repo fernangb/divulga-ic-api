@@ -11,7 +11,6 @@ class ListLaboratoriosService {
 
   public async execute(): Promise<Laboratorio[]> {
     return this.laboratoriosRepository.index();
-
   }
 }
 

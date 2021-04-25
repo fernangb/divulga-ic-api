@@ -16,7 +16,7 @@ interface IRequest {
   crMinimo?: number;
   nrVagas?: number;
   periodoMinimo?: number;
-  laboratorioId: string;
+  laboratorio: string;
   cursos: string[];
   usuarioId: string;
   areas: string[];
@@ -46,7 +46,7 @@ class CreateVagaIcService {
     crMinimo,
     periodoMinimo,
     nrVagas,
-    laboratorioId,
+    laboratorio,
     cursos,
     usuarioId,
     areas,
@@ -68,17 +68,17 @@ class CreateVagaIcService {
       throw new AppError('Professor não existe.');
     }
 
-    const laboratorio = await this.laboratoriosRepository.encontrarPeloId(
-      laboratorioId,
+    const laboratorioExistente = await this.laboratoriosRepository.encontrarPelaSigla(
+      laboratorio,
     );
 
-    if (!laboratorio) {
+    if (!laboratorioExistente) {
       throw new AppError('Laboratório não existe.');
     }
 
     const vagaEncontrada = await this.vagasIcRepository.encontrarVagaExistente({
       nome,
-      laboratorioId,
+      laboratorioId: laboratorioExistente.id,
     });
 
     if (vagaEncontrada) {
@@ -138,7 +138,7 @@ class CreateVagaIcService {
       crMinimo,
       periodoMinimo,
       nrVagas,
-      laboratorioId,
+      laboratorioId: laboratorioExistente.id,
       professorId: professor.id,
       areas: areasExistentes,
       cursos: cursosExistentes,

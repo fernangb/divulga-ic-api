@@ -90,7 +90,7 @@ class UpdateVagaIcService {
       if (!laboratorioExistente)
         throw new AppError('Laboratório não encontrado.');
 
-      vagaExistente.laboratorioId = laboratorioExistente.id;
+      vagaExistente.laboratorio = laboratorioExistente;
     }
 
     if (areas.length === 0) {

@@ -19,11 +19,11 @@ class VagaIC {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToMany(() => Area, {cascade: true, eager: true})
+  @ManyToMany(() => Area, { cascade: true, eager: true })
   @JoinTable()
   areas: Area[];
 
-  @ManyToMany(() => Curso, {cascade: true, eager: true})
+  @ManyToMany(() => Curso, { cascade: true, eager: true })
   @JoinTable()
   cursos: Curso[];
 
@@ -37,7 +37,9 @@ class VagaIC {
   @Column()
   laboratorioId: string;
 
-  @ManyToOne(() => Laboratorio, laboratorio => laboratorio.nome, { eager: true })
+  @ManyToOne(() => Laboratorio, laboratorio => laboratorio.nome, {
+    eager: true,
+  })
   @JoinColumn({ name: 'laboratorioId' })
   laboratorio: Laboratorio;
 
@@ -64,6 +66,9 @@ class VagaIC {
 
   @Column()
   nrInscritos: number;
+
+  @Column()
+  nrSelecionados: number;
 
   @Column()
   nrVagas: number;
