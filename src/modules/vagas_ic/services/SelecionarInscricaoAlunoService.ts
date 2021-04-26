@@ -29,9 +29,14 @@ class SelecionarInscricaoAlunoIcService {
     if (vaga.nrSelecionados >= vaga.nrVagas)
       throw new AppError('Todas as vagas já foram preenchidas.');
 
-    await this.vagasIcRepository.aumentarNumeroAlunosSelecionados(vaga);
-
     await this.inscricoesIcRepository.selecionarAlunoInscrito(inscricao);
+
+    const vagaAtualizada = await this.vagasIcRepository.aumentarNumeroAlunosSelecionados(
+      vaga,
+    );
+
+    if (vagaAtualizada.nrSelecionados === vagaAtualizada.nrVagas)
+      await this.vagasIcRepository.fecharVaga(vagaAtualizada);
   }
 }
 
