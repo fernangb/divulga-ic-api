@@ -183,9 +183,12 @@ class VagasIcRepository implements IVagasIcRepository {
   public async aumentarNumeroAlunosSelecionados(vaga: VagaIc): Promise<VagaIc> {
     const nrSelecionadosAtualizado = vaga.nrSelecionados + 1;
 
+    const preencher = vaga.nrVagas === nrSelecionadosAtualizado;
+
     const vagaAtualizada = {
       ...vaga,
       nrSelecionados: nrSelecionadosAtualizado,
+      esPreenchida: preencher,
     };
 
     return this.ormRepository.save(vagaAtualizada);
@@ -197,6 +200,7 @@ class VagasIcRepository implements IVagasIcRepository {
     const vagaAtualizada = {
       ...vaga,
       nrSelecionados: nrSelecionadosAtualizado,
+      esPreenchida: false,
     };
 
     return this.ormRepository.save(vagaAtualizada);

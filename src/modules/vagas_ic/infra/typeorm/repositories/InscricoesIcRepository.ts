@@ -36,6 +36,7 @@ class InscricoesIcRepository implements IInscricoesIcRepository {
     const novaInscricaoIc = {
       ...inscricaoIc,
       esAtiva: false,
+      esSelecionado: false,
     };
 
     await this.ormRepository.save(novaInscricaoIc);

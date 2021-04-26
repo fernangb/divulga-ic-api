@@ -53,6 +53,11 @@ export class CriarTabelaVagaIC1614035690564 implements MigrationInterface {
             default: true,
           },
           {
+            name: 'esPreenchida',
+            type: 'boolean',
+            default: false,
+          },
+          {
             name: 'nrInscritos',
             type: 'integer',
             default: 0,

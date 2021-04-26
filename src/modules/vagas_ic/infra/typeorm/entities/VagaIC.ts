@@ -65,6 +65,9 @@ class VagaIC {
   esAberta: boolean;
 
   @Column()
+  esPreenchida: boolean;
+
+  @Column()
   nrInscritos: number;
 
   @Column()
