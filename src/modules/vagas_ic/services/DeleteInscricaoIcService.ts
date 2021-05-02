@@ -24,6 +24,17 @@ class DeleteInscricaoIcService {
 
     if (!vaga) throw new AppError('Vaga inexistente.');
 
+    const inscricoesVaga = await this.inscricoesIcRepository.listarAlunosSelecionados(
+      vaga.id,
+    );
+
+    const inscricaoAlunoSelecionada = inscricoesVaga.find(
+      inscricaoVaga => inscricaoVaga.alunoId === inscricao.alunoId,
+    );
+
+    if (inscricaoAlunoSelecionada)
+      throw new AppError('Aluno já selecionado para a vaga.');
+
     await this.vagasIcRepository.diminuirNumeroAlunosInscritos(vaga);
 
     await this.inscricoesIcRepository.delete(id);

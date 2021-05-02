@@ -5,6 +5,7 @@ import ICreateVagaIcDTO from '@modules/vagas_ic/dtos/ICreateVagaIcDTO';
 import IVerificarVagasExistentesDTO from '@modules/vagas_ic/dtos/IVerificarVagasExistentesDTO';
 import IListVagasIcPorAlunoDTO from '@modules/vagas_ic/dtos/IListVagasPorAlunoDTO';
 import IListVagasIcCriadasPorProfessorDTO from '@modules/vagas_ic/dtos/IListVagasIcCriadasPorProfessorDTO';
+import IListVagasDisponiveisDTO from '@modules/vagas_ic/dtos/IListVagasDisponiveisDTO';
 
 class VagasIcRepository implements IVagasIcRepository {
   private ormRepository: Repository<VagaIc>;
@@ -87,6 +88,13 @@ class VagasIcRepository implements IVagasIcRepository {
     await this.ormRepository.save(vagaIc);
 
     return vagaIc;
+  }
+
+  public async listarVagasDisponiveis({
+    esAberta,
+    esPreenchida,
+  }: IListVagasDisponiveisDTO): Promise<VagaIc[]> {
+    return this.ormRepository.find({ where: { esAberta, esPreenchida } });
   }
 
   public async index(): Promise<VagaIc[]> {
@@ -175,7 +183,11 @@ class VagasIcRepository implements IVagasIcRepository {
   public async diminuirNumeroAlunosInscritos(vaga: VagaIc): Promise<VagaIc> {
     const nrInscritosAtualizado = vaga.nrInscritos - 1;
 
-    const vagaAtualizada = { ...vaga, nrInscritos: nrInscritosAtualizado };
+    const vagaAtualizada = {
+      ...vaga,
+      nrInscritos: nrInscritosAtualizado,
+      esPreenchida: false,
+    };
 
     return this.ormRepository.save(vagaAtualizada);
   }

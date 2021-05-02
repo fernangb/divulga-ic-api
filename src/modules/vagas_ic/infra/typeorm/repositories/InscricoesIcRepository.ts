@@ -94,6 +94,17 @@ class InscricoesIcRepository implements IInscricoesIcRepository {
     return false;
   }
 
+  public async listarAlunosSelecionados(
+    vagaId: string,
+  ): Promise<InscricaoIc[]> {
+    return this.ormRepository.find({
+      where: { vagaIcId: vagaId, esSelecionado: true },
+      order: {
+        esAtiva: 'DESC',
+      },
+    });
+  }
+
   public async listarVagasInscritasPeloAluno(
     alunoId: string,
   ): Promise<InscricaoIc[]> {

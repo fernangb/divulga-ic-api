@@ -1,4 +1,5 @@
 import ICreateVagaIcDTO from '../dtos/ICreateVagaIcDTO';
+import IListVagasDisponiveisDTO from '../dtos/IListVagasDisponiveisDTO';
 import IListVagasIcCriadasPorProfessorDTO from '../dtos/IListVagasIcCriadasPorProfessorDTO';
 import IListVagasIcPorAlunoDTO from '../dtos/IListVagasPorAlunoDTO';
 import IVerificarVagasExistentesDTO from '../dtos/IVerificarVagasExistentesDTO';
@@ -28,6 +29,11 @@ export default interface IVagasIcRepository {
   listarVagasCriadasPeloProfessor({
     professorId,
   }: IListVagasIcCriadasPorProfessorDTO): Promise<VagaIc[]>;
+
+  listarVagasDisponiveis({
+    esAberta,
+    esPreenchida,
+  }: IListVagasDisponiveisDTO): Promise<VagaIc[]>;
 
   aumentarNumeroAlunosInscritos(vaga: VagaIc): Promise<VagaIc>;
   diminuirNumeroAlunosInscritos(vaga: VagaIc): Promise<VagaIc>;
