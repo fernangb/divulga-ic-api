@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import IInscricoesIcRepository from '@modules/vagas_ic/repositories/IInscricoesIcRepository';
 import VagaIc from '@modules/vagas_ic/infra/typeorm/entities/VagaIC';
 import { inject, injectable } from 'tsyringe';
@@ -41,11 +42,11 @@ class SearchVagasIcService {
       esPreenchida,
     });
 
-    const vagasIcFiltradas = vagasTotais.filter(vaga => {
+    const vagasIcNaoInscritas = vagasTotais.filter(vaga => {
       return !inscricoes.map(inscricao => inscricao.vagaIcId).includes(vaga.id);
     });
 
-    return vagasIcFiltradas;
+    return vagasIcNaoInscritas;
   }
 }
 

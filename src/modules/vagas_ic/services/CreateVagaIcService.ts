@@ -7,6 +7,7 @@ import { inject, injectable } from 'tsyringe';
 import IUsuariosRepository from '@modules/usuarios/repositories/IUsuariosRepository';
 import VagaIC from '../infra/typeorm/entities/VagaIC';
 import IVagasIcRepository from '../repositories/IVagasIcRepository';
+import IVagasProvider from '../providers/VagasProvider/models/IVagasProvider';
 
 interface IRequest {
   nome: string;
@@ -36,6 +37,8 @@ class CreateVagaIcService {
     private usuariosRepository: IUsuariosRepository,
     @inject('ProfessoresRepository')
     private professoresRepository: IProfessoresRepository,
+    @inject('VagasProvider')
+    private manualVagasProvider: IVagasProvider,
   ) {}
 
   public async execute({
@@ -85,26 +88,26 @@ class CreateVagaIcService {
       throw new AppError('Vaga já cadastrada no sistema.');
     }
 
-    if (vlBolsa && !this.vagasIcRepository.validarValorBolsa(vlBolsa)) {
+    if (vlBolsa && !this.manualVagasProvider.validarValorBolsa(vlBolsa)) {
       throw new AppError('Valor da bolsa não pode ser negativo.');
     }
 
-    if (hrSemana && !this.vagasIcRepository.validarHorasSemanais(hrSemana)) {
+    if (hrSemana && !this.manualVagasProvider.validarHorasSemanais(hrSemana)) {
       throw new AppError('Horas semanais inválida. ');
     }
 
-    if (crMinimo && !this.vagasIcRepository.validarCrMinimo(crMinimo)) {
+    if (crMinimo && !this.manualVagasProvider.validarCrMinimo(crMinimo)) {
       throw new AppError('CR mínimo inválido.');
     }
 
     if (
       periodoMinimo &&
-      !this.vagasIcRepository.validarPeriodoMinimo(periodoMinimo)
+      !this.manualVagasProvider.validarPeriodoMinimo(periodoMinimo)
     ) {
       throw new AppError('Período mínimo inválido.');
     }
 
-    if (nrVagas && !this.vagasIcRepository.validarNumeroVagas(nrVagas)) {
+    if (nrVagas && !this.manualVagasProvider.validarNumeroVagas(nrVagas)) {
       throw new AppError('Número de vagas não pode ser negativo.');
     }
 

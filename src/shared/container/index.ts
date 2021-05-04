@@ -2,6 +2,7 @@ import { container } from 'tsyringe';
 import '@modules/usuarios/providers';
 import '@modules/alunos/providers';
 import '@modules/professores/providers';
+import '@modules/vagas_ic/providers';
 import './providers';
 
 import IAlunosRepository from '@modules/alunos/repositories/IAlunosRepository';

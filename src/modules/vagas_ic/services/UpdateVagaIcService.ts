@@ -6,6 +6,7 @@ import ILaboratoriosRepository from '@modules/laboratorios/repositories/ILaborat
 import IAreasRepository from '@modules/areas/repositories/IAreasRepository';
 import ICursosRepository from '@modules/cursos/repositories/ICursosRepository';
 import IUpdateVagaIcDTO from '../dtos/IUpdateVagaIcDTO';
+import IVagasProvider from '../providers/VagasProvider/models/IVagasProvider';
 
 @injectable()
 class UpdateVagaIcService {
@@ -18,6 +19,8 @@ class UpdateVagaIcService {
     private areasRepository: IAreasRepository,
     @inject('CursosRepository')
     private cursosRepository: ICursosRepository,
+    @inject('VagasProvider')
+    private manualVagasProvider: IVagasProvider,
   ) {}
 
   public async execute({
@@ -48,35 +51,35 @@ class UpdateVagaIcService {
     if (descricao) vagaExistente.descricao = descricao;
 
     if (vlBolsa) {
-      if (!this.vagasIcRepository.validarValorBolsa(vlBolsa))
+      if (!this.manualVagasProvider.validarValorBolsa(vlBolsa))
         throw new AppError('Valor da bolsa não pode ser negativo.');
 
       vagaExistente.vlBolsa = vlBolsa;
     }
 
     if (hrSemana) {
-      if (!this.vagasIcRepository.validarHorasSemanais(hrSemana))
+      if (!this.manualVagasProvider.validarHorasSemanais(hrSemana))
         throw new AppError('Horas semanais inválida. ');
 
       vagaExistente.hrSemana = hrSemana;
     }
 
     if (crMinimo) {
-      if (!this.vagasIcRepository.validarCrMinimo(crMinimo))
+      if (!this.manualVagasProvider.validarCrMinimo(crMinimo))
         throw new AppError('CR mínimo inválido.');
 
       vagaExistente.crMinimo = crMinimo;
     }
 
     if (periodoMinimo) {
-      if (!this.vagasIcRepository.validarCrMinimo(periodoMinimo))
+      if (!this.manualVagasProvider.validarCrMinimo(periodoMinimo))
         throw new AppError('Período mínimo inválido.');
 
       vagaExistente.periodoMinimo = periodoMinimo;
     }
 
     if (nrVagas) {
-      if (!this.vagasIcRepository.validarCrMinimo(nrVagas))
+      if (!this.manualVagasProvider.validarCrMinimo(nrVagas))
         throw new AppError('Número de vagas não pode ser negativo.');
 
       vagaExistente.nrVagas = nrVagas;
