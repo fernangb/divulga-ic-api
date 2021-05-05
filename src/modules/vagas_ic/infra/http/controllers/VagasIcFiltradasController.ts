@@ -15,20 +15,15 @@ export default class VagasIcFiltradasController {
     } = request.query;
     const usuarioId = request.usuario.id;
 
-    const areasSelecionadas = areas.length > 0 ? JSON.parse(areas) : [];
-    const cursosSelecionados = cursos.length > 0 ? JSON.parse(cursos) : [];
-    const laboratoriosSelecionados =
-      laboratorios.length > 0 ? JSON.parse(laboratorios) : [];
-
-    const listVagasIC = container.resolve(SearchVagasIcService);
-
     const vagaAberta = esAberta === 'true';
     const vagaPreenchida = esPreenchida === 'true';
 
+    const listVagasIC = container.resolve(SearchVagasIcService);
+
     const vagasIC = await listVagasIC.execute({
-      laboratorios: laboratoriosSelecionados,
-      cursos: cursosSelecionados,
-      areas: areasSelecionadas,
+      laboratorios: laboratorios?.split(','),
+      cursos: cursos?.split(','),
+      areas: areas?.split(','),
       professor: professor || '',
       esAberta: vagaAberta,
       esPreenchida: vagaPreenchida,

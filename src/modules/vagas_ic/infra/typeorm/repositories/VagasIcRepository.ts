@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, In, Repository } from 'typeorm';
 import VagaIc from '@modules/vagas_ic/infra/typeorm/entities/VagaIC';
 import IVagasIcRepository from '@modules/vagas_ic/repositories/IVagasIcRepository';
 import ICreateVagaIcDTO from '@modules/vagas_ic/dtos/ICreateVagaIcDTO';
@@ -55,10 +55,16 @@ class VagasIcRepository implements IVagasIcRepository {
   }
 
   public async listarVagasDisponiveis({
+    laboratorios,
+    professor,
+    areas,
+    cursos,
     esAberta,
     esPreenchida,
   }: IListVagasDisponiveisDTO): Promise<VagaIc[]> {
-    return this.ormRepository.find({ where: { esAberta, esPreenchida } });
+    return this.ormRepository.find({
+      where: { esAberta, esPreenchida },
+    });
   }
 
   public async index(): Promise<VagaIc[]> {
