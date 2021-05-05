@@ -46,35 +46,32 @@ class SearchVagasIcService {
       esPreenchida,
     });
 
-    console.log(cursos);
-
     const vagasIcNaoInscritas = vagasTotais.filter(vaga => {
       return !inscricoes.map(inscricao => inscricao.vagaIcId).includes(vaga.id);
     });
 
-    const vagasFiltradasPorCurso = !vagasIcNaoInscritas
-      ? vagasIcNaoInscritas
-      : vagasIcNaoInscritas.filter(vaga => {
-          return vaga.cursos.some(c => cursos.find(curso => curso === c.nome));
-        });
+    const vagasFiltradasPorCurso =
+      cursos[0] === ''
+        ? vagasIcNaoInscritas
+        : vagasIcNaoInscritas.filter(vaga => {
+            return vaga.cursos.some(c =>
+              cursos.find(curso => curso === c.nome),
+            );
+          });
 
-    const vagasFiltradasPorArea = !vagasFiltradasPorCurso
-      ? vagasIcNaoInscritas
-      : vagasFiltradasPorCurso.filter(vaga => {
-          return vaga.areas.some(a => areas.find(area => area === a.nome));
-        });
+    const vagasFiltradasPorArea =
+      areas[0] === ''
+        ? vagasIcNaoInscritas
+        : vagasFiltradasPorCurso.filter(vaga => {
+            return vaga.areas.some(a => areas.find(area => area === a.nome));
+          });
 
-    const vagasFiltradas = !vagasFiltradasPorArea
-      ? vagasFiltradasPorArea
-      : vagasFiltradasPorArea.filter(vaga =>
-          laboratorios.includes(vaga.laboratorio.nome),
-        );
-
-    console.log('total: ', vagasTotais.length);
-    console.log('inscr: ', vagasIcNaoInscritas.length);
-    console.log('curso: ', vagasFiltradasPorCurso.length);
-    console.log('area: ', vagasFiltradasPorArea.length);
-    console.log('lab: ', vagasFiltradas.length);
+    const vagasFiltradas =
+      laboratorios[0] === ''
+        ? vagasFiltradasPorArea
+        : vagasFiltradasPorArea.filter(vaga =>
+            laboratorios.includes(vaga.laboratorio.nome),
+          );
 
     return vagasFiltradas;
   }
