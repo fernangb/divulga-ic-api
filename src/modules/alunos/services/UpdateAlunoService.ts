@@ -65,24 +65,15 @@ class UpdateAlunoService {
       aluno.cr = cr;
     }
 
-    console.log('curso: ', curso);
-
     if (curso) {
       const cursoValido = await this.cursosRepository.encontrarPeloNome(curso);
-
-      console.log('curso valido: ', cursoValido);
 
       if (!cursoValido) {
         throw new AppError('Curso inválido.');
       }
 
-      console.log('c1: ', aluno.cursoId);
-      console.log('c2: ', cursoValido.id);
-
       aluno.cursoId = cursoValido.id;
       aluno.curso = cursoValido;
-
-      console.log('c3: ', aluno.cursoId);
     }
 
     return this.alunosRepository.save(aluno);

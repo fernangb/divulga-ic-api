@@ -32,4 +32,20 @@ professorRouter.get(
   professoresUsuariosController.index,
 );
 
+professorRouter.put(
+  '/',
+  ensureAuthenticated,
+  celebrate({
+    [Segments.BODY]: {
+      email: Joi.string().email().required(),
+      nome: Joi.string().required(),
+      sobrenome: Joi.string().required(),
+      siape: Joi.string().required(),
+      curso: Joi.string().required(),
+      laboratorio: Joi.string().required(),
+    },
+  }),
+  professoresController.update,
+);
+
 export default professorRouter;
