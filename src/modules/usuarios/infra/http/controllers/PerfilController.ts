@@ -20,7 +20,7 @@ export default class PerfilController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const usuarioId = request.usuario.id;
-    const { nome, email, senha_antiga, senha } = request.body;
+    const { nome, email, sobrenome } = request.body;
 
     const updatePerfil = container.resolve(UpdatePerfilService);
 
@@ -28,8 +28,7 @@ export default class PerfilController {
       usuarioId,
       nome,
       email,
-      senha_antiga,
-      senha,
+      sobrenome,
     });
 
     return response.json(classToClass(usuario));

@@ -1,12 +1,15 @@
+import ensureAuthenticated from '@modules/usuarios/infra/http/middlewares/EnsureAuthenticated';
 import { celebrate, Joi, Segments } from 'celebrate';
 import { Router } from 'express';
 import EsquecerSenhaController from '../controllers/EsquecerSenhaController';
 import ResetarSenhaController from '../controllers/ResetarSenhaController';
+import SenhaController from '../controllers/SenhaController';
 
 const senhaRouter = Router();
 
 const esquecerSenhaController = new EsquecerSenhaController();
 const resetarSenhaController = new ResetarSenhaController();
+const senhaController = new SenhaController();
 
 senhaRouter.post(
   '/esquecer',
@@ -27,6 +30,18 @@ senhaRouter.post(
     },
   }),
   resetarSenhaController.create,
+);
+
+senhaRouter.put(
+  '/',
+  ensureAuthenticated,
+  celebrate({
+    [Segments.BODY]: {
+      senha: Joi.string().required(),
+      novaSenha: Joi.string().required(),
+    },
+  }),
+  senhaController.update,
 );
 
 export default senhaRouter;
