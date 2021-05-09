@@ -19,17 +19,17 @@ class UpdateAlunoService {
   ) {}
 
   public async execute({
+    curso,
     dre,
     periodo,
-    cursoId,
-    usuarioId,
     cr,
+    usuarioId,
   }: IUpdateAlunoDTO): Promise<Aluno> {
     if (!usuarioId) {
-      throw new AppError('ID usuário não existe.');
+      throw new AppError('Usuário não encontrado.');
     }
 
-    const aluno = await this.alunosRepository.encontrarPeloId(usuarioId);
+    const aluno = await this.alunosRepository.encontrarPeloIdUsuario(usuarioId);
 
     if (!aluno) {
       throw new AppError('Aluno não encontrado.');
@@ -65,14 +65,24 @@ class UpdateAlunoService {
       aluno.cr = cr;
     }
 
-    if (cursoId) {
-      const cursoValido = this.cursosRepository.encontrarPeloId(cursoId);
+    console.log('curso: ', curso);
+
+    if (curso) {
+      const cursoValido = await this.cursosRepository.encontrarPeloNome(curso);
+
+      console.log('curso valido: ', cursoValido);
 
       if (!cursoValido) {
         throw new AppError('Curso inválido.');
       }
 
-      aluno.cursoId = cursoId;
+      console.log('c1: ', aluno.cursoId);
+      console.log('c2: ', cursoValido.id);
+
+      aluno.cursoId = cursoValido.id;
+      aluno.curso = cursoValido;
+
+      console.log('c3: ', aluno.cursoId);
     }
 
     return this.alunosRepository.save(aluno);

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import UpdatePerfilService from '@modules/usuarios/services/UpdatePerfilService';
+import UpdatePerfilService from '@modules/usuarios/services/UpdateUsuarioService';
 import ShowPerfilService from '@modules/usuarios/services/ShowPerfilService';
 import { classToClass } from 'class-transformer';
 

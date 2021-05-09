@@ -32,4 +32,21 @@ alunoRouter.get(
   alunosUsuariosController.index,
 );
 
+alunoRouter.put(
+  '/',
+  ensureAuthenticated,
+  celebrate({
+    [Segments.BODY]: {
+      email: Joi.string().email().required(),
+      nome: Joi.string().required(),
+      sobrenome: Joi.string().required(),
+      dre: Joi.string().required(),
+      periodo: Joi.number().required(),
+      cr: Joi.number().required(),
+      curso: Joi.string().required(),
+    },
+  }),
+  alunosController.update,
+);
+
 export default alunoRouter;

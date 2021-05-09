@@ -7,27 +7,22 @@ import IUsuariosRepository from '../repositories/IUsuariosRepository';
 interface IRequest {
   usuarioId: string;
   nome: string;
+  sobrenome: string;
   email: string;
-  senha?: string;
-  senha_antiga?: string;
 }
 
 @injectable()
-class UpdatePerfilService {
+class UpdateUsuarioService {
   constructor(
     @inject('UsuariosRepository')
     private usuariosRepository: IUsuariosRepository,
-
-    @inject('HashProvider')
-    private hashProvider: IHashProvider,
   ) {}
 
   public async execute({
     usuarioId,
     nome,
+    sobrenome,
     email,
-    senha,
-    senha_antiga,
   }: IRequest): Promise<Usuario | undefined> {
     const usuario = await this.usuariosRepository.encontrarPeloId(usuarioId);
 
@@ -47,29 +42,11 @@ class UpdatePerfilService {
     }
 
     usuario.nome = nome;
+    usuario.sobrenome = sobrenome;
     usuario.email = email;
-
-    if (senha && !senha_antiga) {
-      throw new AppError(
-        'Você precisa informar a senha antiga para atualizá-la.',
-      );
-    }
-
-    if (senha && senha_antiga) {
-      const verificarSenhaAntiga = await this.hashProvider.compararHash(
-        senha_antiga,
-        usuario.senha,
-      );
-
-      if (!verificarSenhaAntiga) {
-        throw new AppError('Senha antiga inválida.');
-      }
-
-      usuario.senha = await this.hashProvider.gerarHash(senha);
-    }
 
     return this.usuariosRepository.save(usuario);
   }
 }
 
-export default UpdatePerfilService;
+export default UpdateUsuarioService;
