@@ -21,10 +21,10 @@ export default class VagasIcFiltradasController {
     const listVagasIC = container.resolve(SearchVagasIcService);
 
     const vagasIC = await listVagasIC.execute({
-      laboratorios: laboratorios?.split(','),
-      cursos: cursos?.split(','),
-      areas: areas?.split(','),
-      professor: professor || '',
+      laboratorios: (laboratorios as string).split(','),
+      cursos: (cursos as string).split(','),
+      areas: (areas as string).split(','),
+      professor: professor as string,
       esAberta: vagaAberta,
       esPreenchida: vagaPreenchida,
       usuarioId,

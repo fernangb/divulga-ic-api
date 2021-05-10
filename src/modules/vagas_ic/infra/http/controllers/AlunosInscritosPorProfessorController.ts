@@ -5,7 +5,7 @@ import ListAlunosInscritosPorProfessorService from '@modules/vagas_ic/services/L
 
 export default class AlunosInscritosPorVagaIcController {
   public async index(request: Request, response: Response): Promise<Response> {
-    const id = request.params;
+    const { id } = request.params;
 
     const listAlunosInscritos = container.resolve(
       ListAlunosInscritosPorProfessorService,

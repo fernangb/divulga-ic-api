@@ -1,4 +1,3 @@
-import Curso from '@modules/cursos/infra/typeorm/entities/Curso';
 import { inject, injectable } from 'tsyringe';
 import IListCursosDTO from '../dtos/IListCursosDTO';
 import ICursosRepository from '../repositories/ICursosRepository';
