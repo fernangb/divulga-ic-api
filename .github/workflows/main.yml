@@ -30,11 +30,11 @@ jobs:
       
     # Install npm dependencies
       - name: Install dependencies
-        run: yarn 
+        run: npm install 
     
     # Run build
       - name: Run build
-        run: yarn build
+        run: npm run build
         
     # Copy ./dist to DigitalOcean
       - name: Copy dist to Digital Ocean
